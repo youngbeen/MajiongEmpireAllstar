@@ -1,18 +1,42 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <action-panel></action-panel>
+    <battle-field></battle-field>
+
+    <choose-hero></choose-hero>
+    <make-skill></make-skill>
+    <choose-target></choose-target>
+    <skill-tooltip></skill-tooltip>
+
+    <audio-manager></audio-manager>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import ActionPanel from '@/components/ActionPanel'
+import BattleField from '@/components/BattleField'
+import ChooseHero from '@/components/ChooseHero'
+import MakeSkill from '@/components/MakeSkill'
+import ChooseTarget from '@/components/ChooseTarget'
+import SkillTooltip from '@/components/SkillTooltip'
+import AudioManager from '@/components/AudioManager'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    ActionPanel,
+    BattleField,
+    ChooseHero,
+    MakeSkill,
+    ChooseTarget,
+    SkillTooltip,
+    AudioManager
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  position: relative;
+}
+</style>
