@@ -1,10 +1,10 @@
 import eventBus from '@/eventBus'
-import skillDict from '../../models/skillDict'
-import config from '../../models/config'
-import hero from '../../models/hero'
-import system from '../../models/system'
-import diceUtil from '../../utils/diceUtil'
-import heroUtil from '../../utils/heroUtil'
+import skillDict from '@/models/skillDict'
+import config from '@/models/config'
+import hero from '@/models/hero'
+import system from '@/models/system'
+import diceUtil from '@/utils/diceUtil'
+import heroUtil from '@/utils/heroUtil'
 import reduceCtrl from '../reduceCtrl'
 
 export default {
@@ -210,9 +210,8 @@ export default {
     if (you.yy) {
       you.yy = 0
       you.maxhp -= config.yyPlusMaxhp
-      you.hp -= config.yyPlusMaxhp
-      if (you.hp < 1) {
-        you.hp = 1
+      if (you.hp > you.maxhp) {
+        you.hp = you.maxhp
       }
       you.speed -= config.yyPlusSpeed
     }

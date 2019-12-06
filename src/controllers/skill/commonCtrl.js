@@ -1,8 +1,8 @@
 // 通用技能
 import eventBus from '@/eventBus'
-import hero from '../../models/hero'
-import system from '../../models/system'
-import config from '../../models/config'
+import hero from '@/models/hero'
+import system from '@/models/system'
+import config from '@/models/config'
 
 export default {
   // 守备

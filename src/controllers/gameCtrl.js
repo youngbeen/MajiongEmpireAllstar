@@ -139,7 +139,7 @@ export default {
   proceedTurn () {
     // 先检查获取胜利
     if (this.checkWin()) {
-      return false
+      return
     }
     let slotUp = 0
     let slotDown = 0
@@ -341,9 +341,8 @@ export default {
           item.yy--
           if (item.yy === 0) {
             item.maxhp -= config.yyPlusMaxhp
-            item.hp -= config.yyPlusMaxhp
-            if (item.hp < 1) {
-              item.hp = 1
+            if (item.hp > item.maxhp) {
+              item.hp = item.maxhp
             }
             item.speed -= config.yyPlusSpeed
           }

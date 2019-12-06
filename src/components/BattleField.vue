@@ -218,7 +218,7 @@ export default {
           effectUrl: '', // 效果图url
           isShowText: false, // 是否展示文字
           isTextAnimateStart: false, // 是否开始文字动效
-          textType: 'damage', // 文字种类，'damage' | 'heal'
+          textType: 'damage', // 文字种类，'damage' | 'heal' | 'sp'
           textValue: '0' // 文字数字内容
         },
         {

@@ -1,9 +1,9 @@
 import eventBus from '@/eventBus'
-import skillDict from '../../models/skillDict'
-import config from '../../models/config'
-import hero from '../../models/hero'
-import system from '../../models/system'
-import diceUtil from '../../utils/diceUtil'
+import skillDict from '@/models/skillDict'
+import config from '@/models/config'
+import hero from '@/models/hero'
+import system from '@/models/system'
+import diceUtil from '@/utils/diceUtil'
 import reduceCtrl from '../reduceCtrl'
 
 export default {

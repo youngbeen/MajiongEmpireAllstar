@@ -124,7 +124,7 @@ export default {
           type: 'warning',
           message: `SP值不足！`
         })
-        return false
+        return
       }
       eventBus.$emit('chooseTarget', {
         skillId: item.id
