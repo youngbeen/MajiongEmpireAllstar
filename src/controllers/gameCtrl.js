@@ -9,6 +9,9 @@ import LRCtrl from './skill/LRCtrl'
 import SMCtrl from './skill/SMCtrl'
 import WSCtrl from './skill/WSCtrl'
 import DZCtrl from './skill/DZCtrl'
+import FSCtrl from './skill/FSCtrl'
+import XDCtrl from './skill/XDCtrl'
+import DKCtrl from './skill/DKCtrl'
 import diceUtil from '../utils/diceUtil'
 
 export default {
@@ -283,11 +286,44 @@ export default {
       case 'DZ1': // DZ毒刃
         DZCtrl.poisonAtk(skillId, targets)
         break
+      case 'C11': // FS普攻
+        FSCtrl.atk(targets)
+        break
+      case 'FS1': // FS寒冰屏障
+        FSCtrl.iceblock(skillId)
+        break
+      case 'C13': // XD普攻
+      case 'C14': // XD普攻
+      case 'C15': // XD普攻
+      case 'C16': // XD普攻
+        XDCtrl.atk(targets)
+        break
+      case 'XD1': // XD变形虎
+        XDCtrl.transform(skillId, 'tiger')
+        break
+      case 'XD2': // XD变形熊
+        XDCtrl.transform(skillId, 'bear')
+        break
+      case 'XD3': // XD变形树
+        XDCtrl.transform(skillId, 'tree')
+        break
+      case 'XD4': // XD共生术
+        XDCtrl.symbiosis(skillId, targets)
+        break
+      case 'C18': // DK普攻
+        DKCtrl.atk(targets)
+        break
+      case 'DK1': // DK牺牲爪牙
+        DKCtrl.boom(skillId, targets)
+        break
       case 'C2': // ZS守备
       case 'C4': // LR守备
       case 'C6': // SM守备
       case 'C8': // WS守备
       case 'C10': // DZ守备
+      case 'C12': // FS守备
+      case 'C17': // XD守备
+      case 'C19': // DK守备
         commonCtrl.guard()
         break
       default:

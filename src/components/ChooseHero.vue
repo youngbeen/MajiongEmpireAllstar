@@ -90,6 +90,7 @@ export default {
       border: 3px solid rgba(0,0,0,0);
       box-shadow: 1px 1px 8px rgba(0,0,0, .4);
       cursor: pointer;
+      transition: all 0.2s;
       &:hover {
         border: 3px solid rgb(46, 150, 255);
         box-shadow: 1px 1px 4px rgba(0,0,0, .8);

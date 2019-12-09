@@ -43,8 +43,8 @@
             <img class="unit-bg" v-show="item.flagTaunt" src="../assets/img/bgtaunt.png" />
             <img class="unit-bg" v-show="item.flagTree" src="../assets/img/bgtree.png" />
             <!-- 显示本体 -->
-            <img class="unit-avatar" v-show="!item.type" src="../assets/img/nounit.png" @click="chooseHero(index, 'up')" />
-            <img class="unit-avatar" v-show="item.type" :src="item.url" @click="chooseHero(index, 'up')" />
+            <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="!item.type" src="../assets/img/nounit.png" @click="chooseHero(index, 'up')" />
+            <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="item.type" :src="item.url" @click="chooseHero(index, 'up')" />
             <!-- 显示其他覆盖状态 -->
             <!-- 显示ICEBLOCK -->
             <img class="unit-cover" v-show="item.iceblock" src="../assets/img/bgiceblock.png" style="opacity: 0.65;" />
@@ -143,8 +143,8 @@
             <img class="unit-bg" v-show="item.flagTaunt" src="../assets/img/bgtaunt.png" />
             <img class="unit-bg" v-show="item.flagTree" src="../assets/img/bgtree.png" />
             <!-- 显示本体 -->
-            <img class="unit-avatar" v-show="!item.type" src="../assets/img/nounit.png" @click="chooseHero(index, 'down')" />
-            <img class="unit-avatar" v-show="item.type" :src="item.url" @click="chooseHero(index, 'down')" />
+            <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="!item.type" src="../assets/img/nounit.png" @click="chooseHero(index, 'down')" />
+            <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="item.type" :src="item.url" @click="chooseHero(index, 'down')" />
             <!-- 显示其他覆盖状态 -->
             <!-- 显示ICEBLOCK -->
             <img class="unit-cover" v-show="item.iceblock" src="../assets/img/bgiceblock.png" style="opacity: 0.65;" />
@@ -294,6 +294,7 @@ export default {
           textValue: '0' // 文字数字内容
         }
       ],
+      system,
       hero
     }
   },
@@ -545,6 +546,9 @@ export default {
               width: 110px;
               height: 130px;
               border-radius: 4px;
+              &.enable {
+                cursor: pointer;
+              }
             }
             .unit-cover {
               position: absolute;

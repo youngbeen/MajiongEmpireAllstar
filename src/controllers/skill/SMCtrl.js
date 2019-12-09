@@ -18,6 +18,7 @@ export default {
     me.isActed = true
     me.actRounds++
 
+    let stackPlays = 1
     // STEP1 计算伤害倍数
     let times = config.normalTimes // 伤害倍数
     // 正常情况
@@ -28,7 +29,6 @@ export default {
       times = config.slightTimes
     }
     // STEP2 计算原始伤害
-    let tc = ''
     let damage = Math.ceil(diceUtil.rollDice(10) * times)
     if (you.iceblock) {
       // 寒冰屏障
@@ -47,14 +47,15 @@ export default {
         me.hp = 0
         me.isDead = true
       }
-      tc = setTimeout(() => {
+      setTimeout(() => {
         // 显示伤害动效
         eventBus.$emit('animateDamage', {
           targets: [system.unitIndex],
           value: reflectDamage
         })
         system.msg = [`*大地之力*效果使${system.unitIndex + 1}号单位受到${reflectDamage}点反馈伤害`, ...system.msg]
-      }, 1500)
+      }, 1500 * stackPlays)
+      stackPlays++
     }
     // STEP3 结算
     me.directDamageTotal += damage
@@ -81,10 +82,6 @@ export default {
         me.hp = 0
         me.isDead = true
       }
-      let delayTime = 1500
-      if (tc) {
-        delayTime = 3000
-      }
       setTimeout(() => {
         // 显示伤害动效
         eventBus.$emit('animateDamage', {
@@ -92,7 +89,8 @@ export default {
           value: damage
         })
         system.msg = [`*蛊惑*使${system.unitIndex + 1}号单位受到了${damage}点伤害`, ...system.msg]
-      }, delayTime)
+      }, 1500 * stackPlays)
+      stackPlays++
     }
 
     // 回写数据

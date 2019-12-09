@@ -517,7 +517,7 @@ export default {
       targetLimit: 0,
       cnName: '能量控制',
       desc: ['有益效果', '无法驱散'],
-      detail: '最大技能点数SP上限提高3点，你每次攻击结束之后有一定几率(1/6)回复1点SP值 TODO 技能需要调整',
+      detail: '最大技能点数SP上限提高3点，你每次攻击结束之后有一定几率(1/6)回复1点SP值',
       url: './img/skill_5_dz.png'
     },
     {

@@ -222,27 +222,21 @@ export default {
     },
     show (params) {
       this.skillId = params.skillId || ''
-      // TODO 处理不需要选择目标的技能
-      switch (this.skillId) {
-        case 'LR1': // LR箭雨
-        case 'SM1': // SM英勇
-        case 'C2': // ZS守备
-        case 'C4': // LR守备
-        case 'C6': // SM守备
-        case 'C8': // WS守备
-        case 'C10': // DZ守备
-          gameCtrl.proceedSkill(this.skillId)
-          this.close()
-          break
-        default: // 其他技能
-          // 根据id匹配技能，获取信息
-          let skillDetail = skillDict.list.find(item => {
-            return item.id === this.skillId
-          })
-          this.skillTargets = skillDetail.targetLimit || 0
-          this.skillName = skillDetail.cnName || ''
-          this.skillImg = skillDetail.url || ''
-          this.isShow = true
+      if (['LR1', 'SM1', 'FS1', 'XD1', 'XD2', 'XD3', 'C2', 'C4', 'C6', 'C8', 'C10', 'C12', 'C17', 'C19'].indexOf(this.skillId) > -1) {
+        // LR箭雨,SM英勇,FS寒冰屏障,XD变形虎,XD变形熊，XD变形树，ZS守备,LR守备,SM守备,WS守备,DZ守备,FS守备，XD守备，DK守备
+        // 处理不需要选择目标的技能
+        // TODO 增加处理不需要选择目标的技能
+        gameCtrl.proceedSkill(this.skillId)
+        this.close()
+      } else {
+        // 根据id匹配技能，获取信息
+        let skillDetail = skillDict.list.find(item => {
+          return item.id === this.skillId
+        })
+        this.skillTargets = skillDetail.targetLimit || 0
+        this.skillName = skillDetail.cnName || ''
+        this.skillImg = skillDetail.url || ''
+        this.isShow = true
       }
     },
     close () {

@@ -8,7 +8,7 @@ import diceUtil from '@/utils/diceUtil'
 import reduceCtrl from '../reduceCtrl'
 
 export default {
-  // 普攻 TODO
+  // 普攻
   atk (targets = []) {
     // 只有一目标
     const youIndex = targets[0]
@@ -18,6 +18,7 @@ export default {
     me.isActed = true
     me.actRounds++
 
+    let stackPlays = 1
     // STEP1 计算伤害倍数
     let times = config.normalTimes // 伤害倍数
     // 正常情况
@@ -31,7 +32,6 @@ export default {
       times = config.criticalTimes
     }
     // STEP2 计算原始伤害
-    let tc = ''
     let damage = Math.ceil(diceUtil.rollDice(10) * times)
     if (you.iceblock) {
       // 寒冰屏障
@@ -50,14 +50,15 @@ export default {
         me.hp = 0
         me.isDead = true
       }
-      tc = setTimeout(() => {
+      setTimeout(() => {
         // 显示伤害动效
         eventBus.$emit('animateDamage', {
           targets: [system.unitIndex],
           value: reflectDamage
         })
         system.msg = [`*大地之力*效果使${system.unitIndex + 1}号单位受到${reflectDamage}点反馈伤害`, ...system.msg]
-      }, 1500)
+      }, 1500 * stackPlays)
+      stackPlays++
     }
     // STEP3 结算
     me.directDamageTotal += damage
@@ -76,6 +77,23 @@ export default {
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
 
+    // 处理奖励SP
+    if (diceUtil.rollDice(6) === 6) {
+      // 1/6概率获取1点SP
+      me.sp++
+      if (me.sp > me.maxsp) {
+        me.sp = me.maxsp
+      }
+      setTimeout(() => {
+        eventBus.$emit('animateSpRecover', {
+          targets: [system.unitIndex],
+          value: 1
+        })
+        system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了1点SP`, ...system.msg]
+      }, 1500 * stackPlays)
+      stackPlays++
+    }
+
     // 处理伤害后的效果
     if (me.confuse && diceUtil.rollDice(3) === 3) {
       // 蛊惑时1/3的概率自己遭受同等伤害
@@ -84,10 +102,6 @@ export default {
         me.hp = 0
         me.isDead = true
       }
-      let delayTime = 1500
-      if (tc) {
-        delayTime = 3000
-      }
       setTimeout(() => {
         // 显示伤害动效
         eventBus.$emit('animateDamage', {
@@ -95,7 +109,8 @@ export default {
           value: damage
         })
         system.msg = [`*蛊惑*使${system.unitIndex + 1}号单位受到了${damage}点伤害`, ...system.msg]
-      }, delayTime)
+      }, 1500 * stackPlays)
+      stackPlays++
     }
 
     // 回写数据
@@ -104,9 +119,7 @@ export default {
   },
   // 毒刃
   poisonAtk (skillId = '', targets = []) {
-    const skill = skillDict.list.find(item => {
-      return item.id === skillId
-    })
+    const skill = skillDict.list.find(item => item.id === skillId)
     // 只有一目标
     const youIndex = targets[0]
     let you = hero.units[youIndex]
@@ -115,6 +128,7 @@ export default {
     me.sp -= skill.spCost
     me.actRounds++
 
+    let stackPlays = 1
     // STEP1 计算伤害倍数
     let times = config.normalTimes // 伤害倍数
     // 正常情况
@@ -153,7 +167,8 @@ export default {
           value: reflectDamage
         })
         system.msg = [`*大地之力*效果使${system.unitIndex + 1}号单位受到${reflectDamage}点反馈伤害`, ...system.msg]
-      }, 1500)
+      }, 1500 * stackPlays)
+      stackPlays++
     }
     // STEP3 结算
     you.poison = config.poisonAtkTurns
@@ -172,6 +187,42 @@ export default {
       image: 'effdamdagger'
     })
     system.msg = [`*毒刃*使${youIndex + 1}号单位中毒，并对其造成${damage}点伤害`, ...system.msg]
+
+    // 处理奖励SP
+    if (diceUtil.rollDice(6) === 6) {
+      // 1/6概率获取1点SP
+      me.sp++
+      if (me.sp > me.maxsp) {
+        me.sp = me.maxsp
+      }
+      setTimeout(() => {
+        eventBus.$emit('animateSpRecover', {
+          targets: [system.unitIndex],
+          value: 1
+        })
+        system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了1点SP`, ...system.msg]
+      }, 1500 * stackPlays)
+      stackPlays++
+    }
+
+    // 处理伤害后的效果
+    if (me.confuse && diceUtil.rollDice(3) === 3) {
+      // 蛊惑时1/3的概率自己遭受同等伤害
+      me.hp -= damage
+      if (me.hp <= 0) {
+        me.hp = 0
+        me.isDead = true
+      }
+      setTimeout(() => {
+        // 显示伤害动效
+        eventBus.$emit('animateDamage', {
+          targets: [system.unitIndex],
+          value: damage
+        })
+        system.msg = [`*蛊惑*使${system.unitIndex + 1}号单位受到了${damage}点伤害`, ...system.msg]
+      }, 1500 * stackPlays)
+      stackPlays++
+    }
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
