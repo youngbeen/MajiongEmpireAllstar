@@ -417,7 +417,7 @@ export default {
       spCost: 3,
       targetLimit: 2,
       cnName: '冲锋',
-      desc: [],
+      desc: ['可以驱散'],
       detail: '对一个敌方单位发起冲锋，被冲锋的单位及其相邻的另外一个单位(由你指定)将会被眩晕，并造成少量(2)直接伤害。被眩晕的目标将无法行动！',
       url: './img/skill_3_zs.png'
     },
@@ -450,7 +450,7 @@ export default {
       spCost: 3,
       targetLimit: 1,
       cnName: '奥术射击',
-      desc: [],
+      desc: ['可以驱散'],
       detail: '发动一次普通射击，并使之附带奥术效果。使敌方目标速度降低(速度-2，不叠加)，并能驱散敌方目标身上的激怒或英勇效果',
       url: './img/skill_4_lr.png'
     },
@@ -473,7 +473,7 @@ export default {
       targetLimit: 0,
       cnName: '大地之力',
       desc: ['有益效果', '无法驱散'],
-      detail: '召唤大地母亲护佑全体友方单位，持续整场战斗。若敌方对友方单位造成暴击的时候，1/3伤害将反馈给攻击方自行承受',
+      detail: '召唤大地母亲护佑全体友方单位，持续整场战斗。若敌方对友方单位造成暴击的时候，1/3伤害将反馈给攻击方',
       url: './img/skill_5_sm.png'
     },
     {
@@ -505,7 +505,7 @@ export default {
       spCost: 3,
       targetLimit: 1,
       cnName: '毒刃',
-      desc: ['有害效果', '可以驱散'],
+      desc: ['可以驱散'],
       detail: '对一名敌方单位发动一次普通攻击，并附带中毒效果(持续2回合，最多2层)。中毒的目标每回合结束会受到3点毒药伤害，毒药伤害不会被减伤效果削弱。此外你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)',
       url: './img/skill_3_dz.png'
     },
@@ -670,7 +670,7 @@ export default {
       spCost: 3,
       targetLimit: 0,
       cnName: '蛊惑曲',
-      desc: ['有害效果', '可以驱散'],
+      desc: ['可以驱散'],
       detail: '吹奏蛊惑心智的乐曲，持续2回合，被蛊惑的所有敌方单位有一定(1/3)几率遭受其造成的正常攻击伤害的同等伤害',
       url: './img/skill_4_sr.png'
     },
@@ -703,7 +703,7 @@ export default {
       spCost: 6,
       targetLimit: 1,
       cnName: '醉酒',
-      desc: [],
+      desc: ['可以驱散'],
       detail: '灌醉一名敌方单位，使其喝醉。醉酒状态的单位始终跳过其行动回合，醉酒状态在每回合结束有较低概率(1/5)解除',
       url: './img/skill_3_jb.png'
     },

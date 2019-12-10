@@ -14,14 +14,6 @@ export default {
     const youIndex = targets[0]
     let me = hero.units[system.unitIndex]
     let you = hero.units[youIndex]
-    let mySubtype = 'xd'
-    if (me.flagTiger) {
-      mySubtype = 'tiger'
-    } else if (me.flagBear) {
-      mySubtype = 'bear'
-    } else if (me.flagTree) {
-      mySubtype = 'tree'
-    }
     let stackPlays = 1
 
     me = commonCtrl.act(me)
@@ -36,11 +28,7 @@ export default {
       times = config.slightTimes
     }
     // STEP2 计算原始伤害
-    let damageFactor = diceUtil.getDamageFactor()
-    let damage = Math.ceil(damageFactor * times)
-    if (me.flagTiger) {
-      damage += 2
-    }
+    let damage = Math.ceil(diceUtil.getDamageFactor() * times)
     if (you.iceblock) {
       // 寒冰屏障
       damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
@@ -55,8 +43,8 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: `atk${mySubtype}`,
-      image: `effdam${mySubtype}`
+      sound: 'atkms',
+      image: 'effdammagic'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
 
@@ -77,73 +65,30 @@ export default {
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(youIndex, 1, you)
   },
-  // 变形
-  transform (skillId = '', type = '', targets = []) {
-    let me = hero.units[system.unitIndex]
-    let stackPlays = 1
-    me = commonCtrl.act(me, skillId)
-
-    if (me.flagBear) {
-      // 仅清除熊身上的嘲讽，避免错误清除其他buff的嘲讽
-      me.flagTaunt = false
-    }
-    me.flagTiger = false
-    me.flagBear = false
-    me.flagTree = false
-    let cnType = ''
-    switch (type) {
-      case 'tiger':
-        me.flagTiger = true
-        cnType = '虎'
-        break
-      case 'bear':
-        me.flagBear = true
-        me.flagTaunt = true
-        cnType = '熊'
-        break
-      case 'tree':
-        me.flagTree = true
-        cnType = '树'
-        break
-    }
-    eventBus.$emit('playSound', {
-      sound: type
-    })
-
-    me = commonCtrl.changeHp(me, 3)
-    setTimeout(() => {
-      eventBus.$emit('animateHeal', {
-        targets: [system.unitIndex],
-        value: 3
-      })
-      system.msg = [`${system.unitIndex + 1}号单位变形为${cnType}形态，恢复3点生命值`, ...system.msg]
-    }, 1500 * stackPlays)
-    stackPlays++
-
-    // 回写数据
-    hero.units.splice(system.unitIndex, 1, me)
-  },
-  // 共生术
-  symbiosis (skillId = '', targets = []) {
+  // 治疗术
+  heal (skillId = '', targets = []) {
     const youIndex = targets[0]
     let you = hero.units[youIndex]
     let me = hero.units[system.unitIndex]
+
     me = commonCtrl.act(me, skillId)
 
-    let tempHp = you.hp
-    you.hp = me.hp
-    if (you.hp > you.maxhp) {
-      you.hp = you.maxhp
+    you.flagFaint = false
+    if (you.flagSlow) {
+      you.flagSlow = false
+      you.speed += config.magicShotMinusSpeed
     }
-    me.hp = tempHp
-    if (me.hp > me.maxhp) {
-      me.hp = me.maxhp
-    }
-
-    eventBus.$emit('playSound', {
-      sound: 'xdgs'
+    you.poison = 0
+    you.confuse = 0
+    you.flagDrunk = false
+    let times = diceUtil.getHealTimes().times
+    let healAmount = Math.round(you.maxhp * times)
+    you = commonCtrl.changeHp(you, healAmount)
+    eventBus.$emit('animateHeal', {
+      targets: [youIndex],
+      value: healAmount
     })
-    system.msg = [`${system.unitIndex + 1}号单位释放*共生术*，与${youIndex + 1}号单位交换了生命值`, ...system.msg]
+    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位释放*治疗术*，清除其所有不良效果，并回复${healAmount}点生命值`, ...system.msg]
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)

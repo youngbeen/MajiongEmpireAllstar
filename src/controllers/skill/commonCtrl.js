@@ -1,15 +1,16 @@
 // 通用技能
 import eventBus from '@/eventBus'
+import skillDict from '@/models/skillDict'
 import hero from '@/models/hero'
 import system from '@/models/system'
 import config from '@/models/config'
+import reduceCtrl from '../reduceCtrl'
 
 export default {
   // 守备
   guard () {
     let me = hero.units[system.unitIndex]
-    me.isActed = true
-    me.actRounds++
+    me = this.act(me)
 
     let heal = config.guardBaseHeal
     if (me.type === 'DK') {
@@ -19,15 +20,84 @@ export default {
     } else if (me.iceblock) {
       heal += config.guardIceblockPlusHeal
     }
-    me.hp += heal
-    if (me.hp > me.maxhp) {
-      me.hp = me.maxhp
-    }
+    this.changeHp(me, heal)
+    hero.units.splice(system.unitIndex, 1, me)
     // 显示治疗特效
     eventBus.$emit('animateHeal', {
       targets: [system.unitIndex],
       value: heal
     })
     system.msg = [`${system.unitIndex + 1}号单位*守备*,回复${heal}点生命值`, ...system.msg]
+  },
+  // 结算大地之力反伤
+  earthReflect (me, stackPlays = 1, damage) {
+    let newDamage = reduceCtrl.getReducedDamage(damage, 'earth')
+    let reflectDamage = newDamage.reflectDamage
+    me = this.changeHp(me, -1 * reflectDamage)
+    setTimeout(() => {
+      // 显示伤害动效
+      eventBus.$emit('animateDamage', {
+        targets: [system.unitIndex],
+        value: reflectDamage
+      })
+      system.msg = [`*大地之力*效果使${system.unitIndex + 1}号单位受到${reflectDamage}点反馈伤害`, ...system.msg]
+    }, 1500 * stackPlays)
+
+    return me
+  },
+  // 结算蛊惑伤害
+  enchant (me, stackPlays = 1, damage) {
+    me = this.changeHp(me, -1 * damage)
+    setTimeout(() => {
+      // 显示伤害动效
+      eventBus.$emit('animateDamage', {
+        targets: [system.unitIndex],
+        value: damage
+      })
+      system.msg = [`*蛊惑*使${system.unitIndex + 1}号单位受到了${damage}点伤害`, ...system.msg]
+    }, 1500 * stackPlays)
+
+    return me
+  },
+  // 结算行动相关参数
+  act (me, skillId = '') {
+    me.isActed = true
+    me.actRounds++
+    if (skillId) {
+      const skill = skillDict.list.find(item => item.id === skillId)
+      me.sp -= skill.spCost
+      if (me.sp < 0) {
+        me.sp = 0
+      }
+    }
+    return me
+  },
+  // 结算DPS
+  drawDps (me, type = 'direct', damage) {
+    me[`${type}DamageTotal`] += damage
+    me.damageTotal += damage
+    return me
+  },
+  // 结算HP变动
+  changeHp (unit, change = 0) {
+    unit.hp += change
+    if (unit.hp < 0) {
+      unit.hp = 0
+      unit.isDead = true
+      // TODO 清理其他buff？
+    } else if (unit.hp > unit.maxhp) {
+      unit.hp = unit.maxhp
+    }
+    return unit
+  },
+  // 结算SP变动
+  changeSp (unit, change = 0) {
+    unit.sp += change
+    if (unit.sp < 0) {
+      unit.sp = 0
+    } else if (unit.sp > unit.maxsp) {
+      unit.sp = unit.maxsp
+    }
+    return unit
   }
 }

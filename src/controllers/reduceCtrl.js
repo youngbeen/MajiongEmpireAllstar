@@ -14,8 +14,7 @@ export default {
       case 'earth': // 大地之力反伤 1/3伤害自己承受
         let reflectDamage = Math.round(damage / 3)
         return {
-          reflectDamage,
-          leftDamage: damage - reflectDamage
+          reflectDamage
         }
       // TODO 补充其他减伤策略？
       default:

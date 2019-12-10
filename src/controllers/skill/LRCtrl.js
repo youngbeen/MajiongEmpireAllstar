@@ -1,11 +1,11 @@
 import eventBus from '@/eventBus'
-import skillDict from '@/models/skillDict'
 import config from '@/models/config'
 import hero from '@/models/hero'
 import system from '@/models/system'
 import diceUtil from '@/utils/diceUtil'
 import heroUtil from '@/utils/heroUtil'
 import reduceCtrl from '../reduceCtrl'
+import commonCtrl from './commonCtrl'
 
 export default {
   // 普攻
@@ -14,11 +14,10 @@ export default {
     const youIndex = targets[0]
     let me = hero.units[system.unitIndex]
     let you = hero.units[youIndex]
-
-    me.isActed = true
-    me.actRounds++
-
     let stackPlays = 1
+
+    me = commonCtrl.act(me)
+
     // STEP1 计算伤害倍数
     let times = config.normalTimes // 伤害倍数
     // 正常情况
@@ -29,7 +28,7 @@ export default {
       times = config.slightTimes
     }
     // STEP2 计算原始伤害
-    let damage = Math.ceil(diceUtil.rollDice(10) * times)
+    let damage = Math.ceil(diceUtil.getDamageFactor() * times)
     if (you.iceblock) {
       // 寒冰屏障
       damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
@@ -37,34 +36,9 @@ export default {
       // 熊形态
       damage = reduceCtrl.getReducedDamage(damage, 'bear')
     }
-    if (you.flagEarth && times === config.criticalTimes) {
-      // 大地之力反伤
-      let newDamage = reduceCtrl.getReducedDamage(damage, 'earth')
-      let reflectDamage = newDamage.reflectDamage
-      damage = newDamage.leftDamage
-      me.hp -= reflectDamage
-      if (me.hp <= 0) {
-        me.hp = 0
-        me.isDead = true
-      }
-      setTimeout(() => {
-        // 显示伤害动效
-        eventBus.$emit('animateDamage', {
-          targets: [system.unitIndex],
-          value: reflectDamage
-        })
-        system.msg = [`*大地之力*效果使${system.unitIndex + 1}号单位受到${reflectDamage}点反馈伤害`, ...system.msg]
-      }, 1500 * stackPlays)
-      stackPlays++
-    }
     // STEP3 结算
-    me.directDamageTotal += damage
-    me.damageTotal += damage
-    you.hp -= damage
-    if (you.hp <= 0) {
-      you.hp = 0
-      you.isDead = true
-    }
+    me = commonCtrl.drawDps(me, 'direct', damage)
+    you = commonCtrl.changeHp(you, -1 * damage)
     // 显示伤害动效
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
@@ -74,22 +48,16 @@ export default {
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
 
+    if (you.flagEarth && times === config.criticalTimes) {
+      // 大地之力反伤
+      me = commonCtrl.earthReflect(me, stackPlays, damage)
+      stackPlays++
+    }
+
     // 处理伤害后的效果
-    if (me.confuse && diceUtil.rollDice(3) === 3) {
+    if (me.hp && me.confuse && diceUtil.rollDice(3) === 3) {
       // 蛊惑时1/3的概率自己遭受同等伤害
-      me.hp -= damage
-      if (me.hp <= 0) {
-        me.hp = 0
-        me.isDead = true
-      }
-      setTimeout(() => {
-        // 显示伤害动效
-        eventBus.$emit('animateDamage', {
-          targets: [system.unitIndex],
-          value: damage
-        })
-        system.msg = [`*蛊惑*使${system.unitIndex + 1}号单位受到了${damage}点伤害`, ...system.msg]
-      }, 1500 * stackPlays)
+      me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
     }
 
@@ -99,11 +67,8 @@ export default {
   },
   // 箭雨
   rain (skillId = '', targets = []) {
-    const skill = skillDict.list.find(item => item.id === skillId)
     let me = hero.units[system.unitIndex]
-    me.isActed = true
-    me.sp -= skill.spCost
-    me.actRounds++
+    me = commonCtrl.act(me, skillId)
 
     // 寻找所有对方有效单位
     targets = heroUtil.getAllTargets()
@@ -129,13 +94,8 @@ export default {
         youDamage = reduceCtrl.getReducedDamage(youDamage, 'bear')
       }
       // STEP2 结算
-      me.skillDamageTotal += youDamage
-      me.damageTotal += youDamage
-      you.hp -= youDamage
-      if (you.hp <= 0) {
-        you.hp = 0
-        you.isDead = true
-      }
+      me = commonCtrl.drawDps(me, 'skill', youDamage)
+      you = commonCtrl.changeHp(you, -1 * youDamage)
       // 显示伤害动效
       eventBus.$emit('animateDamage', {
         targets: [youIndex],
@@ -153,16 +113,13 @@ export default {
   },
   // 奥术射击
   magicShoot (skillId = '', targets = []) {
-    const skill = skillDict.list.find(item => item.id === skillId)
-    // 只有一目标
     const youIndex = targets[0]
     let you = hero.units[youIndex]
     let me = hero.units[system.unitIndex]
-    me.isActed = true
-    me.sp -= skill.spCost
-    me.actRounds++
-
     let stackPlays = 1
+
+    me = commonCtrl.act(me, skillId)
+
     // STEP1 计算伤害倍数
     let times = config.normalTimes // 伤害倍数
     // 正常情况
@@ -173,33 +130,13 @@ export default {
       times = config.slightTimes
     }
     // STEP2 计算原始伤害
-    let damage = Math.ceil(diceUtil.rollDice(10) * times)
+    let damage = Math.ceil(diceUtil.getDamageFactor() * times)
     if (you.iceblock) {
       // 寒冰屏障
       damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
     } else if (you.flagBear) {
       // 熊形态
       damage = reduceCtrl.getReducedDamage(damage, 'bear')
-    }
-    if (you.flagEarth && times === config.criticalTimes) {
-      // 大地之力反伤
-      let newDamage = reduceCtrl.getReducedDamage(damage, 'earth')
-      let reflectDamage = newDamage.reflectDamage
-      damage = newDamage.leftDamage
-      me.hp -= reflectDamage
-      if (me.hp <= 0) {
-        me.hp = 0
-        me.isDead = true
-      }
-      setTimeout(() => {
-        // 显示伤害动效
-        eventBus.$emit('animateDamage', {
-          targets: [system.unitIndex],
-          value: reflectDamage
-        })
-        system.msg = [`*大地之力*效果使${system.unitIndex + 1}号单位受到${reflectDamage}点反馈伤害`, ...system.msg]
-      }, 1500 * stackPlays)
-      stackPlays++
     }
     // STEP3 结算
     // 清除yy效果
@@ -218,13 +155,8 @@ export default {
       you.flagSlow = true
       you.speed -= config.magicShotMinusSpeed
     }
-    me.skillDamageTotal += damage
-    me.damageTotal += damage
-    you.hp -= damage
-    if (you.hp <= 0) {
-      you.hp = 0
-      you.isDead = true
-    }
+    me = commonCtrl.drawDps(me, 'skill', damage)
+    you = commonCtrl.changeHp(you, -1 * damage)
     // 显示伤害动效
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
@@ -233,6 +165,12 @@ export default {
       image: 'effdamarrow'
     })
     system.msg = [`*奥术射击*使${youIndex + 1}号单位减速，并对其造成${damage}点伤害`, ...system.msg]
+
+    if (you.flagEarth && times === config.criticalTimes) {
+      // 大地之力反伤
+      me = commonCtrl.earthReflect(me, stackPlays, damage)
+      stackPlays++
+    }
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)

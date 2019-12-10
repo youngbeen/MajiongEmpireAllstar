@@ -12,6 +12,9 @@ import DZCtrl from './skill/DZCtrl'
 import FSCtrl from './skill/FSCtrl'
 import XDCtrl from './skill/XDCtrl'
 import DKCtrl from './skill/DKCtrl'
+import QSCtrl from './skill/QSCtrl'
+import MSCtrl from './skill/MSCtrl'
+import SRCtrl from './skill/SRCtrl'
 import diceUtil from '../utils/diceUtil'
 
 export default {
@@ -71,8 +74,8 @@ export default {
         if (index < 5) {
           // 上方
           if (isMSUpside) {
-            item.maxhp += 3
-            item.hp += 3
+            item.maxhp += config.enhancePlusHp
+            item.hp += config.enhancePlusHp
             item.flagEnhance = true
           }
           if (isSMUpside) {
@@ -85,8 +88,8 @@ export default {
         } else if (index < 10) {
           // 下方
           if (isMSDownside) {
-            item.maxhp += 3
-            item.hp += 3
+            item.maxhp += config.enhancePlusHp
+            item.hp += config.enhancePlusHp
             item.flagEnhance = true
           }
           if (isSMDownside) {
@@ -316,6 +319,30 @@ export default {
       case 'DK1': // DK牺牲爪牙
         DKCtrl.boom(skillId, targets)
         break
+      case 'C20': // QS普攻
+        QSCtrl.atk(targets)
+        break
+      case 'QS1': // QS生而平等
+        QSCtrl.equal(skillId)
+        break
+      case 'QS2': // QS圣疗术
+        QSCtrl.reborn(skillId)
+        break
+      case 'C22': // MS普攻
+        MSCtrl.atk(targets)
+        break
+      case 'MS1': // MS治疗
+        MSCtrl.heal(skillId, targets)
+        break
+      case 'C24': // SR普攻
+        SRCtrl.atk(targets)
+        break
+      case 'SR1': // SR鼓舞
+        SRCtrl.inspire(skillId, targets)
+        break
+      case 'SR2': // SR蛊惑曲
+        SRCtrl.enchant(skillId)
+        break
       case 'C2': // ZS守备
       case 'C4': // LR守备
       case 'C6': // SM守备
@@ -324,6 +351,9 @@ export default {
       case 'C12': // FS守备
       case 'C17': // XD守备
       case 'C19': // DK守备
+      case 'C21': // QS守备
+      case 'C23': // MS守备
+      case 'C25': // SR守备
         commonCtrl.guard()
         break
       default:
@@ -360,11 +390,13 @@ export default {
   },
   // 结算回合结束时的技能，buff等
   runBuffs () {
+    let upMSDead = false
+    let downMSDead = false
+    let upTreeAlive = false
+    let downTreeAlive = false
     let delayCauses = []
     hero.units = hero.units.map((item, index) => {
       if (item.isOpen && item.type && !item.isDead) {
-        // 有效单位
-        // let tc = ''
         // 清除眩晕
         item.flagFaint = false
         // 清除减速
@@ -383,6 +415,14 @@ export default {
             item.speed -= config.yyPlusSpeed
           }
         }
+        // 清除寒冰屏障
+        if (item.iceblock > 0) {
+          item.iceblock--
+        }
+        // 清除蛊惑效果
+        if (item.confuse > 0) {
+          item.confuse--
+        }
         // 结算中毒
         if (item.poison > 0) {
           if (delayCauses.indexOf('poison') === -1) {
@@ -394,6 +434,7 @@ export default {
           if (item.hp <= 0) {
             item.hp = 0
             item.isDead = true
+            // TODO 清除buff？
           }
           // 显示伤害动效
           eventBus.$emit('animateDamage', {
@@ -405,32 +446,25 @@ export default {
           system.msg = [`${index + 1}号单位受到了${poisonDamage}点毒药伤害`, ...system.msg]
         }
       }
-      // //清除ms强化效果
-      // if (data.unit[i].cat == 10 && data.unit[i].hp == 0) {
-      //   for (j = 0; j < 10; j++) {
-      //     if (data.unit[j].enhanceflag == true && data.unit[j].hp > 0) {
-      //       data.unit[j].enhanceflag = false;
-      //       data.unit[j].hp -= 3;
-      //       data.unit[j].hp < 1 ? data.unit[j].hp = 1 : data.unit[j].hp;
-      //     };
-      //   };
-      //   $("div.history-content").prepend("<p class='history-item'>强化效果消失</p>");
-      // };
-      // //树形态回血
-      // if (data.unit[i].treeflag == true && data.unit[i].hp > 0) {
-      //   var x;
-      //   i > 4 ? x = 5 : x = 0;
-      //   for (j = 0; j < 5; j++) {
-      //     if (data.unit[j + x].hp > 0) {
-      //       data.unit[j + x].hp++;
-      //       data.unit[j + x].hp > data.unit[j + x].maxhp ? data.unit[j + x].hp = data.unit[j + x].maxhp : data.unit[j + x].hp;
-      //       // painter.makeHeal(j+x, 1, "static/audio/heal.wav");
-      //     };
-      //   };
-      //   $("div.history-content").prepend("<p class='history-item'>德鲁伊树形态为所有队友回复了生命值</p>");
-      // };
-      // //清除蛊惑效果
-      // data.unit[i].confuse > 0 ? data.unit[i].confuse-- : data.unit[i].confuse;
+      // 判断MS死亡情况
+      if (item.type === 'MS' && item.isDead) {
+        if (index < 5) {
+          upMSDead = true
+        } else {
+          downMSDead = true
+        }
+      }
+      // 判断树形态
+      if (item.flagTree) {
+        if (delayCauses.indexOf('tree') === -1) {
+          delayCauses.push('tree')
+        }
+        if (index < 5) {
+          upTreeAlive = true
+        } else {
+          downTreeAlive = true
+        }
+      }
       // //清除醉酒效果
       // data.unit[i].drunkflag == true && controller.rollDice(5) == 5 ? data.unit[i].drunkflag = false : data.unit[i].drunkflag;
       // //清除园丁 致命藤蔓
@@ -443,6 +477,33 @@ export default {
       return item
     })
 
+    hero.units = hero.units.map((item, index) => {
+      if (item.isOpen && item.type && !item.isDead) {
+        // 清除ms强化效果
+        if ((index < 5 && upMSDead) || (index > 4 && downMSDead)) {
+          item.flagEnhance = false
+          item.maxhp -= config.enhancePlusHp
+          if (item.hp > item.maxhp) {
+            item.hp = item.maxhp
+          }
+        }
+        // 结算树回复效果
+        if ((index < 5 && upTreeAlive) || (index > 4 && downTreeAlive)) {
+          item.hp += config.treeHealAmount
+          if (item.hp > item.maxhp) {
+            item.hp = item.maxhp
+          }
+          setTimeout(() => {
+            eventBus.$emit('animateHeal', {
+              targets: [index],
+              value: config.treeHealAmount
+            })
+          }, 1500 * delayCauses.length - 1)
+        }
+      }
+      return item
+    })
+
     // //执行 致命藤蔓
     // for (i = 0; i < 10; i++) {
     //   if (data.unit[i].bindflag == true && data.unit[i].hp > 0) {
@@ -452,18 +513,6 @@ export default {
     //       var t = setTimeout('painter.makeAttack(' + i + ', 2, "static/audio/bind.wav", "static/img/effdamtree.png");', 100);
     //       $("div.history-content").prepend("<p class='history-item'>致命藤蔓对" + (i + 1) + "号单位造成2点自然伤害</p>");
     //     };
-    //   };
-    // };
-
-    // //清除寒冰屏障
-    // if (controller.ibNum > 0) {
-    //   controller.ibNum++;
-    //   if (controller.ibNum > 3) {
-    //     controller.ibNum = 0;
-    //     for (i = 0; i < 10; i++) {
-    //       data.unit[i].iceblockflag = false;
-    //     };
-    //     $("div.history-content").prepend("<p class='history-item'>寒冰屏障效果消失了</p>");
     //   };
     // };
 
