@@ -81,7 +81,7 @@ export default {
   // 结算HP变动
   changeHp (unit, change = 0) {
     unit.hp += change
-    if (unit.hp < 0) {
+    if (unit.hp <= 0) {
       unit.hp = 0
       unit.isDead = true
       // TODO 清理其他buff？

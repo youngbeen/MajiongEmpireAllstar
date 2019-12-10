@@ -13,7 +13,7 @@
         <!-- 条信息 -->
         <div class="box-bars">
           <div class="box-bar">
-            <bar :value="hp" :max="maxhp" :height="20" :color="'#558c08'"></bar>
+            <bar :value="hp" :max="maxhp" :height="20" :color="'#62a108'"></bar>
           </div>
           <div class="box-bar">
             <bar :value="sp" :max="maxsp" :height="20" :color="'#ddd71b'"></bar>
@@ -164,6 +164,18 @@ export default {
       this.avatarUrl = heroDetail.url
       let commonSkillIds = heroDetail.commonSkills || []
       let positiveSkillIds = heroDetail.positiveSkills || []
+      // 针对XD特殊的多技能，做特殊处理
+      if (this.heroName === 'XD') {
+        if (hero.units[index].flagTiger) {
+          commonSkillIds = ['C14', 'C17']
+        } else if (hero.units[index].flagBear) {
+          commonSkillIds = ['C15', 'C17']
+        } else if (hero.units[index].flagTree) {
+          commonSkillIds = ['C16', 'C17']
+        } else {
+          commonSkillIds = ['C13', 'C17']
+        }
+      }
       let negativeSkillIds = heroDetail.negativeSkills || []
       if (commonSkillIds.length) {
         this.commonSkills = skillDict.list.filter(item => {
@@ -235,10 +247,11 @@ export default {
       // left: 0;
       // top: 0;
       width: 20%;
-      max-height: 322px;
+      height: 260px;
       border: 4px solid rgba(0,0,0, 0);
-      border-radius: 14px;
-      // height: 280px;
+      border-top-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      // border-radius: 14px;
       background: #fff;
       box-shadow: 1px 1px 8px rgba(0,0,0, .5);
       overflow: hidden;
@@ -261,7 +274,7 @@ export default {
           align-items: center;
           font-size: 16px;
           .hp {
-            color: #558c08;
+            color: #62a108;
           }
           .name {
             font-weight: bold;
@@ -280,15 +293,15 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: space-around;
-          height: 250px;
+          height: 210px;
           .common-skills {
             display: flex;
-            height: 85px;
+            height: 64px;
             border: 2px solid rgba(53, 194, 18, 0.6);
             .label {
               margin-right: 4px;
               width: 14px;
-              padding-top: 24px;
+              padding-top: 14px;
               color: #000;
               background: rgba(53, 194, 18, 0.6);
               font-size: 10px;
@@ -296,6 +309,7 @@ export default {
             .skills {
               display: flex;
               align-items: center;
+              overflow-x: auto;
               .icon-skill {
                 margin: 0 4px;
                 width: 40px;
@@ -306,12 +320,12 @@ export default {
           }
           .positive-skills {
             display: flex;
-            height: 85px;
+            height: 64px;
             border: 2px solid rgba(207, 224, 52, 0.6);
             .label {
               margin-right: 4px;
               width: 14px;
-              padding-top: 24px;
+              padding-top: 14px;
               color: #000;
               background: rgba(207, 224, 52, 0.6);
               font-size: 10px;
@@ -319,6 +333,7 @@ export default {
             .skills {
               display: flex;
               align-items: center;
+              overflow-x: auto;
               .icon-skill {
                 margin: 0 4px;
                 width: 40px;
@@ -334,7 +349,7 @@ export default {
             .label {
               margin-right: 4px;
               width: 14px;
-              padding-top: 1px;
+              padding-top: 3px;
               color: #fff;
               background: rgba(123, 123, 123, 0.6);
               font-size: 10px;

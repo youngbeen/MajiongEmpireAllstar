@@ -15,6 +15,12 @@ import DKCtrl from './skill/DKCtrl'
 import QSCtrl from './skill/QSCtrl'
 import MSCtrl from './skill/MSCtrl'
 import SRCtrl from './skill/SRCtrl'
+import PCCtrl from './skill/PCCtrl'
+import JBCtrl from './skill/JBCtrl'
+import YDCtrl from './skill/YDCtrl'
+import YXCtrl from './skill/YXCtrl'
+import TFCtrl from './skill/TFCtrl'
+import MOCtrl from './skill/MOCtrl'
 import diceUtil from '../utils/diceUtil'
 
 export default {
@@ -51,6 +57,8 @@ export default {
         item.hp = item.maxhp = truth.maxhp
         item.maxsp = truth.maxsp
         item.sp = 0
+        // TODO testing
+        item.sp = item.maxsp
         item.speed = truth.speed
         item.directDamageTotal = 0
         item.skillDamageTotal = 0
@@ -343,6 +351,33 @@ export default {
       case 'SR2': // SR蛊惑曲
         SRCtrl.enchant(skillId)
         break
+      case 'C26': // PC普攻
+        PCCtrl.atk(targets)
+        break
+      case 'C28': // JB普攻
+        JBCtrl.atk(targets)
+        break
+      case 'JB1': // JB醉酒
+        JBCtrl.drunk(skillId, targets)
+        break
+      case 'C30': // YD普攻
+        YDCtrl.atk(targets)
+        break
+      case 'C32': // YX普攻
+        YXCtrl.atk(targets)
+        break
+      case 'YX1': // YX幻影打击
+        YXCtrl.shadowAtk(skillId, targets)
+        break
+      case 'C34': // TF普攻
+        TFCtrl.atk(targets)
+        break
+      case 'TF1': // TF行刑
+        TFCtrl.excute(skillId, targets)
+        break
+      case 'C36': // MO普攻
+        MOCtrl.atk(targets)
+        break
       case 'C2': // ZS守备
       case 'C4': // LR守备
       case 'C6': // SM守备
@@ -354,10 +389,15 @@ export default {
       case 'C21': // QS守备
       case 'C23': // MS守备
       case 'C25': // SR守备
+      case 'C27': // PC守备
+      case 'C29': // JB守备
+      case 'C31': // YD守备
+      case 'C33': // YX守备
+      case 'C35': // TF守备
+      case 'C37': // MO守备
         commonCtrl.guard()
         break
       default:
-        // TODO 补全技能
     }
   },
   // 刷新action
@@ -394,6 +434,8 @@ export default {
     let downMSDead = false
     let upTreeAlive = false
     let downTreeAlive = false
+    let upYDDead = false
+    let downYDDead = false
     let delayCauses = []
     hero.units = hero.units.map((item, index) => {
       if (item.isOpen && item.type && !item.isDead) {
@@ -422,6 +464,10 @@ export default {
         // 清除蛊惑效果
         if (item.confuse > 0) {
           item.confuse--
+        }
+        // 清除醉酒
+        if (item.flagDrunk && diceUtil.rollDice(5) === 5) {
+          item.flagDrunk = false
         }
         // 结算中毒
         if (item.poison > 0) {
@@ -465,15 +511,36 @@ export default {
           downTreeAlive = true
         }
       }
-      // //清除醉酒效果
-      // data.unit[i].drunkflag == true && controller.rollDice(5) == 5 ? data.unit[i].drunkflag = false : data.unit[i].drunkflag;
-      // //清除园丁 致命藤蔓
-      // if (data.unit[i].cat == 14 && data.unit[i].hp == 0) {
-      //   for (j = 0; j < 10; j++) {
-      //     data.unit[j].bindflag = false;
-      //   };
-      //   $("div.history-content").prepend("<p class='history-item'>致命藤蔓效果消失了</p>");
-      // };
+      // 执行YD藤蔓
+      if (item.flagBind && diceUtil.rollDice(2) === 2) {
+        if (delayCauses.indexOf('bind') === -1) {
+          delayCauses.push('bind')
+        }
+        item.hp -= config.bindDamage
+        if (item.hp < 0) {
+          item.hp = 0
+          item.isDead = true
+          // TODO 清除buff？
+        }
+        setTimeout(() => {
+          // 显示伤害动效
+          eventBus.$emit('animateDamage', {
+            targets: [index],
+            value: config.bindDamage,
+            sound: 'bind',
+            image: 'effdamtree'
+          })
+        }, 1500 * (delayCauses.length - 1))
+        system.msg = [`致命藤蔓对${index + 1}号单位造成${config.bindDamage}点自然伤害`, ...system.msg]
+      }
+      // 判断YD死亡情况
+      if (item.type === 'YD' && item.isDead) {
+        if (index < 5) {
+          upYDDead = true
+        } else {
+          downYDDead = true
+        }
+      }
       return item
     })
 
@@ -498,23 +565,15 @@ export default {
               targets: [index],
               value: config.treeHealAmount
             })
-          }, 1500 * delayCauses.length - 1)
+          }, 1500 * (delayCauses.length - 1))
+        }
+        // 清除YD藤蔓
+        if (item.flagBind && ((index < 5 && downYDDead) || (index > 4 && upYDDead))) {
+          item.flagBind = false
         }
       }
       return item
     })
-
-    // //执行 致命藤蔓
-    // for (i = 0; i < 10; i++) {
-    //   if (data.unit[i].bindflag == true && data.unit[i].hp > 0) {
-    //     if (controller.rollDice(2) == 2) {
-    //       data.unit[i].hp -= 2;
-    //       data.unit[i].hp < 0 ? data.unit[i].hp = 0 : data.unit[i].hp;
-    //       var t = setTimeout('painter.makeAttack(' + i + ', 2, "static/audio/bind.wav", "static/img/effdamtree.png");', 100);
-    //       $("div.history-content").prepend("<p class='history-item'>致命藤蔓对" + (i + 1) + "号单位造成2点自然伤害</p>");
-    //     };
-    //   };
-    // };
 
     this.gainSp(delayCauses.length)
   },
@@ -552,5 +611,46 @@ export default {
       // 还未结束
     }
     return isUpsideWin || isDownsideWin
+  },
+  reset () {
+    system.step = 0
+    system.firstHand = ''
+    system.turn = ''
+    system.unitIndex = -1
+    system.msg = []
+    hero.units = []
+    for (let i = 0; i < 10; i++) {
+      hero.units.push({
+        isOpen: false, // 是否启用slot，是否有激活的英雄
+        isActed: false, // 当前回合是否已经使用过行动
+        isDead: false, // 角色是否处于已死亡状态
+        type: '', // ZS/LR/SM/WS/DZ/FS/XD/DK/QS/MS/SR - 吟游诗人/PC - 破城者/JB - 酒保/YD - 园丁/YX - 夜行者/TF - 屠夫/MO - 木偶
+        url: '', // 头像url
+        maxhp: 0,
+        hp: 0,
+        maxsp: 0,
+        sp: 0,
+        speed: 0,
+        flagAnger: false, // 是否激怒
+        iceblock: 0, // 寒冰屏障剩余层数
+        flagEnhance: false, // 是否激活了ms提供的强化
+        flagTiger: false, // 是否激活了虎形态
+        flagBear: false, // 是否激活了熊形态
+        flagTree: false, // 是否激活了树形态
+        yy: 0, // 英勇效果剩余层数
+        flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
+        flagEarth: false, // 是否激活了大地之力
+        flagFaint: false, // 是否激活了眩晕
+        flagSlow: false, // 是否激活了减速
+        poison: 0, // 中毒状态剩余层数
+        confuse: 0, // 蛊惑状态剩余层数
+        flagBind: false, // 是否激活了捆绑
+        flagDrunk: false, // 是否激活了醉酒
+        directDamageTotal: 0, // 累计直接伤害
+        skillDamageTotal: 0, // 累计技能伤害
+        damageTotal: 0, // 累计总伤害
+        actRounds: 0 // 行动回合
+      })
+    }
   }
 }

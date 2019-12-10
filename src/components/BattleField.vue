@@ -49,8 +49,8 @@
             <!-- 显示ICEBLOCK -->
             <img class="unit-cover" v-show="item.iceblock" src="../assets/img/bgiceblock.png" style="opacity: 0.65;" />
             <!-- 显示已行动，死亡 -->
-            <p class="unit-cover acted-cover" v-show="!item.isDead && item.isActed">-已行动-</p>
-            <p class="unit-cover death-cover" v-show="item.isDead">-死 亡-</p>
+            <p class="unit-cover acted-cover" v-show="!item.isDead && item.isActed">- 已行动 -</p>
+            <p class="unit-cover death-cover" v-show="item.isDead">- 死 亡 -</p>
             <!-- 显示伤害效果 -->
             <img class="cover-effect" v-show="animates[index].isShowEffect" :src="animates[index].effectUrl" />
             <!-- 显示扣血/治疗效果 -->
@@ -85,7 +85,7 @@
               <font-awesome-icon icon="heart" />
             </div>
             <div class="box-bar">
-              <bar :value="item.hp" :max="item.maxhp" :height="20" :color="'#558c08'"></bar>
+              <bar :value="item.hp" :max="item.maxhp" :height="20" :color="'#62a108'"></bar>
             </div>
           </div>
           <div class="box-sp" v-show="item.isOpen">
@@ -149,8 +149,8 @@
             <!-- 显示ICEBLOCK -->
             <img class="unit-cover" v-show="item.iceblock" src="../assets/img/bgiceblock.png" style="opacity: 0.65;" />
             <!-- 显示已行动，死亡 -->
-            <p class="unit-cover acted-cover" v-show="!item.isDead && item.isActed">-已行动-</p>
-            <p class="unit-cover death-cover" v-show="item.isDead">-死 亡-</p>
+            <p class="unit-cover acted-cover" v-show="!item.isDead && item.isActed">- 已行动 -</p>
+            <p class="unit-cover death-cover" v-show="item.isDead">- 死 亡 -</p>
             <!-- 显示伤害效果 -->
             <img class="cover-effect" v-show="animates[index + 5].isShowEffect" :src="animates[index + 5].effectUrl" />
             <!-- 显示扣血效果 -->
@@ -540,6 +540,7 @@ export default {
               width: 100%;
               height: 100%;
               z-index: -1;
+              opacity: 0.7;
             }
             .unit-avatar {
               margin: 10px;
@@ -572,7 +573,7 @@ export default {
               background-color: rgba(160,160,160,0.5);
               text-align: center;
               font-size: 18px;
-              font-weight: bold;
+              // font-weight: bold;
               text-shadow: 2px 2px 3px rgba(0,0,0,1)
             }
             .death-cover {
@@ -582,7 +583,7 @@ export default {
               background-color: rgba(0, 0, 0, 0.8);
               text-align: center;
               font-size: 18px;
-              font-weight: bold;
+              // font-weight: bold;
               text-shadow: 2px 2px 3px rgba(0,0,0,1);
             }
             .cover-effect-hpminus {
@@ -616,7 +617,7 @@ export default {
               left: 4px;
               top: 2px;
               width: 20px;
-              color: #558c08;
+              color: #62a108;
               text-align: center;
               font-size: 14px;
             }

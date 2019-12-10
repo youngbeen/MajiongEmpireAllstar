@@ -9,12 +9,14 @@
     <el-button type="primary" size="mini" :disabled="system.step !== 2" @click="proceedTurn">行动</el-button>
     <el-button size="mini" @click="testLuck">试试手气</el-button>
     <el-button size="mini" @click="getDPS">查看实时伤害统计</el-button>
+    <el-button type="danger" size="mini" @click="reset()">重置</el-button>
   </section>
 </template>
 
 <script>
 import eventBus from '@/eventBus'
 import system from '@/models/system'
+import hero from '@/models/hero'
 import diceUtil from '@/utils/diceUtil'
 import gameCtrl from '@/controllers/gameCtrl'
 
@@ -46,7 +48,16 @@ export default {
 
   methods: {
     startDraw () {
-      // TODO 执行校验（上下是否都有有效英雄）
+      // 执行校验（上下是否都有有效英雄）
+      let upHeroValid = hero.units.some((unit, index) => index < 5 && unit.type)
+      let downHeroValid = hero.units.some((unit, index) => index > 4 && unit.type)
+      if (!upHeroValid || !downHeroValid) {
+        this.$notify({
+          // title: '提示',
+          message: `请先设置英雄单位！`
+        })
+        return
+      }
       eventBus.$emit('playSound', {
         sound: 'dice'
       })
@@ -99,6 +110,9 @@ export default {
         // title: '提示',
         message: `你掷出了${dice}点`
       })
+    },
+    reset () {
+      gameCtrl.reset()
     },
     getDPS () {
       // TODO 待开发显示输出统计

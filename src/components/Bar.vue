@@ -44,10 +44,11 @@ export default {
     .label {
       height: 100%;
       // width: 99%;
+      transition: all 0.2s;
     }
     .box-text {
       position: absolute;
-      right: 0;
+      right: 4px;
       top: 0;
       height: 100%;
       font-size: 14px;

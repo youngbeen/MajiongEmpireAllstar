@@ -1,5 +1,5 @@
 <template>
-  <el-dialog class="window-choose-hero" title="选择英雄" :visible.sync="isShow" width="82%" top="2vh" :before-close="handleClose">
+  <el-dialog class="window-choose-hero" title="选择英雄" :visible.sync="isShow" width="84%" top="2vh" :before-close="handleClose">
     <div class="box-heros">
       <div class="box-hero" v-for="item in heros" :key="item.name" @click="choose(item)">
         <div class="box-avatar">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button size="small" @click="handleCancel">取 消</el-button>
+      <el-button size="small" @click="handleCancel">取消</el-button>
     </span>
   </el-dialog>
 </template>
@@ -85,6 +85,8 @@ export default {
     display: flex;
     // justify-content: space-between;
     flex-wrap: wrap;
+    max-height: 340px;
+    overflow-y: auto;
     .box-hero {
       margin: 8px 8px;
       border: 3px solid rgba(0,0,0,0);
@@ -97,8 +99,8 @@ export default {
       }
       .box-avatar {
         img {
-          width: 120px;
-          height: 140px;
+          width: 130px;
+          height: 150px;
         }
       }
       .title {
@@ -107,7 +109,7 @@ export default {
         font-weight: bold;
       }
       .desc {
-        width: 120px;
+        width: 130px;
         text-align: center;
         font-size: 12px;
       }

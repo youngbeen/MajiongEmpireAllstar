@@ -16,7 +16,6 @@ export default {
         return {
           reflectDamage
         }
-      // TODO 补充其他减伤策略？
       default:
         return 0
     }

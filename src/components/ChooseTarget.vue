@@ -1,13 +1,13 @@
 <template>
   <section class="bed-choose-target" v-show="isShow">
     <div class="bg-layer"></div>
-    <div class="box-main" :class="{ 'selected': selectedTarget.indexOf(index) > -1 }" v-show="item.isTarget && item.isOpen && item.type" v-for="(item, index) in targets" :key="index" :style="position(index)" @click="handleTargetSelect(index)">
+    <div class="box-main" :class="{ 'selected': selectedTarget.indexOf(index) > -1, 'highlight': item.flagTaunt }" v-show="item.isTarget && item.isOpen && item.type" v-for="(item, index) in targets" :key="index" :style="position(index)" @click="handleTargetSelect(index)">
       <img :src="item.url" class="covered-avatar">
       <div class="box-info">
         <!-- 顶部名称及标记 -->
         <div class="head">
           <font-awesome-icon class="hp" icon="heart" />
-          <div class="name"><span v-show="selectedTarget.indexOf(index) > -1"><font-awesome-icon icon="check-circle" /></span>目标{{ index + 1 }}<span v-if="!item.isDead && item.isActed">[已行动]</span><span v-if="item.isDead">[已死亡]</span></div>
+          <div class="name"><span v-show="selectedTarget.indexOf(index) > -1"><font-awesome-icon icon="check-circle" /></span><span v-show="item.flagTaunt"><font-awesome-icon icon="shield-alt" /></span>目标{{ index + 1 }}<span v-if="!item.isDead && item.isActed">[已行动]</span><span v-if="item.isDead">[已死亡]</span></div>
           <font-awesome-icon class="sp" icon="bolt" />
         </div>
         <!-- 条信息 -->
@@ -51,6 +51,8 @@
             </div>
           </div>
         </div>
+        <!-- death cover -->
+        <div class="cover-invalid" v-show="item.isDead"></div>
       </div>
     </div>
 
@@ -173,6 +175,7 @@ export default {
   },
 
   mounted () {
+    this.units = hero.units
     eventBus.$on('chooseTarget', (params) => {
       if (params && params.skillId) {
         this.show(params)
@@ -222,10 +225,9 @@ export default {
     },
     show (params) {
       this.skillId = params.skillId || ''
-      if (['LR1', 'SM1', 'FS1', 'XD1', 'XD2', 'XD3', 'QS1', 'QS2', 'MS1', 'SR2', 'C2', 'C4', 'C6', 'C8', 'C10', 'C12', 'C17', 'C19', 'C21', 'C23', 'C25'].indexOf(this.skillId) > -1) {
-        // LR箭雨,SM英勇,FS寒冰屏障,XD变形虎,XD变形熊，XD变形树，QS生而平等，QS圣疗，MS治疗，SR蛊惑，ZS守备,LR守备,SM守备,WS守备,DZ守备,FS守备，XD守备，DK守备，QS守备，MS守备，SR守备
+      if (['LR1', 'SM1', 'FS1', 'XD1', 'XD2', 'XD3', 'QS1', 'QS2', 'MS1', 'SR2', 'C2', 'C4', 'C6', 'C8', 'C10', 'C12', 'C17', 'C19', 'C21', 'C23', 'C25', 'C26', 'C27', 'C29', 'C31', 'C33', 'C35', 'C37'].indexOf(this.skillId) > -1) {
+        // LR箭雨,SM英勇,FS寒冰屏障,XD变形虎,XD变形熊，XD变形树，QS生而平等，QS圣疗，MS治疗，SR蛊惑，ZS守备,LR守备,SM守备,WS守备,DZ守备,FS守备，XD守备，DK守备，QS守备，MS守备，SR守备，PC普攻，PC守备，JB守备，YD守备，YX守备，TF守备，MO守备
         // 处理不需要选择目标的技能
-        // TODO 增加处理不需要选择目标的技能
         gameCtrl.proceedSkill(this.skillId)
         this.close()
       } else {
@@ -278,16 +280,21 @@ export default {
       width: 20%;
       height: 312px;
       border: 4px solid rgba(0,0,0, 0);
-      border-radius: 14px;
+      border-top-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      // border-radius: 6px;
       // height: 280px;
       background: #fff;
       // box-shadow: 1px 1px 8px rgba(0,0,0, .5);
       overflow: hidden;
       user-select: none;
+      transform: scale(0.9);
+      transition: all 0.2s;
       &:hover {
         border: 4px solid rgb(235, 52, 28);
         background: #fff;
-        box-shadow: 1px 1px 8px rgba(0,0,0, .5);
+        box-shadow: 1px 1px 12px 4px rgba(205, 238, 15, 0.6);
+        transform: scale(1);
       }
       .covered-avatar {
         width: 100%;
@@ -306,7 +313,7 @@ export default {
           align-items: center;
           font-size: 16px;
           .hp {
-            color: #558c08;
+            color: #62a108;
           }
           .name {
             font-weight: bold;
@@ -333,7 +340,7 @@ export default {
             .label {
               margin-right: 4px;
               width: 14px;
-              padding-top: 24px;
+              padding-top: 26px;
               color: #000;
               background: rgba(53, 194, 18, 0.6);
               font-size: 10px;
@@ -357,7 +364,7 @@ export default {
             .label {
               margin-right: 4px;
               width: 14px;
-              padding-top: 24px;
+              padding-top: 26px;
               color: #000;
               background: rgba(216, 69, 32, 0.6);
               font-size: 10px;
@@ -375,11 +382,23 @@ export default {
             }
           }
         }
+        .cover-invalid {
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(51, 51, 51, .6);
+        }
       }
+    }
+    .highlight {
+      border: 4px solid rgb(37, 92, 209);
     }
     .selected {
       border: 4px solid rgb(235, 52, 28);
       background: #fff;
+      box-shadow: 1px 1px 12px 4px rgba(205, 238, 15, 0.6);
     }
     .box-side-info {
       display: flex;
@@ -431,6 +450,7 @@ export default {
           padding: 0 10px;
           line-height: 60px;
           color: rgb(236, 31, 31);
+          // background: #62a108;
           font-size: 12px;
         }
       }
