@@ -7,16 +7,16 @@
         <!-- 顶部名称及标记 -->
         <div class="head">
           <font-awesome-icon class="hp" icon="heart" />
-          <div class="name"><span v-show="selectedTarget.indexOf(index) > -1"><font-awesome-icon icon="check-circle" /></span><span v-show="item.flagTaunt"><font-awesome-icon icon="shield-alt" /></span>目标{{ index + 1 }}<span v-if="!item.isDead && item.isActed">[已行动]</span><span v-if="item.isDead">[已死亡]</span></div>
+          <div class="name"><font-awesome-icon icon="check-circle" v-show="selectedTarget.indexOf(index) > -1" /><font-awesome-icon class="taunt" icon="shield-alt" v-show="item.flagTaunt" />{{item.type | cnNameFix}}<font-awesome-icon icon="skull-crossbones" v-show="item.isDead" /><span v-if="!item.isDead && item.isActed">[已行动]</span><span v-if="item.isDead">[已死亡]</span></div>
           <font-awesome-icon class="sp" icon="bolt" />
         </div>
         <!-- 条信息 -->
         <div class="box-bars">
           <div class="box-bar">
-            <bar :value="item.hp" :max="item.maxhp" :height="20" :color="'#558c08'"></bar>
+            <bar :value="item.hp" :max="item.maxhp" :height="20" :color="config.healthColor"></bar>
           </div>
           <div class="box-bar">
-            <bar :value="item.sp" :max="item.maxsp" :height="20" :color="'#ddd71b'"></bar>
+            <bar :value="item.sp" :max="item.maxsp" :height="20" :color="config.skillColor"></bar>
           </div>
         </div>
         <!-- 技能信息 -->
@@ -109,8 +109,9 @@
 <script>
 import eventBus from '@/eventBus'
 import system from '@/models/system'
+import config from '@/models/config'
 import hero from '@/models/hero'
-// import heroDict from '@/models/heroDict'
+import heroDict from '@/models/heroDict'
 import skillDict from '@/models/skillDict'
 import gameCtrl from '@/controllers/gameCtrl'
 import Bar from '@/components/Bar'
@@ -126,6 +127,7 @@ export default {
       skillImg: '',
       selectedTarget: [], // 保存的是目标索引
       system,
+      config,
       units: hero.units
     }
   },
@@ -171,6 +173,16 @@ export default {
         return item
       })
       return result
+    }
+  },
+  filters: {
+    cnNameFix (val) {
+      let target = heroDict.list.find(item => item.name === val)
+      if (target) {
+        return target.cnName
+      } else {
+        return val
+      }
     }
   },
 
@@ -258,6 +270,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/var.scss";
+
   .bed-choose-target {
     position: fixed;
     left: 0;
@@ -291,13 +305,15 @@ export default {
       transform: scale(0.9);
       transition: all 0.2s;
       &:hover {
-        border: 4px solid rgb(235, 52, 28);
+        border: 4px solid $DANGER-COLOR;
         background: #fff;
         box-shadow: 1px 1px 12px 4px rgba(205, 238, 15, 0.6);
         transform: scale(1);
       }
       .covered-avatar {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
       .box-info {
         position: absolute;
@@ -311,15 +327,19 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          color: $PRIMARY-TEXT-COLOR;
           font-size: 16px;
           .hp {
-            color: #62a108;
+            color: $HEALTH-COLOR;
           }
           .name {
             font-weight: bold;
+            .taunt {
+              color: $FOCUS-COLOR;
+            }
           }
           .sp {
-            color: #ddd71b;
+            color: $SKILL-COLOR;
           }
         }
         .box-bars {
@@ -393,12 +413,13 @@ export default {
       }
     }
     .highlight {
-      border: 4px solid rgb(37, 92, 209);
+      border: 4px solid $FOCUS-COLOR;
     }
     .selected {
-      border: 4px solid rgb(235, 52, 28);
+      border: 4px solid $DANGER-COLOR;
       background: #fff;
       box-shadow: 1px 1px 12px 4px rgba(205, 238, 15, 0.6);
+      transform: scale(1);
     }
     .box-side-info {
       display: flex;
@@ -422,7 +443,7 @@ export default {
       }
       .target-count {
         margin-left: 20px;
-        color: red;
+        color: $DANGER-COLOR;
         font-size: 14px;
       }
       .skill-info {
@@ -449,8 +470,7 @@ export default {
         .tip {
           padding: 0 10px;
           line-height: 60px;
-          color: rgb(236, 31, 31);
-          // background: #62a108;
+          color: $DANGER-COLOR;
           font-size: 12px;
         }
       }

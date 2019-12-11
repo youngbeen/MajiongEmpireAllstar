@@ -68,13 +68,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/var.scss";
+
   .bed-skill-tooltip {
     position: fixed;
     max-width: 400px;
     border: 1px solid #000;
     border-radius: 2px;
     color: #fff;
-    background-color: #000;
+    background: #000;
     box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
     z-index: 5000;
     .skill-title {
@@ -85,13 +87,13 @@ export default {
     }
     .skill-quote {
       padding: 0 15px;
-      color: rgba(255,0,0,1);
+      color: $DANGER-COLOR;
       font-size: 10px;
       font-style: italic;
     }
     .skill-def {
       padding: 4px 15px 8px;
-      color: rgba(220,220,220,1);
+      color: #dcdcdc;
       font-size: 12px;
     }
   }

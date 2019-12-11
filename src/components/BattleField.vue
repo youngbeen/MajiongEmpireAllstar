@@ -85,7 +85,7 @@
               <font-awesome-icon icon="heart" />
             </div>
             <div class="box-bar">
-              <bar :value="item.hp" :max="item.maxhp" :height="20" :color="'#62a108'"></bar>
+              <bar :value="item.hp" :max="item.maxhp" :height="20" :color="config.healthColor"></bar>
             </div>
           </div>
           <div class="box-sp" v-show="item.isOpen">
@@ -93,7 +93,7 @@
               <font-awesome-icon icon="bolt" />
             </div>
             <div class="box-bar">
-              <bar :value="item.sp" :max="item.maxsp" :height="20" :color="'#ddd71b'"></bar>
+              <bar :value="item.sp" :max="item.maxsp" :height="20" :color="config.skillColor"></bar>
             </div>
           </div>
         </div>
@@ -185,7 +185,7 @@
               <font-awesome-icon icon="heart" />
             </div>
             <div class="box-bar">
-              <bar :value="item.hp" :max="item.maxhp" :height="20" :color="'#558c08'"></bar>
+              <bar :value="item.hp" :max="item.maxhp" :height="20" :color="config.healthColor"></bar>
             </div>
           </div>
           <div class="box-sp" v-show="item.isOpen">
@@ -193,7 +193,7 @@
               <font-awesome-icon icon="bolt" />
             </div>
             <div class="box-bar">
-              <bar :value="item.sp" :max="item.maxsp" :height="20" :color="'#ddd71b'"></bar>
+              <bar :value="item.sp" :max="item.maxsp" :height="20" :color="config.skillColor"></bar>
             </div>
           </div>
         </div>
@@ -205,6 +205,7 @@
 <script>
 import eventBus from '@/eventBus'
 import system from '@/models/system'
+import config from '@/models/config'
 import hero from '@/models/hero'
 import Bar from '@/components/Bar'
 
@@ -295,6 +296,7 @@ export default {
         }
       ],
       system,
+      config,
       hero
     }
   },
@@ -448,6 +450,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/var.scss";
+
   .buff-icon {
     width: 25px;
     height: 25px;
@@ -539,14 +543,16 @@ export default {
               top: 0;
               width: 100%;
               height: 100%;
-              z-index: -1;
+              object-fit: cover;
               opacity: 0.7;
+              z-index: -1;
             }
             .unit-avatar {
               margin: 10px;
               width: 110px;
               height: 130px;
               border-radius: 4px;
+              object-fit: cover;
               &.enable {
                 cursor: pointer;
               }
@@ -589,7 +595,7 @@ export default {
             .cover-effect-hpminus {
               // width: 110px;
               top: 0;
-              color: rgba(255,0,0,1);
+              color: $DANGER-COLOR;
               font-size: 40px;
               font-weight: bold;
               text-align: center;
@@ -597,10 +603,10 @@ export default {
               transition: top .7s;
             }
             .cover-heal {
-              color: rgb(0,176,80);
+              color: $HEALTH-COLOR;
             }
             .cover-sp-recover {
-              color: rgba(255,227,99,1);
+              color: $SKILL-COLOR;
             }
             .cover-effect-hpminus-active {
               top: -40px;
@@ -617,7 +623,7 @@ export default {
               left: 4px;
               top: 2px;
               width: 20px;
-              color: #62a108;
+              color: $HEALTH-COLOR;
               text-align: center;
               font-size: 14px;
             }
@@ -633,7 +639,7 @@ export default {
               left: 4px;
               top: 2px;
               width: 20px;
-              color: #ddd71b;
+              color: $SKILL-COLOR;
               text-align: center;
               font-size: 14px;
             }

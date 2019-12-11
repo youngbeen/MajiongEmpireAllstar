@@ -81,6 +81,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/var.scss";
+
   .box-heros {
     display: flex;
     // justify-content: space-between;
@@ -94,13 +96,14 @@ export default {
       cursor: pointer;
       transition: all 0.2s;
       &:hover {
-        border: 3px solid rgb(46, 150, 255);
+        border: 3px solid $FOCUS-COLOR;
         box-shadow: 1px 1px 4px rgba(0,0,0, .8);
       }
       .box-avatar {
         img {
           width: 130px;
           height: 150px;
+          object-fit: cover;
         }
       }
       .title {

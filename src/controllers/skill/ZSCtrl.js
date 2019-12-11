@@ -108,7 +108,7 @@ export default {
         value: damage,
         sound: 'atkzs'
       })
-      system.msg = [`冲锋*使${youIndex + 1}号单位眩晕，并对其造成了${damage}点伤害`, ...system.msg]
+      system.msg = [`*冲锋*使${youIndex + 1}号单位眩晕，并对其造成了${damage}点伤害`, ...system.msg]
 
       hero.units.splice(youIndex, 1, you)
     })

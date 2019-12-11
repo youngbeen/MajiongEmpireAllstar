@@ -47,6 +47,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/css/var.scss";
+
 .bed-battle-log {
   position: fixed;
   left: 0;
@@ -69,7 +71,7 @@ export default {
       height: 28px;
       line-height: 28px;
       padding: 0 6px;
-      color: #666;
+      color: $SUB-TEXT-COLOR;
       font-size: 12px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -87,8 +89,7 @@ export default {
     .log {
       height: 20px;
       padding: 0 6px;
-      // background: blue;
-      color: #888;
+      color: $SUBNODE-TEXT-COLOR;
       font-size: 11px;
       overflow: hidden;
       text-overflow: ellipsis;

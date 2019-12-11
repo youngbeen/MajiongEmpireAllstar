@@ -20,5 +20,8 @@ export default {
   enhancePlusHp: 3, // MS强化提升的HP上限
   inspirePlusHp: 2, // SR鼓舞提升的HP上限
   confuseTurns: 2, // SR蛊惑持续层数
-  bindDamage: 2 // YD藤蔓伤害
+  bindDamage: 2, // YD藤蔓伤害
+  // 系统配置
+  healthColor: '#62a108', // HP使用色
+  skillColor: '#ddd71b' // 技能使用色
 }

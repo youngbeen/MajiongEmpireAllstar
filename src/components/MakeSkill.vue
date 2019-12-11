@@ -13,10 +13,10 @@
         <!-- 条信息 -->
         <div class="box-bars">
           <div class="box-bar">
-            <bar :value="hp" :max="maxhp" :height="20" :color="'#62a108'"></bar>
+            <bar :value="hp" :max="maxhp" :height="20" :color="config.healthColor"></bar>
           </div>
           <div class="box-bar">
-            <bar :value="sp" :max="maxsp" :height="20" :color="'#ddd71b'"></bar>
+            <bar :value="sp" :max="maxsp" :height="20" :color="config.skillColor"></bar>
           </div>
         </div>
         <!-- 技能信息 -->
@@ -54,6 +54,7 @@
 <script>
 import eventBus from '@/eventBus'
 import system from '@/models/system'
+import config from '@/models/config'
 import hero from '@/models/hero'
 import heroDict from '@/models/heroDict'
 import skillDict from '@/models/skillDict'
@@ -87,7 +88,8 @@ export default {
         // },
       ],
       positiveSkills: [],
-      negativeSkills: []
+      negativeSkills: [],
+      config
     }
   },
   computed: {
@@ -227,6 +229,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/var.scss";
+
   .bed-make-skill {
     position: fixed;
     left: 0;
@@ -259,6 +263,8 @@ export default {
       transition: all 0.2s;
       .covered-avatar {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
       .box-info {
         position: absolute;
@@ -274,13 +280,13 @@ export default {
           align-items: center;
           font-size: 16px;
           .hp {
-            color: #62a108;
+            color: $HEALTH-COLOR;
           }
           .name {
             font-weight: bold;
           }
           .sp {
-            color: #ddd71b;
+            color: $SKILL-COLOR;
           }
         }
         .box-bars {

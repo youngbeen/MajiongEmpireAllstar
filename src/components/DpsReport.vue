@@ -82,6 +82,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/css/var.scss";
+
   .box-report {
     .unit-info {
       display: flex;
@@ -100,7 +102,7 @@ export default {
         padding: 0 4px;
         font-weight: bold;
         .desc {
-          color: #999;
+          color: $DESC-TEXT-COLOR;
           font-size: 12px;
           font-weight: normal;
         }

@@ -37,7 +37,7 @@ export default {
       targets: [youIndex],
       value: damage,
       sound: 'atkyd',
-      image: 'effdamct'
+      image: 'effdampick'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
 
