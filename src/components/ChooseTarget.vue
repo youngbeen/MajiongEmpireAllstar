@@ -1,7 +1,7 @@
 <template>
   <section class="bed-choose-target" v-show="isShow">
     <div class="bg-layer"></div>
-    <div class="box-main" :class="{ 'selected': selectedTarget.indexOf(index) > -1, 'highlight': item.flagTaunt }" v-show="item.isTarget && item.isOpen && item.type" v-for="(item, index) in targets" :key="index" :style="position(index)" @click="handleTargetSelect(index)">
+    <div class="box-main" :class="{ 'selected': selectedTarget.indexOf(index) > -1, 'highlight': item.flagTaunt }" v-show="item.isTarget" v-for="(item, index) in targets" :key="index" :style="position(index)" @click="handleTargetSelect(index)">
       <img :src="item.url" class="covered-avatar">
       <div class="box-info">
         <!-- 顶部名称及标记 -->
@@ -128,7 +128,7 @@ export default {
       selectedTarget: [], // 保存的是目标索引
       system,
       config,
-      units: hero.units
+      hero
     }
   },
   computed: {
@@ -141,7 +141,7 @@ export default {
       }
     },
     sourceUnit () {
-      let result = this.units.find((item, index) => {
+      let result = this.hero.units.find((item, index) => {
         return index === this.system.unitIndex
       })
       if (result) {
@@ -154,25 +154,64 @@ export default {
       }
     },
     targets () {
-      let result = this.units.map((item, index) => {
-        if (this.system.unitIndex >= 5) {
-          // 下方source
-          if (index < 5) {
-            item.isTarget = true
+      if (this.skillId === 'DK1') {
+        // NOTE DK的牺牲爪牙技能比较特殊，需要选取死亡的敌对目标
+        let deads = this.hero.units.map((item, index) => {
+          if (this.system.unitIndex >= 5) {
+            // 下方source
+            if (index < 5 && item.isOpen && item.isDead) {
+              item.isTarget = true
+            } else {
+              item.isTarget = false
+            }
           } else {
-            item.isTarget = false
+            // 上方source
+            if (index >= 5 && item.isOpen && item.isDead) {
+              item.isTarget = true
+            } else {
+              item.isTarget = false
+            }
           }
-        } else {
-          // 上方source
-          if (index >= 5) {
-            item.isTarget = true
+          return item
+        })
+        return deads
+      } else {
+        // 正常情况
+        let upTaunt = this.hero.units.some((item, index) => index < 5 && item.isOpen && !item.isDead && item.flagTaunt)
+        let downTaunt = this.hero.units.some((item, index) => index >= 5 && item.isOpen && !item.isDead && item.flagTaunt)
+
+        let result = this.hero.units.map((item, index) => {
+          if (this.system.unitIndex >= 5) {
+            // 下方source
+            if (index < 5 && item.isOpen && !item.isDead) {
+              if (upTaunt && item.flagTaunt) {
+                item.isTarget = true
+              } else if (!upTaunt) {
+                item.isTarget = true
+              } else {
+                item.isTarget = false
+              }
+            } else {
+              item.isTarget = false
+            }
           } else {
-            item.isTarget = false
+            // 上方source
+            if (index >= 5 && item.isOpen && !item.isDead) {
+              if (downTaunt && item.flagTaunt) {
+                item.isTarget = true
+              } else if (!downTaunt) {
+                item.isTarget = true
+              } else {
+                item.isTarget = false
+              }
+            } else {
+              item.isTarget = false
+            }
           }
-        }
-        return item
-      })
-      return result
+          return item
+        })
+        return result
+      }
     }
   },
   filters: {
@@ -187,7 +226,6 @@ export default {
   },
 
   mounted () {
-    this.units = hero.units
     eventBus.$on('chooseTarget', (params) => {
       if (params && params.skillId) {
         this.show(params)
