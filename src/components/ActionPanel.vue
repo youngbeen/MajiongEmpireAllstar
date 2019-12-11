@@ -7,8 +7,8 @@
       {{ battleText }}
     </el-button>
     <el-button type="primary" size="mini" :disabled="system.step !== 2" @click="proceedTurn">行动</el-button>
-    <el-button size="mini" @click="testLuck">试试手气</el-button>
-    <el-button size="mini" @click="getDPS">查看实时伤害统计</el-button>
+    <el-button size="mini" @click="testLuck()">试试手气</el-button>
+    <el-button size="mini" @click="getDPS()">查看实时伤害统计</el-button>
     <el-button type="danger" size="mini" @click="reset()">重置</el-button>
   </section>
 </template>
@@ -115,7 +115,7 @@ export default {
       gameCtrl.reset()
     },
     getDPS () {
-      // TODO 待开发显示输出统计
+      eventBus.$emit('dpsReport')
     }
   }
 }

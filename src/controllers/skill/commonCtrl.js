@@ -84,7 +84,22 @@ export default {
     if (unit.hp <= 0) {
       unit.hp = 0
       unit.isDead = true
-      // TODO 清理其他buff？
+      // 清理其他buff
+      unit.flagAnger = false
+      unit.iceblock = 0
+      unit.flagEnhance = false
+      unit.flagTiger = false
+      unit.flagBear = false
+      unit.flagTree = false
+      unit.yy = 0
+      unit.flagTaunt = false
+      unit.flagEarth = false
+      unit.flagFaint = false
+      unit.flagSlow = false
+      unit.poison = 0
+      unit.confuse = 0
+      unit.flagBind = false
+      unit.flagDrunk = false
     } else if (unit.hp > unit.maxhp) {
       unit.hp = unit.maxhp
     }
@@ -99,5 +114,9 @@ export default {
       unit.sp = unit.maxsp
     }
     return unit
+  },
+  // 清理状态
+  clearHeroState () {
+
   }
 }

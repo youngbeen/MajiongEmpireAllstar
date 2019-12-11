@@ -480,7 +480,8 @@ export default {
           if (item.hp <= 0) {
             item.hp = 0
             item.isDead = true
-            // TODO 清除buff？
+            // 清除buff
+            item = this.clearHeroState(item)
           }
           // 显示伤害动效
           eventBus.$emit('animateDamage', {
@@ -520,7 +521,8 @@ export default {
         if (item.hp < 0) {
           item.hp = 0
           item.isDead = true
-          // TODO 清除buff？
+          // 清除buff
+          item = this.clearHeroState(item)
         }
         setTimeout(() => {
           // 显示伤害动效
@@ -652,5 +654,23 @@ export default {
         actRounds: 0 // 行动回合
       })
     }
+  },
+  clearHeroState (unit) {
+    unit.flagAnger = false
+    unit.iceblock = 0
+    unit.flagEnhance = false
+    unit.flagTiger = false
+    unit.flagBear = false
+    unit.flagTree = false
+    unit.yy = 0
+    unit.flagTaunt = false
+    unit.flagEarth = false
+    unit.flagFaint = false
+    unit.flagSlow = false
+    unit.poison = 0
+    unit.confuse = 0
+    unit.flagBind = false
+    unit.flagDrunk = false
+    return unit
   }
 }
