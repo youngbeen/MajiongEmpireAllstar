@@ -35,7 +35,7 @@ export default {
             sound: 'anger'
           })
           system.msg = ['战士获得*激怒*效果', ...system.msg]
-        }, 1500 * stackPlays)
+        }, config.animationTime * stackPlays)
         stackPlays++
       }
       if (you.type === 'WS' && timeDice.dice === 3) {

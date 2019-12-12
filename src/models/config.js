@@ -23,5 +23,7 @@ export default {
   bindDamage: 2, // YD藤蔓伤害
   // 系统配置
   healthColor: '#62a108', // HP使用色
-  skillColor: '#ddd71b' // 技能使用色
+  skillColor: '#ddd71b', // 技能使用色
+  preCastingTime: 1000, // 技能释放前摇时长，单位ms
+  animationTime: 1500 // 每个动效播放的时长，单位ms
 }

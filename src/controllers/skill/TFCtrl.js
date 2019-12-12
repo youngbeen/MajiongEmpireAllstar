@@ -141,7 +141,7 @@ export default {
             image: 'effdam'
           })
           system.msg = [`${system.unitIndex + 1}号单位对${targetIndex + 1}号单位造成${attachedDamage}点顺带伤害`, ...system.msg]
-        }, 1500 * stackPlays)
+        }, config.animationTime * stackPlays)
 
         hero.units.splice(targetIndex, 1, enemy)
       })

@@ -52,8 +52,8 @@ export default {
       let upHeroValid = hero.units.some((unit, index) => index < 5 && unit.type)
       let downHeroValid = hero.units.some((unit, index) => index > 4 && unit.type)
       if (!upHeroValid || !downHeroValid) {
-        this.$notify({
-          // title: '提示',
+        this.$message({
+          type: 'warning',
           message: `请先设置英雄单位！`
         })
         return

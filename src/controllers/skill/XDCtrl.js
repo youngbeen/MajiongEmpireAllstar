@@ -117,7 +117,7 @@ export default {
         value: 3
       })
       system.msg = [`${system.unitIndex + 1}号单位变形为${cnType}形态，恢复3点生命值`, ...system.msg]
-    }, 1500 * stackPlays)
+    }, config.animationTime * stackPlays)
     stackPlays++
 
     // 回写数据

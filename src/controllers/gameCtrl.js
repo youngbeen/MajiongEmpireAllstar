@@ -179,13 +179,17 @@ export default {
       // 无可行动角色，回合结束，重新开始新回合
       this.refreshActionFlag()
       // 处理buff，清除debuff
-      this.runBuffs()
+      let stackPlays = this.runBuffs()
+      stackPlays = this.gainSp(stackPlays)
+
       system.turn = system.firstHand
 
-      // eventBus.$emit('playSound', {
-      //   sound: 'reset'
-      // })
-      system.msg = ['所有单位已重置！', ...system.msg]
+      setTimeout(() => {
+        eventBus.$emit('playSound', {
+          sound: 'reset'
+        })
+        system.msg = ['所有单位已重置！', ...system.msg]
+      }, config.animationTime * stackPlays)
     } else if (speedUp !== -99 && speedDown !== -99) {
       // 都存在未动作单位，比较速度大小及先后手
       if (speedUp > speedDown) {
@@ -253,7 +257,7 @@ export default {
         })
         setTimeout(() => {
           ZSCtrl.charge(skillId, targets)
-        }, 1000)
+        }, config.preCastingTime)
         break
       case 'C3': // LR普攻
         eventBus.$emit('playSound', {
@@ -261,7 +265,7 @@ export default {
         })
         setTimeout(() => {
           LRCtrl.atk(targets)
-        }, 1000)
+        }, config.preCastingTime)
         break
       case 'LR1': // LR箭雨
         eventBus.$emit('playSound', {
@@ -269,7 +273,7 @@ export default {
         })
         setTimeout(() => {
           LRCtrl.rain(skillId)
-        }, 1000)
+        }, config.preCastingTime)
         break
       case 'LR2': // LR奥术射击
         eventBus.$emit('playSound', {
@@ -277,7 +281,7 @@ export default {
         })
         setTimeout(() => {
           LRCtrl.magicShoot(skillId, targets)
-        }, 1000)
+        }, config.preCastingTime)
         break
       case 'C5': // SM普攻
         SMCtrl.atk(targets)
@@ -408,7 +412,7 @@ export default {
     })
   },
   // 获取sp
-  gainSp (delayCausesLength) {
+  gainSp (stackPlays) {
     hero.units = hero.units.map((item, index) => {
       if (item.isOpen && item.type && !item.isDead) {
         // 存活的有效单位，每回合2/5的概率获得2 sp
@@ -422,11 +426,13 @@ export default {
               targets: [index],
               value: 2
             })
-          }, 1500 * delayCausesLength)
+          }, config.animationTime * stackPlays)
         }
       }
       return item
     })
+    stackPlays++
+    return stackPlays
   },
   // 结算回合结束时的技能，buff等
   runBuffs () {
@@ -436,7 +442,7 @@ export default {
     let downTreeAlive = false
     let upYDDead = false
     let downYDDead = false
-    let delayCauses = []
+    let delayCauses = [] // 每一类结算因素会造成下一个效果的延迟播放
     hero.units = hero.units.map((item, index) => {
       if (item.isOpen && item.type && !item.isDead) {
         // 清除眩晕
@@ -532,7 +538,7 @@ export default {
             sound: 'bind',
             image: 'effdamtree'
           })
-        }, 1500 * (delayCauses.length - 1))
+        }, config.animationTime * (delayCauses.length - 1))
         system.msg = [`致命藤蔓对${index + 1}号单位造成${config.bindDamage}点自然伤害`, ...system.msg]
       }
       // 判断YD死亡情况
@@ -567,7 +573,7 @@ export default {
               targets: [index],
               value: config.treeHealAmount
             })
-          }, 1500 * (delayCauses.length - 1))
+          }, config.animationTime * (delayCauses.length - 1))
         }
         // 清除YD藤蔓
         if (item.flagBind && ((index < 5 && downYDDead) || (index > 4 && upYDDead))) {
@@ -577,7 +583,8 @@ export default {
       return item
     })
 
-    this.gainSp(delayCauses.length)
+    // 返回造成延迟的因素个数，用于其他后续流程延迟播放
+    return delayCauses.length
   },
   // 检查胜利
   checkWin () {

@@ -78,7 +78,7 @@ export default {
     color: #fff;
     background: #000;
     box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
-    z-index: 5000;
+    z-index: 50;
     .skill-title {
       // margin-top: 8px;
       padding: 8px 15px 4px;

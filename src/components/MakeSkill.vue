@@ -121,7 +121,7 @@ export default {
   methods: {
     handleSkillCast (item) {
       if (this.sp < item.spCost) {
-        this.$notify({
+        this.$message({
           // title: '警告',
           type: 'warning',
           message: `SP值不足！`
@@ -203,7 +203,7 @@ export default {
       this.isShow = true
       setTimeout(() => {
         this.animateFlag = true
-      }, 200)
+      }, 10)
     },
     close () {
       eventBus.$emit('hideSkillTooltip')
@@ -237,7 +237,7 @@ export default {
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 4000;
+    z-index: 40;
     .bg-layer {
       position: absolute;
       left: 0;
@@ -260,6 +260,7 @@ export default {
       box-shadow: 1px 1px 8px rgba(0,0,0, .5);
       overflow: hidden;
       opacity: 0;
+      transform: scale(0.5);
       transition: all 0.2s;
       .covered-avatar {
         width: 100%;
@@ -375,6 +376,7 @@ export default {
     }
     .box-main-active {
       opacity: 1;
+      transform: scale(1);
     }
   }
 </style>

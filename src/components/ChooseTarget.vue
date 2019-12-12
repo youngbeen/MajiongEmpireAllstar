@@ -76,7 +76,7 @@
         <span class="tip">
           限定 {{ skillTargets }} 目标
         </span>
-        <el-button type="primary" size="small" @click="confirm" style="width: 100px;">确 定</el-button>
+        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确 定</el-button>
       </div>
     </div>
 
@@ -100,7 +100,7 @@
         <span class="tip">
           限定 {{ skillTargets }} 目标
         </span>
-        <el-button type="primary" size="small" @click="confirm" style="width: 100px;">确 定</el-button>
+        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确 定</el-button>
       </div>
     </div>
   </section>
@@ -241,6 +241,14 @@ export default {
     confirm () {
       // console.log(this.selectedTarget)
       if (this.selectedTarget.length) {
+        if (this.skillId === 'ZS1' && this.selectedTarget.length >= 2 && Math.abs(this.selectedTarget[0] - this.selectedTarget[1]) > 1) {
+          // NOTE ZS的冲锋技能比较特殊，选择的2个目标必须是相邻单位
+          this.$message({
+            type: 'warning',
+            message: '*冲锋*技能的目标必须是相邻单位！'
+          })
+          return
+        }
         gameCtrl.proceedSkill(this.skillId, this.selectedTarget)
         this.close()
       }
@@ -316,7 +324,7 @@ export default {
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 4000;
+    z-index: 40;
     .bg-layer {
       position: absolute;
       left: 0;

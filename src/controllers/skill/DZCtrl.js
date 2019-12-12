@@ -74,7 +74,7 @@ export default {
           value: 1
         })
         system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了1点SP`, ...system.msg]
-      }, 1500 * stackPlays)
+      }, config.animationTime * stackPlays)
       stackPlays++
     }
 
@@ -148,7 +148,7 @@ export default {
           value: 1
         })
         system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了1点SP`, ...system.msg]
-      }, 1500 * stackPlays)
+      }, config.animationTime * stackPlays)
       stackPlays++
     }
 

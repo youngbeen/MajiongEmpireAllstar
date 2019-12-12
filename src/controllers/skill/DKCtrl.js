@@ -63,7 +63,7 @@ export default {
           value: 2
         })
         system.msg = [`${system.unitIndex + 1}号单位的*邪恶斩击*使其回复了2点生命值`, ...system.msg]
-      }, 1500 * stackPlays)
+      }, config.animationTime * stackPlays)
       stackPlays++
     }
 

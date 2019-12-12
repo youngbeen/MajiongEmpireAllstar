@@ -103,7 +103,7 @@ export default {
         image: 'effdammagic'
       })
       system.msg = [`*冰枪术*对${index + 1}号单位额外造成${damage}点偏斜伤害`, ...system.msg]
-    }, 1500 * stackPlays)
+    }, config.animationTime * stackPlays)
 
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(index, 1, you)

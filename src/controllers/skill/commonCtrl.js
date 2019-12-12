@@ -41,7 +41,7 @@ export default {
         value: reflectDamage
       })
       system.msg = [`*大地之力*效果使${system.unitIndex + 1}号单位受到${reflectDamage}点反馈伤害`, ...system.msg]
-    }, 1500 * stackPlays)
+    }, config.animationTime * stackPlays)
 
     return me
   },
@@ -55,7 +55,7 @@ export default {
         value: damage
       })
       system.msg = [`*蛊惑*使${system.unitIndex + 1}号单位受到了${damage}点伤害`, ...system.msg]
-    }, 1500 * stackPlays)
+    }, config.animationTime * stackPlays)
 
     return me
   },

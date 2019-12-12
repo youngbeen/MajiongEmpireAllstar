@@ -360,7 +360,7 @@ export default {
           let copy = this.animates[params.targets[0]]
           copy.isTextAnimateStart = true
           this.animates.splice(params.targets[0], 1, copy)
-        }, 100)
+        }, 10)
         // 清除效果图相关
         setTimeout(() => {
           let copy = this.animates[params.targets[0]]
@@ -399,7 +399,7 @@ export default {
           let copy = this.animates[params.targets[0]]
           copy.isTextAnimateStart = true
           this.animates.splice(params.targets[0], 1, copy)
-        }, 100)
+        }, 10)
         // 清除文字
         setTimeout(() => {
           let copy = this.animates[params.targets[0]]
@@ -431,7 +431,7 @@ export default {
           let copy = this.animates[params.targets[0]]
           copy.isTextAnimateStart = true
           this.animates.splice(params.targets[0], 1, copy)
-        }, 100)
+        }, 10)
         // 清除文字
         setTimeout(() => {
           let copy = this.animates[params.targets[0]]

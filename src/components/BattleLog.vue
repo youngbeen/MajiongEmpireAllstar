@@ -57,7 +57,7 @@ export default {
   height: 100px;
   background: #fff;
   box-shadow: 0 -1px 6px 1px rgba(180, 180, 180, .5);
-  z-index: 1000;
+  z-index: 10;
   transition: all 0.2s;
   &.extend {
     bottom: 0;
