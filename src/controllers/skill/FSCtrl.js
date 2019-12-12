@@ -113,7 +113,7 @@ export default {
     let me = hero.units[system.unitIndex]
     me = commonCtrl.act(me, skillId)
 
-    me.iceblock = 3
+    me.iceblock = config.iceblockTurns
     eventBus.$emit('playSound', {
       sound: 'casticeblock'
     })

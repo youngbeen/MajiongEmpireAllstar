@@ -44,7 +44,7 @@
             <img class="unit-bg" v-show="item.flagTree" src="../assets/img/bgtree.png" />
             <!-- 显示本体 -->
             <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="!item.type" src="../assets/img/nounit.png" @click="chooseHero(index, 'up')" />
-            <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="item.type" :src="item.url" @click="chooseHero(index, 'up')" />
+            <img class="unit-avatar" :class="[system.step === 0 && 'enable', damageFloating[index] && 'floating-up']" v-show="item.type" :src="item.url" @click="chooseHero(index, 'up')" />
             <!-- 显示其他覆盖状态 -->
             <!-- 显示ICEBLOCK -->
             <img class="unit-cover" v-show="item.iceblock" src="../assets/img/bgiceblock.png" style="opacity: 0.65;" />
@@ -54,7 +54,7 @@
             <!-- 显示伤害效果 -->
             <img class="cover-effect" v-show="animates[index].isShowEffect" :src="animates[index].effectUrl" />
             <!-- 显示扣血/治疗效果 -->
-            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index].textType === 'heal', 'cover-sp-recover': animates[index].textType === 'sp', 'cover-effect-hpminus-active': animates[index].isTextAnimateStart }" v-show="animates[index].isShowText">{{ animates[index].textType === 'damage' ? '-' : '+' }} {{ animates[index].textValue }}</p>
+            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index].textType === 'heal', 'cover-sp-recover': animates[index].textType === 'sp', 'active': animates[index].isTextAnimateStart }" v-show="animates[index].isShowText">{{ animates[index].textType === 'damage' ? '-' : '+' }}{{ animates[index].textValue }}</p>
           </div>
           <!-- 右侧debuff栏 -->
           <div class="box-debuffs">
@@ -144,7 +144,7 @@
             <img class="unit-bg" v-show="item.flagTree" src="../assets/img/bgtree.png" />
             <!-- 显示本体 -->
             <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="!item.type" src="../assets/img/nounit.png" @click="chooseHero(index, 'down')" />
-            <img class="unit-avatar" :class="[system.step === 0 && 'enable']" v-show="item.type" :src="item.url" @click="chooseHero(index, 'down')" />
+            <img class="unit-avatar" :class="[system.step === 0 && 'enable', damageFloating[index + 5] && 'floating-down']" v-show="item.type" :src="item.url" @click="chooseHero(index, 'down')" />
             <!-- 显示其他覆盖状态 -->
             <!-- 显示ICEBLOCK -->
             <img class="unit-cover" v-show="item.iceblock" src="../assets/img/bgiceblock.png" style="opacity: 0.65;" />
@@ -154,7 +154,7 @@
             <!-- 显示伤害效果 -->
             <img class="cover-effect" v-show="animates[index + 5].isShowEffect" :src="animates[index + 5].effectUrl" />
             <!-- 显示扣血效果 -->
-            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index + 5].textType === 'heal', 'cover-sp-recover': animates[index + 5].textType === 'sp', 'cover-effect-hpminus-active': animates[index + 5].isTextAnimateStart }" v-show="animates[index + 5].isShowText">{{ animates[index + 5].textType === 'damage' ? '-' : '+' }} {{ animates[index + 5].textValue }}</p>
+            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index + 5].textType === 'heal', 'cover-sp-recover': animates[index + 5].textType === 'sp', 'active': animates[index + 5].isTextAnimateStart }" v-show="animates[index + 5].isShowText">{{ animates[index + 5].textType === 'damage' ? '-' : '+' }}{{ animates[index + 5].textValue }}</p>
           </div>
           <!-- 右侧debuff栏 -->
           <div class="box-debuffs">
@@ -294,7 +294,8 @@ export default {
           textType: 'damage', // 文字种类，'damage' | 'heal'
           textValue: '0' // 文字数字内容
         }
-      ],
+      ], // 控制伤害及数字动效
+      damageFloating: [false, false, false, false, false, false, false, false, false, false], // 控制伤害浮动动效
       system,
       config,
       hero
@@ -375,6 +376,12 @@ export default {
           copy.isTextAnimateStart = false
           this.animates.splice(params.targets[0], 1, copy)
         }, 1200)
+
+        // 处理伤害floating
+        this.damageFloating[params.targets[0]] = true
+        setTimeout(() => {
+          this.damageFloating[params.targets[0]] = false
+        }, 700)
       }
     },
     handleHealAnimate (params) {
@@ -533,6 +540,7 @@ export default {
           }
           .box-unit {
             position: relative;
+            top: 0;
             width: 130px;
             height: 150px;
             border-radius: 4px;
@@ -548,13 +556,22 @@ export default {
               z-index: -1;
             }
             .unit-avatar {
+              position: relative;
+              top: 0;
               margin: 10px;
               width: 110px;
               height: 130px;
               border-radius: 4px;
               object-fit: cover;
+              transition: all 0.2s;
               &.enable {
                 cursor: pointer;
+              }
+              &.floating-up {
+                top: -10px;
+              }
+              &.floating-down {
+                top: 10px;
               }
             }
             .unit-cover {
@@ -596,20 +613,21 @@ export default {
               // width: 110px;
               top: 0;
               color: $DANGER-COLOR;
+              font-family: 'DMG Regular';
               font-size: 40px;
-              font-weight: bold;
+              // font-weight: bold;
               text-align: center;
-              text-shadow: 2px 2px 4px rgba(0,0,0,1);
+              // text-shadow: 1px 1px 4px rgba(0,0,0,1);
               transition: top .7s;
-            }
-            .cover-heal {
-              color: $HEALTH-COLOR;
-            }
-            .cover-sp-recover {
-              color: $SKILL-COLOR;
-            }
-            .cover-effect-hpminus-active {
-              top: -40px;
+              &.cover-heal {
+                color: $HEALTH-COLOR;
+              }
+              &.cover-sp-recover {
+                color: $SKILL-COLOR;
+              }
+              &.active {
+                top: -46px;
+              }
             }
           }
         }

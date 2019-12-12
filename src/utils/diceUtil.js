@@ -53,7 +53,7 @@ export default {
         }
     }
   },
-  // 从2枚骰子中挑选大的（用于生成原始伤害）
+  // 从2枚骰子中挑选大的
   getBigIn2Dices () {
     let dice1 = this.rollDice()
     let dice2 = this.rollDice()

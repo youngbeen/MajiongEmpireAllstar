@@ -1,3 +1,8 @@
+import config from './config'
+
+const atkSuffixDesc = '发动一次正常攻击，造成一次直接伤害'
+const guardPrefixDesc = '采用防守戒备的行动'
+
 export default {
   // NOTE id: C - common, ZS or other hero name - hero skill
   // cat: C - common, P - positive, N - negative
@@ -11,7 +16,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '手持宽阔的剑刃斩击敌人，发动一次正常攻击，造成一次直接伤害',
+      detail: `手持宽阔的剑刃斩击敌人，${atkSuffixDesc}`,
       url: './img/skill_1_zs.png'
     },
     {
@@ -22,7 +27,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -33,7 +38,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '挽起弓箭射击敌人，发动一次正常攻击，造成一次直接伤害',
+      detail: `挽起弓箭射击敌人，${atkSuffixDesc}`,
       url: './img/skill_1_lr.png'
     },
     {
@@ -44,7 +49,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -55,7 +60,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '挥舞附带元素力量的武器，发动一次正常攻击，造成一次直接伤害',
+      detail: `挥舞附带元素力量的武器，${atkSuffixDesc}`,
       url: './img/skill_1_sm.png'
     },
     {
@@ -66,7 +71,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -77,7 +82,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '舞动手中的五步棍，发动一次正常攻击，造成一次直接伤害',
+      detail: `舞动手中的五步棍，${atkSuffixDesc}`,
       url: './img/skill_1_ws.png'
     },
     {
@@ -88,7 +93,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -99,7 +104,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '使用锋利的匕首攻击敌人，发动一次正常攻击，造成一次直接伤害',
+      detail: `使用锋利的匕首攻击敌人，${atkSuffixDesc}`,
       url: './img/skill_1_dz.png'
     },
     {
@@ -110,7 +115,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -121,7 +126,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '吟唱寒冷刺骨的魔法，发动一次正常攻击，造成一次直接伤害',
+      detail: `吟唱寒冷刺骨的魔法，${atkSuffixDesc}`,
       url: './img/skill_1_fs.png'
     },
     {
@@ -132,7 +137,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -143,7 +148,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '借助你的特殊能力，发动一次正常攻击，造成一次直接伤害',
+      detail: `借助你的特殊能力，${atkSuffixDesc}`,
       url: './img/skill_1_xd.png'
     },
     {
@@ -154,7 +159,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '借助你的特殊能力，发动一次正常攻击，造成一次直接伤害',
+      detail: `借助你的特殊能力，${atkSuffixDesc}`,
       url: './img/skill_1_tiger.png'
     },
     {
@@ -165,7 +170,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '借助你的特殊能力，发动一次正常攻击，造成一次直接伤害',
+      detail: `借助你的特殊能力，${atkSuffixDesc}`,
       url: './img/skill_1_bear.png'
     },
     {
@@ -176,7 +181,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '借助你的特殊能力，发动一次正常攻击，造成一次直接伤害',
+      detail: `借助你的特殊能力，${atkSuffixDesc}`,
       url: './img/skill_1_tree.png'
     },
     {
@@ -187,7 +192,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -198,7 +203,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '手持你的符文剑，发动一次正常攻击，造成一次直接伤害',
+      detail: `手持你的符文剑，${atkSuffixDesc}`,
       url: './img/skill_1_dk.png'
     },
     {
@@ -209,7 +214,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动',
+      detail: `${guardPrefixDesc}`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -220,7 +225,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '使用正义力量惩戒敌人，发动一次正常攻击，造成一次直接伤害',
+      detail: `使用正义力量惩戒敌人，${atkSuffixDesc}`,
       url: './img/skill_1_qs.png'
     },
     {
@@ -231,7 +236,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -242,7 +247,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '使用神圣法术惩戒敌人，发动一次正常攻击，造成一次直接伤害',
+      detail: `使用神圣法术惩戒敌人，${atkSuffixDesc}`,
       url: './img/skill_1_ms.png'
     },
     {
@@ -253,7 +258,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -264,7 +269,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '演奏摄人心魄的乐曲，发动一次正常攻击，造成一次直接伤害',
+      detail: `演奏摄人心魄的乐曲，${atkSuffixDesc}`,
       url: './img/skill_1_sr.png'
     },
     {
@@ -275,7 +280,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -286,7 +291,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '挥舞手中沉重的武器，发动一次毁灭性的攻击，造成一次直接伤害',
+      detail: `挥舞手中沉重的武器，${atkSuffixDesc}`,
       url: './img/skill_1_pc.png'
     },
     {
@@ -297,7 +302,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -308,7 +313,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '使用手中的戒备棒，发动一次正常攻击，造成一次直接伤害',
+      detail: `使用手中的戒备棒，${atkSuffixDesc}`,
       url: './img/skill_1_jb.png'
     },
     {
@@ -319,7 +324,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -330,7 +335,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '挥舞手中的花园锄头，不得已地发动一次正常攻击，造成一次直接伤害',
+      detail: `挥舞手中的花园锄头，${atkSuffixDesc}`,
       url: './img/skill_1_yd.png'
     },
     {
@@ -341,7 +346,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(3)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal + config.guardYDPlusHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -352,7 +357,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '手持利刃从阴影中打击敌人，发动一次正常攻击，造成一次直接伤害',
+      detail: `手持利刃从阴影中打击敌人，${atkSuffixDesc}`,
       url: './img/skill_1_yx.png'
     },
     {
@@ -363,7 +368,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -374,7 +379,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '高举手中的屠刀，发动一次正常攻击，造成一次直接伤害',
+      detail: `高举手中的屠刀，${atkSuffixDesc}`,
       url: './img/skill_1_tf.png'
     },
     {
@@ -385,7 +390,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -396,7 +401,7 @@ export default {
       targetLimit: 1,
       cnName: '攻击',
       desc: [],
-      detail: '发动一次正常攻击，造成一次直接伤害',
+      detail: `${atkSuffixDesc}`,
       url: './img/skill_1_mo.png'
     },
     {
@@ -407,7 +412,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: '采用防守戒备的行动，可以恢复少量(1)生命值',
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -418,7 +423,7 @@ export default {
       targetLimit: 2,
       cnName: '冲锋',
       desc: ['可以驱散'],
-      detail: '对一个敌方单位发起冲锋，被冲锋的单位及其相邻的另外一个单位(由你指定)将会被眩晕，并造成少量(2)直接伤害。被眩晕的目标将无法行动！',
+      detail: `对最多2个敌方单位发起冲锋，被冲锋的单位将会被眩晕，并对其造成(${config.chargeFixedDamage})直接伤害。被眩晕的目标将无法行动`,
       url: './img/skill_3_zs.png'
     },
     {
@@ -451,7 +456,7 @@ export default {
       targetLimit: 1,
       cnName: '奥术射击',
       desc: ['可以驱散'],
-      detail: '发动一次普通射击，并使之附带奥术效果。使敌方目标速度降低(速度-2，不叠加)，并能驱散敌方目标身上的激怒或英勇效果',
+      detail: `发动一次普通射击，并使之附带奥术效果。使敌方目标速度降低(速度-${config.magicShotMinusSpeed}，不叠加)，并能驱散敌方目标身上的激怒和英勇效果`,
       url: './img/skill_4_lr.png'
     },
     {
@@ -462,7 +467,7 @@ export default {
       targetLimit: 0,
       cnName: '英勇',
       desc: ['有益效果', '可以驱散'],
-      detail: '借助元素的力量，鼓舞所有队友。全体友方单位生命值上限提高(2点)，速度上升(2点)，持续2回合，英勇增益效果不会叠加',
+      detail: `借助元素的力量，鼓舞所有队友。全体友方单位生命值上限提高(${config.yyPlusMaxhp})，速度上升(${config.yyPlusSpeed})，持续${config.yyMaxTurns}回合，英勇增益效果不会叠加`,
       url: './img/skill_3_sm.png'
     },
     {
@@ -473,7 +478,7 @@ export default {
       targetLimit: 0,
       cnName: '大地之力',
       desc: ['有益效果', '无法驱散'],
-      detail: '召唤大地母亲护佑全体友方单位，持续整场战斗。若敌方对友方单位造成暴击的时候，1/3伤害将反馈给攻击方',
+      detail: '召唤大地母亲护佑全体友方单位，持续整场战斗。若敌方对友方单位造成暴击的时候，受到伤害的1/3伤害将反馈给攻击方',
       url: './img/skill_5_sm.png'
     },
     {
@@ -484,7 +489,7 @@ export default {
       targetLimit: 1,
       cnName: '死亡一指',
       desc: [],
-      detail: '发动武术绝学，对一名敌方单位发动一次强力的终结技能，造成技能伤害。若目标生命值为10及以下则立即击杀该目标，否则对其造成5点伤害值',
+      detail: `发动武术绝学，对一名敌方单位发动一次强力的终结技能，造成技能伤害。若目标生命值为${config.deathFingerMaxDamage}及以下则立即击杀该目标，否则对其造成${config.deathFingerMinDamage}点伤害值`,
       url: './img/skill_3_ws.png'
     },
     {
@@ -506,7 +511,7 @@ export default {
       targetLimit: 1,
       cnName: '毒刃',
       desc: ['可以驱散'],
-      detail: '对一名敌方单位发动一次普通攻击，并附带中毒效果(持续2回合，最多2层)。中毒的目标每回合结束会受到3点毒药伤害，毒药伤害不会被减伤效果削弱。此外你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)',
+      detail: `对一名敌方单位发动一次普通攻击，并附带中毒效果(持续${config.poisonDamageTurns}回合，最多${config.poisonDamageTurns}层)。中毒的目标每回合结束会受到毒药伤害(${config.poisonDamage})，毒药伤害不会被减伤效果削弱。此外你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)`,
       url: './img/skill_3_dz.png'
     },
     {
@@ -517,7 +522,7 @@ export default {
       targetLimit: 0,
       cnName: '能量控制',
       desc: ['有益效果', '无法驱散'],
-      detail: '最大技能点数SP上限提高3点，你每次攻击结束之后有一定几率(1/6)回复1点SP值',
+      detail: `最大技能点数上限提高，你每次攻击结束之后有一定几率(1/6)回复${config.rogueBonusSp}点SP值`,
       url: './img/skill_5_dz.png'
     },
     {
@@ -528,7 +533,7 @@ export default {
       targetLimit: 0,
       cnName: '寒冰屏障',
       desc: ['有益效果', '无法驱散'],
-      detail: '释放一道寒冰屏障保护自己，持续3回合，寒冰屏障存在的时候你免疫任何*直接*伤害。此外在寒冰屏障持续的时候，使用*守 备*技能可以多回复少量(1点)生命值',
+      detail: `释放一道寒冰屏障保护自己，持续${config.iceblockTurns}回合，寒冰屏障存在的时候你免疫任何*直接*伤害。此外在寒冰屏障持续的时候，使用*守 备*技能可以额外回复${config.guardIceblockPlusHeal}点生命值`,
       url: './img/skill_3_fs.png'
     },
     {
@@ -539,7 +544,7 @@ export default {
       targetLimit: 0,
       cnName: '冰枪术',
       desc: ['有益效果', '无法驱散'],
-      detail: '每次普通攻击有一定几率(50%)触发冰枪术，对当前敌方单位及其左右相邻单位造成一次额外的偏斜伤害',
+      detail: `每次普通攻击有一定几率(50%)触发冰枪术，对当前敌方单位及其左右相邻单位造成一次额外的偏斜伤害`,
       url: './img/skill_5_fs.png'
     },
     {
@@ -550,7 +555,7 @@ export default {
       targetLimit: 0,
       cnName: '变形术:虎形态',
       desc: ['有益效果', '无法驱散'],
-      detail: '回复少量(3)生命值并变形成尖牙利齿的虎形态，在该形态下你所有普通攻击将额外造成2点伤害',
+      detail: `回复${config.transformHealAmount}点生命值并变形成尖牙利齿的虎形态，在该形态下你所有普通攻击将额外造成${config.tigerPlusDamage}点伤害`,
       url: './img/skill_7_xd.png'
     },
     {
@@ -561,7 +566,7 @@ export default {
       targetLimit: 0,
       cnName: '变形术:熊形态',
       desc: ['有益效果', '无法驱散'],
-      detail: '回复少量(3)生命值并变形成厚实坚硬的熊形态，在该形态下你拥有嘲讽技能，强迫敌方单位必须先攻击你。并且你受到的所有的伤害都会略微减少(1点)',
+      detail: `回复${config.transformHealAmount}点生命值并变形成厚实坚硬的熊形态，在该形态下你拥有嘲讽技能，强迫敌方单位必须先攻击你。并且你受到的所有的伤害都会减少(${config.bearDamageReduce})`,
       url: './img/skill_8_xd.png'
     },
     {
@@ -572,7 +577,7 @@ export default {
       targetLimit: 0,
       cnName: '变形术:树形态',
       desc: ['有益效果', '无法驱散'],
-      detail: '回复少量(3)生命值并变形成自然和谐的树形态，在该形态下每回合结束所有友方单位都会回复少量(1)生命值',
+      detail: `回复${config.transformHealAmount}点生命值并变形成自然和谐的树形态，在该形态下每回合结束所有友方单位都会回复${config.treeHealAmount}点生命值`,
       url: './img/skill_9_xd.png'
     },
     {
@@ -594,7 +599,7 @@ export default {
       targetLimit: 1,
       cnName: '牺牲爪牙',
       desc: [],
-      detail: '使用你操控死亡的能力，复活一名敌方已死亡的单位为食尸鬼，并牺牲它使其爆炸。食尸鬼爆炸会对其相邻的单位造成3点伤害',
+      detail: `操控死亡能力，使一名敌方已死亡的单位变化为食尸鬼，并牺牲它使其爆炸。食尸鬼爆炸会对其相邻的单位造成${config.boomDamage}点伤害`,
       url: './img/skill_3_dk.png'
     },
     {
@@ -605,7 +610,7 @@ export default {
       targetLimit: 0,
       cnName: '邪恶斩击',
       desc: ['有益效果', '无法驱散'],
-      detail: '你的正常攻击若造成有效伤害，会使你回复2点生命值，但你的*守 备*动作不会回复生命值',
+      detail: `你的正常攻击若造成有效伤害(>0)，会使你回复${config.absorbHealAmount}点生命值，但你的*守 备*动作不会回复生命值`,
       url: './img/skill_5_dk.png'
     },
     {
@@ -616,7 +621,7 @@ export default {
       targetLimit: 0,
       cnName: '生而平等',
       desc: [],
-      detail: '友方生命值最低的单位与敌方生命值最高的单位均分生命值，但不会超过其生命值上限',
+      detail: `友方生命值最低的单位与敌方生命值最高的单位均分生命值，但不会超过自身生命值上限`,
       url: './img/skill_3_qs.png'
     },
     {
@@ -649,7 +654,7 @@ export default {
       targetLimit: 0,
       cnName: '强化',
       desc: ['有益效果', '无法驱散'],
-      detail: '存活的情况下，所有友方单位最大生命值增加3点。死亡时，回合结束该增益效果自动消失',
+      detail: `存活的情况下，所有友方单位最大生命值增加(${config.enhancePlusHp})。死亡时，回合结束该增益效果自动消失`,
       url: './img/skill_5_ms.png'
     },
     {
@@ -660,7 +665,7 @@ export default {
       targetLimit: 1,
       cnName: '鼓舞',
       desc: ['有益效果', '无法驱散'],
-      detail: '吹奏鼓舞士气的乐曲，使一名友方单位在该场战斗中生命值及其上限永久增加2点，并获得*嘲 讽*技能，强迫敌方单位必须优先攻击他。可以对一名友方单位多次释放该技能，但不能对自己释放',
+      detail: `吹奏鼓舞士气的乐曲，使一名友方单位在该场战斗中生命值及其上限永久增加(${config.inspirePlusHp})，并获得嘲讽技能，强迫敌方单位必须优先攻击他。可以对一名友方单位重复释放该技能`,
       url: './img/skill_3_sr.png'
     },
     {
@@ -671,7 +676,7 @@ export default {
       targetLimit: 0,
       cnName: '蛊惑曲',
       desc: ['可以驱散'],
-      detail: '吹奏蛊惑心智的乐曲，持续2回合，被蛊惑的所有敌方单位有一定(1/3)几率遭受其造成的正常攻击伤害的同等伤害',
+      detail: `吹奏蛊惑心智的乐曲，被蛊惑的所有敌方单位有一定(1/3)几率遭受其造成的正常攻击伤害的同等伤害，持续${config.confuseTurns}回合`,
       url: './img/skill_4_sr.png'
     },
     {
@@ -726,7 +731,7 @@ export default {
       targetLimit: 0,
       cnName: '致命藤蔓',
       desc: ['有害效果', '无法驱散'],
-      detail: '你存活的回合结束阶段，会召唤出致命的藤蔓攻击所有敌方单位，致命藤蔓每次有一定几率(1/2)对目标造成2点自然伤害。该伤害不会被减伤效果削弱',
+      detail: `你存活的回合结束阶段，会召唤出致命的藤蔓攻击所有敌方单位，致命藤蔓每次有一定几率(1/2)对目标造成${config.bindDamage}点自然伤害。该伤害不会被减伤效果削弱`,
       url: './img/skill_5_yd.png'
     },
     {
@@ -737,7 +742,7 @@ export default {
       targetLimit: 0,
       cnName: '平和主义',
       desc: ['无法驱散'],
-      detail: '你的*守 备*行动回复的生命值额外增加2点，但你的正常攻击始终造成偏斜伤害',
+      detail: `你的*守 备*行动回复的生命值额外增加${config.guardYDPlusHeal}点，但你的正常攻击始终造成偏斜伤害`,
       url: './img/skill_6_yd.png'
     },
     {
@@ -759,7 +764,7 @@ export default {
       targetLimit: 0,
       cnName: '要害痛击',
       desc: ['有益效果', '无法驱散'],
-      detail: '丰富的实战经验使你洞察敌人的弱点，战斗中速度略微增加(2)，你的直接伤害造成暴击的时候，可以额外奖励一个行动回合。幻影打击不触发额外奖励行动回合',
+      detail: '丰富的实战经验使你洞察敌人的弱点，战斗中速度增加，你的直接伤害造成暴击的时候，可以额外奖励一个行动回合。幻影打击不触发额外奖励行动回合',
       url: './img/skill_5_yx.png'
     },
     {
@@ -781,7 +786,7 @@ export default {
       targetLimit: 0,
       cnName: '恃强凌弱',
       desc: ['无法驱散'],
-      detail: '你对生命值低于10的敌方单位进行攻击时，会额外造成少量(2)伤害。但对生命值为10点及以上的敌方单位进行攻击时，造成的伤害会降低(1)',
+      detail: `你对生命值低于${config.tfRudeHpLine}的敌方单位进行攻击时，会额外造成${config.tfBonusDamage}点伤害。但对生命值为${config.tfRudeHpLine}点及以上的敌方单位进行攻击时，造成的伤害会降低${config.tfDamageReduce}点`,
       url: './img/skill_5_tf.png'
     },
     {
@@ -792,7 +797,7 @@ export default {
       targetLimit: 0,
       cnName: '小不点也有大作为',
       desc: ['有益效果', '无法驱散'],
-      detail: '你的普通攻击不进行攻击判定，初始伤害固定为1。伤害值会随着每个回合而微量增加(1)',
+      detail: '你的普通攻击不进行攻击判定，初始伤害固定为1。伤害值会随着每个回合而增加(1)',
       url: './img/skill_5_mo.png'
     },
     {

@@ -5,6 +5,14 @@
 </template>
 
 <style lang="scss">
+@font-face {
+  font-family: 'DMG Regular';
+  src: url('./assets/fonts/chunkfive/ChunkFive-Regular.otf');
+}
+@font-face {
+  font-family: 'DMG Print';
+  src: url('./assets/fonts/chunkfive/ChunkFive-Print.otf');
+}
 html, body {
   margin: 0;
   width: 100%;

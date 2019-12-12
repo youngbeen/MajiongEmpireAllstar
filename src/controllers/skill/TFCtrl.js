@@ -29,10 +29,10 @@ export default {
     }
     // STEP2 计算原始伤害
     let damage = Math.ceil(diceUtil.getDamageFactor() * times)
-    if (you.hp < 10) {
-      damage += 2
+    if (you.hp < config.tfRudeHpLine) {
+      damage += config.tfBonusDamage
     } else {
-      damage -= 1
+      damage -= config.tfDamageReduce
       if (damage < 0) {
         damage = 0
       }
@@ -93,10 +93,10 @@ export default {
     }
     // STEP2 计算原始伤害
     let damage = Math.ceil(diceUtil.getDamageFactor() * times)
-    if (you.hp < 10) {
-      damage += 2
+    if (you.hp < config.tfRudeHpLine) {
+      damage += config.tfBonusDamage
     } else {
-      damage -= 1
+      damage -= config.tfDamageReduce
       if (damage < 0) {
         damage = 0
       }

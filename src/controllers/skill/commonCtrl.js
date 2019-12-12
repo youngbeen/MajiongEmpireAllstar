@@ -114,9 +114,5 @@ export default {
       unit.sp = unit.maxsp
     }
     return unit
-  },
-  // 清理状态
-  clearHeroState () {
-
   }
 }

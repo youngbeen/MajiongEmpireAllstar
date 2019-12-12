@@ -90,7 +90,7 @@ export default {
       let you = hero.units[youIndex]
 
       // STEP1 计算伤害
-      let damage = 2
+      let damage = config.chargeFixedDamage
       if (you.iceblock) {
         // 寒冰屏障
         damage = reduceCtrl.getReducedDamage(damage, 'iceblock')

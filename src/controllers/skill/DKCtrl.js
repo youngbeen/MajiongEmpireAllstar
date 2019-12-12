@@ -56,13 +56,13 @@ export default {
 
     // 处理邪恶斩击效果
     if (me.hp > 0 && damage > 0) {
-      me = commonCtrl.changeHp(me, 2)
+      me = commonCtrl.changeHp(me, config.absorbHealAmount)
       setTimeout(() => {
         eventBus.$emit('animateHeal', {
           targets: [system.unitIndex],
-          value: 2
+          value: config.absorbHealAmount
         })
-        system.msg = [`${system.unitIndex + 1}号单位的*邪恶斩击*使其回复了2点生命值`, ...system.msg]
+        system.msg = [`${system.unitIndex + 1}号单位的*邪恶斩击*使其回复了${config.absorbHealAmount}点生命值`, ...system.msg]
       }, config.animationTime * stackPlays)
       stackPlays++
     }
@@ -89,12 +89,12 @@ export default {
     hero.units.splice(system.unitIndex, 1, me)
 
     if (youIndex === 0 || youIndex === 5) {
-      this.drawBoomAtk(youIndex + 1, 3)
+      this.drawBoomAtk(youIndex + 1, config.boomDamage)
     } else if (youIndex === 4 || youIndex === 9) {
-      this.drawBoomAtk(youIndex - 1, 3)
+      this.drawBoomAtk(youIndex - 1, config.boomDamage)
     } else {
-      this.drawBoomAtk(youIndex - 1, 3)
-      this.drawBoomAtk(youIndex + 1, 3)
+      this.drawBoomAtk(youIndex - 1, config.boomDamage)
+      this.drawBoomAtk(youIndex + 1, config.boomDamage)
     }
 
     // 回写数据

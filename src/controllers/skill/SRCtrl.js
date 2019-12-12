@@ -81,7 +81,7 @@ export default {
     eventBus.$emit('playSound', {
       sound: 'srcheer'
     })
-    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}单位释放*鼓舞*，使其最大生命值增加2，并获得嘲讽`, ...system.msg]
+    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}单位释放*鼓舞*，使其最大生命值增加${config.config.inspirePlusHp}，并获得嘲讽`, ...system.msg]
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)

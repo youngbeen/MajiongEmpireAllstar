@@ -87,7 +87,7 @@ export default {
     display: flex;
     // justify-content: space-between;
     flex-wrap: wrap;
-    max-height: 340px;
+    max-height: 350px;
     overflow-y: auto;
     .box-hero {
       margin: 8px 8px;

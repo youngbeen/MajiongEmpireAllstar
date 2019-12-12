@@ -23,12 +23,12 @@ export default {
       case 1:
       case 2:
       case 3:
-        times = 0.5
+        times = config.slightTimes
         break
       case 4:
       case 5:
       case 6:
-        times = 1
+        times = config.normalTimes
         break
     }
     // STEP2 计算原始伤害

@@ -66,14 +66,14 @@ export default {
 
     // 处理奖励SP
     if (me.hp && diceUtil.rollDice(6) === 6) {
-      // 1/6概率获取1点SP
-      me = commonCtrl.changeSp(me, 1)
+      // 1/6概率获取奖励SP
+      me = commonCtrl.changeSp(me, config.rogueBonusSp)
       setTimeout(() => {
         eventBus.$emit('animateSpRecover', {
           targets: [system.unitIndex],
-          value: 1
+          value: config.rogueBonusSp
         })
-        system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了1点SP`, ...system.msg]
+        system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了${config.rogueBonusSp}点SP`, ...system.msg]
       }, config.animationTime * stackPlays)
       stackPlays++
     }
@@ -113,7 +113,7 @@ export default {
       damage = reduceCtrl.getReducedDamage(damage, 'bear')
     }
     // STEP3 结算
-    you.poison = config.poisonAtkTurns
+    you.poison = config.poisonDamageTurns
     me = commonCtrl.drawDps(me, 'skill', damage)
     you = commonCtrl.changeHp(you, -1 * damage)
     // 显示伤害动效
@@ -141,13 +141,13 @@ export default {
     // 处理奖励SP
     if (me.hp && diceUtil.rollDice(6) === 6) {
       // 1/6概率获取1点SP
-      me = commonCtrl.changeSp(me, 1)
+      me = commonCtrl.changeSp(me, config.rogueBonusSp)
       setTimeout(() => {
         eventBus.$emit('animateSpRecover', {
           targets: [system.unitIndex],
-          value: 1
+          value: config.rogueBonusSp
         })
-        system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了1点SP`, ...system.msg]
+        system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了${config.rogueBonusSp}点SP`, ...system.msg]
       }, config.animationTime * stackPlays)
       stackPlays++
     }

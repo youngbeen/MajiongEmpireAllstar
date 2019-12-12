@@ -26,24 +26,12 @@ import diceUtil from '../utils/diceUtil'
 export default {
   // 设置角色数据
   setUnitData () {
-    let isMSUpside = hero.units.some((item, index) => {
-      return index < 5 && item.type === 'MS'
-    })
-    let isMSDownside = hero.units.some((item, index) => {
-      return index >= 5 && index < 10 && item.type === 'MS'
-    })
-    let isSMUpside = hero.units.some((item, index) => {
-      return index < 5 && item.type === 'SM'
-    })
-    let isSMDownside = hero.units.some((item, index) => {
-      return index >= 5 && index < 10 && item.type === 'SM'
-    })
-    let isYDUpside = hero.units.some((item, index) => {
-      return index < 5 && item.type === 'YD'
-    })
-    let isYDDownside = hero.units.some((item, index) => {
-      return index >= 5 && index < 10 && item.type === 'YD'
-    })
+    let isMSUpside = hero.units.some((item, index) => index < 5 && item.type === 'MS')
+    let isMSDownside = hero.units.some((item, index) => index >= 5 && index < 10 && item.type === 'MS')
+    let isSMUpside = hero.units.some((item, index) => index < 5 && item.type === 'SM')
+    let isSMDownside = hero.units.some((item, index) => index >= 5 && index < 10 && item.type === 'SM')
+    let isYDUpside = hero.units.some((item, index) => index < 5 && item.type === 'YD')
+    let isYDDownside = hero.units.some((item, index) => index >= 5 && index < 10 && item.type === 'YD')
     hero.units = hero.units.map((item, index) => {
       if (item.type) {
         // 选择了英雄，进行初始化
@@ -415,16 +403,16 @@ export default {
   gainSp (stackPlays) {
     hero.units = hero.units.map((item, index) => {
       if (item.isOpen && item.type && !item.isDead) {
-        // 存活的有效单位，每回合2/5的概率获得2 sp
+        // 存活的有效单位，每回合2/5的概率获得sp
         if (diceUtil.rollDice(5) > 3) {
-          item.sp += 2
+          item.sp += config.recoverSpAmount
           if (item.sp > item.maxsp) {
             item.sp = item.maxsp
           }
           setTimeout(() => {
             eventBus.$emit('animateSpRecover', {
               targets: [index],
-              value: 2
+              value: config.recoverSpAmount
             })
           }, config.animationTime * stackPlays)
         }
@@ -524,7 +512,7 @@ export default {
           delayCauses.push('bind')
         }
         item.hp -= config.bindDamage
-        if (item.hp < 0) {
+        if (item.hp <= 0) {
           item.hp = 0
           item.isDead = true
           // 清除buff

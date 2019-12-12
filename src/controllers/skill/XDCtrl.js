@@ -39,7 +39,7 @@ export default {
     let damageFactor = diceUtil.getDamageFactor()
     let damage = Math.ceil(damageFactor * times)
     if (me.flagTiger) {
-      damage += 2
+      damage += config.tigerPlusDamage
     }
     if (you.iceblock) {
       // 寒冰屏障
@@ -110,13 +110,13 @@ export default {
       sound: type
     })
 
-    me = commonCtrl.changeHp(me, 3)
+    me = commonCtrl.changeHp(me, config.transformHealAmount)
     setTimeout(() => {
       eventBus.$emit('animateHeal', {
         targets: [system.unitIndex],
-        value: 3
+        value: config.transformHealAmount
       })
-      system.msg = [`${system.unitIndex + 1}号单位变形为${cnType}形态，恢复3点生命值`, ...system.msg]
+      system.msg = [`${system.unitIndex + 1}号单位变形为${cnType}形态，恢复${config.transformHealAmount}点生命值`, ...system.msg]
     }, config.animationTime * stackPlays)
     stackPlays++
 
