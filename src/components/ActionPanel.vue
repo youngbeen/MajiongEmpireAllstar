@@ -1,15 +1,28 @@
 <template>
   <section class="bed-action-panel">
-    <el-button size="mini" @click="startDraw" :disabled="system.step > 0">
-      {{ firstHandText }}
+    <el-button size="mini" v-show="system.step === 0" @click="startDraw()">
+      <font-awesome-icon icon="theater-masks" /> 先后手
     </el-button>
-    <el-button size="mini" @click="startBattle" :disabled="system.step >= 2">
-      {{ battleText }}
+    <el-button size="mini" v-show="system.step === 1" @click="startBattle()">
+      <font-awesome-icon icon="hand-rock" /> 战斗开始
     </el-button>
-    <el-button type="primary" size="mini" :disabled="system.step !== 2" @click="proceedTurn">行动</el-button>
-    <el-button size="mini" @click="testLuck()">试试手气</el-button>
-    <el-button size="mini" @click="getDPS()">查看实时伤害统计</el-button>
-    <el-button type="danger" size="mini" @click="reset()">重置</el-button>
+    <el-button type="primary" size="mini" v-show="system.step === 2" @click="proceedTurn()">
+      <font-awesome-icon icon="crosshairs" /> 行 动
+    </el-button>
+    <el-button size="mini" @click="testLuck()">
+      <font-awesome-icon icon="dice" /> 试试手气
+    </el-button>
+    <el-button size="mini" @click="getDPS()">
+      <font-awesome-icon icon="list-ol" /> 实时统计
+    </el-button>
+    <el-button type="danger" size="mini" @click="reset()">
+      <font-awesome-icon icon="sync-alt" /> 重置
+    </el-button>
+
+    <!-- 状态信息 -->
+    <div class="box-info" v-show="system.step === 2">
+      回合<span class="big"> {{ system.turns + 1 }}</span><span class="desc">（{{ firstHandText }}）</span>
+    </div>
   </section>
 </template>
 
@@ -34,14 +47,7 @@ export default {
       } else if (this.system.firstHand === 'down') {
         return '下方先手'
       } else {
-        return '先后手'
-      }
-    },
-    battleText () {
-      if (this.system.step === 2) {
-        return '战斗已开始'
-      } else {
-        return '战斗开始'
+        return '未决出先后手'
       }
     }
   },
@@ -121,5 +127,29 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/css/var.scss";
+
+.bed-action-panel {
+  position: relative;
+  padding: 0 6px;
+  .box-info {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px 8px;
+    border-bottom-left-radius: 4px;
+    background: #f6f6f6;
+    font-size: 12px;
+    .big {
+      color: $DANGER-COLOR;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .desc {
+      color: $DESC-TEXT-COLOR;
+      font-size: 11px;
+    }
+  }
+}
 </style>

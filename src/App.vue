@@ -13,6 +13,10 @@
   font-family: 'DMG Print';
   src: url('./assets/fonts/chunkfive/ChunkFive-Print.otf');
 }
+@font-face {
+  font-family: 'Slim DMG';
+  src: url('./assets/fonts/BebasNeue-Regular.otf');
+}
 html, body {
   margin: 0;
   width: 100%;

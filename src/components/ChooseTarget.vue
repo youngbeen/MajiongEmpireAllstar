@@ -76,7 +76,7 @@
         <span class="tip">
           限定 {{ skillTargets }} 目标
         </span>
-        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确 定</el-button>
+        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确定</el-button>
       </div>
     </div>
 
@@ -100,7 +100,7 @@
         <span class="tip">
           限定 {{ skillTargets }} 目标
         </span>
-        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确 定</el-button>
+        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确定</el-button>
       </div>
     </div>
   </section>

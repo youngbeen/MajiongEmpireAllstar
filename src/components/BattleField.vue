@@ -356,32 +356,33 @@ export default {
           textValue: value
         }
         this.animates.splice(params.targets[0], 1, effect)
-        // 文字动效
         setTimeout(() => {
+          // 文字动效
           let copy = this.animates[params.targets[0]]
           copy.isTextAnimateStart = true
           this.animates.splice(params.targets[0], 1, copy)
         }, 10)
-        // 清除效果图相关
         setTimeout(() => {
+          // 清除效果图相关
           let copy = this.animates[params.targets[0]]
           copy.isShowEffect = false
           copy.effectUrl = ''
           this.animates.splice(params.targets[0], 1, copy)
         }, 1000)
-        // 清除文字
         setTimeout(() => {
+          // 清除文字
           let copy = this.animates[params.targets[0]]
           copy.isShowText = false
           copy.isTextAnimateStart = false
           this.animates.splice(params.targets[0], 1, copy)
         }, 1200)
 
-        // 处理伤害floating
+        // 处理伤害floating动效
         this.damageFloating[params.targets[0]] = true
         setTimeout(() => {
+          // 清除伤害floating
           this.damageFloating[params.targets[0]] = false
-        }, 700)
+        }, 600)
       }
     },
     handleHealAnimate (params) {
@@ -497,7 +498,8 @@ export default {
               color: #fff;
               text-align: center;
               font-size: 14px;
-              font-weight: bold;
+              // font-weight: bold;
+              font-family: 'DMG Regular';
               text-shadow: 1px 1px 1px rgba(0,0,0,1);
               cursor: default;
             }
@@ -532,7 +534,8 @@ export default {
                 color: #fff;
                 text-align: center;
                 font-size: 14px;
-                font-weight: bold;
+                // font-weight: bold;
+                font-family: 'DMG Regular';
                 text-shadow: 1px 1px 1px rgba(0,0,0,1);
                 cursor: default;
               }
@@ -617,7 +620,7 @@ export default {
               font-size: 40px;
               // font-weight: bold;
               text-align: center;
-              // text-shadow: 1px 1px 4px rgba(0,0,0,1);
+              text-shadow: 1px 2px 1px rgba(10,10,10,0.4);
               transition: top .7s;
               &.cover-heal {
                 color: $HEALTH-COLOR;

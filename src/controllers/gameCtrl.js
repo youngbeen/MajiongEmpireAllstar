@@ -171,6 +171,7 @@ export default {
       stackPlays = this.gainSp(stackPlays)
 
       system.turn = system.firstHand
+      system.turns++
 
       setTimeout(() => {
         eventBus.$emit('playSound', {
@@ -613,6 +614,7 @@ export default {
     system.step = 0
     system.firstHand = ''
     system.turn = ''
+    system.turns = 0
     system.unitIndex = -1
     system.msg = []
     hero.units = []

@@ -24,7 +24,7 @@
       </div>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button size="small" @click="handleCancel">取消</el-button>
+      <el-button size="small" @click="handleCancel">关闭</el-button>
     </span>
   </el-dialog>
 </template>

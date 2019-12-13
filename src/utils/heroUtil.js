@@ -2,6 +2,10 @@ import hero from '../models/hero'
 import system from '../models/system'
 
 export default {
+  // 检验目标是否是有效目标（开启slot，存活）
+  isTargetValid (index) {
+    return index >= 0 && index < 10 && hero.units[index].isOpen && !hero.units[index].isDead
+  },
   // 获取所有有效敌方单位索引
   getAllTargets () {
     let result = []

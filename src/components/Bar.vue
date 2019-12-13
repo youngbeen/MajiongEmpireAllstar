@@ -20,7 +20,7 @@ export default {
   computed: {
     percent () {
       if (this.value && this.max) {
-        let div = this.value / this.max * 100
+        let div = Math.round(this.value / this.max * 100)
         if (div > 100) {
           div = 100
         }
@@ -52,8 +52,15 @@ export default {
       top: 0;
       height: 100%;
       font-size: 14px;
+      font-family: 'Slim DMG';
+      opacity: 0.7;
       .value {
+        color: #000;
         font-weight: bold;
+      }
+      .max {
+        color: #333;
+        font-size: 12px;
       }
     }
   }

@@ -3,7 +3,7 @@ import config from '@/models/config'
 import hero from '@/models/hero'
 import system from '@/models/system'
 import diceUtil from '@/utils/diceUtil'
-// import heroUtil from '@/utils/heroUtil'
+import heroUtil from '@/utils/heroUtil'
 import reduceCtrl from '../reduceCtrl'
 import commonCtrl from './commonCtrl'
 
@@ -57,12 +57,20 @@ export default {
     if (diceUtil.rollDice(2) >= 2) {
       this.drawIceshotAtk(youIndex, damageFactor, stackPlays)
       if (youIndex === 0 || youIndex === 5) {
-        this.drawIceshotAtk(youIndex + 1, damageFactor, stackPlays)
+        if (heroUtil.isTargetValid(youIndex + 1)) {
+          this.drawIceshotAtk(youIndex + 1, damageFactor, stackPlays)
+        }
       } else if (youIndex === 4 || youIndex === 9) {
-        this.drawIceshotAtk(youIndex - 1, damageFactor, stackPlays)
+        if (heroUtil.isTargetValid(youIndex - 1)) {
+          this.drawIceshotAtk(youIndex - 1, damageFactor, stackPlays)
+        }
       } else {
-        this.drawIceshotAtk(youIndex - 1, damageFactor, stackPlays)
-        this.drawIceshotAtk(youIndex + 1, damageFactor, stackPlays)
+        if (heroUtil.isTargetValid(youIndex + 1)) {
+          this.drawIceshotAtk(youIndex - 1, damageFactor, stackPlays)
+        }
+        if (heroUtil.isTargetValid(youIndex - 1)) {
+          this.drawIceshotAtk(youIndex + 1, damageFactor, stackPlays)
+        }
       }
       stackPlays++
     }

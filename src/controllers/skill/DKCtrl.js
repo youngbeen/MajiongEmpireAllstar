@@ -3,7 +3,7 @@ import config from '@/models/config'
 import hero from '@/models/hero'
 import system from '@/models/system'
 import diceUtil from '@/utils/diceUtil'
-// import heroUtil from '@/utils/heroUtil'
+import heroUtil from '@/utils/heroUtil'
 import reduceCtrl from '../reduceCtrl'
 import commonCtrl from './commonCtrl'
 
@@ -89,12 +89,20 @@ export default {
     hero.units.splice(system.unitIndex, 1, me)
 
     if (youIndex === 0 || youIndex === 5) {
-      this.drawBoomAtk(youIndex + 1, config.boomDamage)
+      if (heroUtil.isTargetValid(youIndex + 1)) {
+        this.drawBoomAtk(youIndex + 1, config.boomDamage)
+      }
     } else if (youIndex === 4 || youIndex === 9) {
-      this.drawBoomAtk(youIndex - 1, config.boomDamage)
+      if (heroUtil.isTargetValid(youIndex - 1)) {
+        this.drawBoomAtk(youIndex - 1, config.boomDamage)
+      }
     } else {
-      this.drawBoomAtk(youIndex - 1, config.boomDamage)
-      this.drawBoomAtk(youIndex + 1, config.boomDamage)
+      if (heroUtil.isTargetValid(youIndex - 1)) {
+        this.drawBoomAtk(youIndex - 1, config.boomDamage)
+      }
+      if (heroUtil.isTargetValid(youIndex + 1)) {
+        this.drawBoomAtk(youIndex + 1, config.boomDamage)
+      }
     }
 
     // 回写数据
