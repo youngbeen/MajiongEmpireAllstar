@@ -1,4 +1,20 @@
-# majiong-empire-allstar
+
+# Majiong Empire All-stars
+
+This is a deluxe edition rebuilt with Electron and Vue based on [MajiongEmpire HTML](https://github.com/youngbeen/MajiongEmpire). Also it's the newest in my MajiongEmpire series.
+
+All heros and skills are kept, meanwhile it takes you more features, heros, skills etc.
+
+## Introduction
+
+### Features
+
+* All heros' fight
+* Up to X heros
+* Various skills
+* Addictive battle rhythm with SE & Animation
+
+# Guide For Developer
 
 ## Project setup
 ```
@@ -7,12 +23,17 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run e:serve
 ```
 
-### Compiles and minifies for production
+### Compiles and minifies for production(HTML edition)
 ```
 npm run build
+```
+
+### Compiles and minifies for production(Application edition)
+```
+npm run e:build
 ```
 
 ### Lints and fixes files
@@ -44,15 +65,19 @@ npm run lint
 
 ## TODOS
 
-* 伤害统计增加各项MVP显示 fa-award
-* 调整选择目标界面的确定按钮为一把剑⚔，并放置于屏幕中央
+* 释放技能页面，SP不足的技能置灰
+* 所有角色技能review，前摇设置？
 * HP和所有伤害数值调整
 * 初始SP多少？
-* 所有角色技能review，前摇设置？
 * 使用更美观的角色图片
 * 所有角色再增加新技能？
 * 增加新角色？
 
 ## BUGS
 
+* XD变形树未换图
+* XD共生术应该选择己方单位
+* SQ生而平等应该扣减敌方生命值最高单位，而不是己方
+* SM死亡之后，YY并未清除
+* MS治疗术不能选择目标
 * 重置之后，再次选择目标界面数据错乱？

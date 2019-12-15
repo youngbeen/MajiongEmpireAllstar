@@ -17,7 +17,8 @@ import {
   faCrosshairs,
   faDice,
   faListOl,
-  faSyncAlt
+  faSyncAlt,
+  faAward
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 require('./assets/css/base.css')
@@ -35,6 +36,7 @@ library.add(faCrosshairs)
 library.add(faDice)
 library.add(faListOl)
 library.add(faSyncAlt)
+library.add(faAward)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(ElementUI)

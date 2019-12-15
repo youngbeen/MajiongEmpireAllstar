@@ -56,32 +56,10 @@
       </div>
     </div>
 
-    <!-- 上方source说明 -->
-    <div class="box-side-info" v-show="sourceSide === 'up'" style="top: 0;">
-      <div class="box-unit">
-        <img class="unit-avatar" :src="sourceUnit.url" :alt="sourceUnit.type">
-      </div>
-      <div class="tip-position">
-        (位置{{ system.unitIndex + 1 }})
-      </div>
-      <div class="skill-info">
-        <span>正在使用：</span>
-        <img class="skill-image" :src="skillImg">
-        <span class="skill-name">{{ skillName }}</span>
-      </div>
-      <div class="target-count">
-        已选择 {{ selectedTarget.length }} 个目标
-      </div>
-      <div class="right-box">
-        <span class="tip">
-          限定 {{ skillTargets }} 目标
-        </span>
-        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确定</el-button>
-      </div>
-    </div>
+    <div class="btn-confirm" v-show="selectedTarget.length" :style="confirmStyle" @click="confirm()">⚔️</div>
 
-    <!-- 下方source说明 -->
-    <div class="box-side-info" v-show="sourceSide === 'down'" style="bottom: 0;">
+    <!-- source说明 -->
+    <div class="box-side-info" :style="sideInfoStyle">
       <div class="box-unit">
         <img class="unit-avatar" :src="sourceUnit.url" :alt="sourceUnit.type">
       </div>
@@ -94,13 +72,13 @@
         <span class="skill-name">{{ skillName }}</span>
       </div>
       <div class="target-count">
-        已选择 {{ selectedTarget.length }} 个目标
+        已选择 {{ selectedTarget.length }}/{{ skillTargets }} 个目标
       </div>
       <div class="right-box">
-        <span class="tip">
+        <!-- <span class="tip">
           限定 {{ skillTargets }} 目标
-        </span>
-        <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确定</el-button>
+        </span> -->
+        <!-- <el-button type="primary" size="small" @click="confirm()" style="width: 100px;">确定</el-button> -->
       </div>
     </div>
   </section>
@@ -132,24 +110,36 @@ export default {
     }
   },
   computed: {
-    // 技能来源单位所处的方位
-    sourceSide () {
-      if (this.system.unitIndex >= 5) {
-        return 'down'
-      } else {
-        return 'up'
-      }
-    },
     sourceUnit () {
-      let result = this.hero.units.find((item, index) => {
-        return index === this.system.unitIndex
-      })
+      let result = this.hero.units.find((item, index) => index === this.system.unitIndex)
       if (result) {
         return result
       } else {
         return {
           url: '',
           type: ''
+        }
+      }
+    },
+    sideInfoStyle () {
+      if (this.system.unitIndex >= 5) {
+        return {
+          bottom: '0'
+        }
+      } else {
+        return {
+          top: '0'
+        }
+      }
+    },
+    confirmStyle () {
+      if (this.system.unitIndex >= 5) {
+        return {
+          top: '55%'
+        }
+      } else {
+        return {
+          top: '30%'
         }
       }
     },
@@ -356,6 +346,15 @@ export default {
         box-shadow: 1px 1px 12px 4px rgba(205, 238, 15, 0.6);
         transform: scale(1);
       }
+      &.highlight {
+        border: 4px solid $FOCUS-COLOR;
+      }
+      &.selected {
+        border: 4px solid $DANGER-COLOR;
+        background: #fff;
+        box-shadow: 1px 1px 12px 4px rgba(205, 238, 15, 0.6);
+        transform: scale(1);
+      }
       .covered-avatar {
         width: 100%;
         height: 100%;
@@ -458,14 +457,16 @@ export default {
         }
       }
     }
-    .highlight {
-      border: 4px solid $FOCUS-COLOR;
-    }
-    .selected {
-      border: 4px solid $DANGER-COLOR;
-      background: #fff;
-      box-shadow: 1px 1px 12px 4px rgba(205, 238, 15, 0.6);
-      transform: scale(1);
+    .btn-confirm {
+      position: absolute;
+      left: 47%;
+      // top: 45%;
+      font-size: 60px;
+      cursor: pointer;
+      animation: 1s linear infinite heartbeat;
+      &:hover {
+        animation: none;
+      }
     }
     .box-side-info {
       display: flex;
@@ -520,6 +521,17 @@ export default {
           font-size: 12px;
         }
       }
+    }
+  }
+  @keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 </style>
