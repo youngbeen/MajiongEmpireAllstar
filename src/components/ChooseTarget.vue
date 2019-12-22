@@ -165,6 +165,27 @@ export default {
           return item
         })
         return deads
+      } else if (this.skillId === 'XD4') {
+        // NOTE XD共生术比较特殊，需要选择右方目标
+        let friends = this.hero.units.map((item, index) => {
+          if (this.system.unitIndex >= 5) {
+            // 下方source
+            if (index >= 5 && item.isOpen && !item.isDead && index !== this.system.unitIndex) {
+              item.isTarget = true
+            } else {
+              item.isTarget = false
+            }
+          } else {
+            // 上方source
+            if (index < 5 && item.isOpen && !item.isDead && index !== this.system.unitIndex) {
+              item.isTarget = true
+            } else {
+              item.isTarget = false
+            }
+          }
+          return item
+        })
+        return friends
       } else {
         // 正常情况
         let upTaunt = this.hero.units.some((item, index) => index < 5 && item.isOpen && !item.isDead && item.flagTaunt)

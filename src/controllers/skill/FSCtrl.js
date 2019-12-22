@@ -66,10 +66,10 @@ export default {
         }
       } else {
         if (heroUtil.isTargetValid(youIndex + 1)) {
-          this.drawIceshotAtk(youIndex - 1, damageFactor, stackPlays)
+          this.drawIceshotAtk(youIndex + 1, damageFactor, stackPlays)
         }
         if (heroUtil.isTargetValid(youIndex - 1)) {
-          this.drawIceshotAtk(youIndex + 1, damageFactor, stackPlays)
+          this.drawIceshotAtk(youIndex - 1, damageFactor, stackPlays)
         }
       }
       stackPlays++

@@ -1,15 +1,15 @@
 
 # Majiong Empire All-stars
 
-This is a deluxe edition rebuilt with Electron and Vue based on [MajiongEmpire HTML](https://github.com/youngbeen/MajiongEmpire). Also it's the newest in my MajiongEmpire series.
+This is a deluxe edition rebuilt with Electron and Vue based on [MajiongEmpire HTML](https://github.com/youngbeen/MajiongEmpire). It's also the latest MajiongEmpire piece in my MajiongEmpire series.
 
-All heros and skills are kept, meanwhile it takes you more features, heros, skills etc.
+All heros and skills are kept, while it brings more features, heros, skills etc.
 
 ## Introduction
 
 ### Features
 
-* All heros' fight
+* All heros' deluxe fight
 * Up to X heros
 * Various skills
 * Addictive battle rhythm with SE & Animation
@@ -65,6 +65,7 @@ npm run lint
 
 ## TODOS
 
+* 选择目标界面，对右方释放有益技能时，不展示剑图标？
 * 释放技能页面，SP不足的技能置灰
 * 所有角色技能review，前摇设置？
 * HP和所有伤害数值调整
@@ -75,8 +76,6 @@ npm run lint
 
 ## BUGS
 
-* XD变形树未换图
-* XD共生术应该选择己方单位
 * SQ生而平等应该扣减敌方生命值最高单位，而不是己方
 * SM死亡之后，YY并未清除
 * MS治疗术不能选择目标

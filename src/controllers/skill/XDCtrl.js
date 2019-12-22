@@ -106,6 +106,7 @@ export default {
         cnType = '树'
         break
     }
+    me.url = `./img/unit${type}.png`
     eventBus.$emit('playSound', {
       sound: type
     })
