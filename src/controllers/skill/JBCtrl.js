@@ -44,7 +44,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atkjb',
+      sound: 'stick',
       image: 'effdamstick'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -77,7 +77,7 @@ export default {
     you.flagDrunk = true
 
     eventBus.$emit('playSound', {
-      sound: 'jbdrunk'
+      sound: 'glass_broke'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位释放了*醉酒*`, ...system.msg]
 

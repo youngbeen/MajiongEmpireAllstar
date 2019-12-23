@@ -43,7 +43,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atklr',
+      sound: 'arrow',
       image: 'effdamarrow'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -100,7 +100,7 @@ export default {
       eventBus.$emit('animateDamage', {
         targets: [youIndex],
         value: youDamage,
-        sound: 'atklr',
+        sound: 'arrow',
         image: 'effdamarrow'
       })
       system.msg = [`*箭雨*对${youIndex + 1}号单位造成了${youDamage}点伤害`, ...system.msg]
@@ -161,7 +161,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atklr',
+      sound: 'arrow',
       image: 'effdamarrow'
     })
     system.msg = [`*奥术射击*使${youIndex + 1}号单位减速，并对其造成${damage}点伤害`, ...system.msg]

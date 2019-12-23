@@ -51,7 +51,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atktf',
+      sound: 'sword',
       image: 'effdam'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -115,7 +115,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'tfexcute',
+      sound: 'sword',
       image: 'effdam'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -137,7 +137,7 @@ export default {
           eventBus.$emit('animateDamage', {
             targets: [targetIndex],
             value: attachedDamage,
-            sound: 'tfexcute',
+            sound: 'sword',
             image: 'effdam'
           })
           system.msg = [`${system.unitIndex + 1}号单位对${targetIndex + 1}号单位造成${attachedDamage}点顺带伤害`, ...system.msg]

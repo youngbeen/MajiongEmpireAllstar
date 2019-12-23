@@ -1,5 +1,8 @@
 <template>
   <section class="bed-action-panel">
+    <el-button size="mini" v-show="system.step === 0" @click="randomPick()">
+      <font-awesome-icon icon="dice" /> 随机英雄
+    </el-button>
     <el-button size="mini" v-show="system.step === 0" @click="startDraw()">
       <font-awesome-icon icon="theater-masks" /> 先后手
     </el-button>
@@ -27,9 +30,11 @@
 </template>
 
 <script>
+import { numberUtil } from '@youngbeen/angle-util'
 import eventBus from '@/eventBus'
 import system from '@/models/system'
 import hero from '@/models/hero'
+import heroDict from '@/models/heroDict'
 import diceUtil from '@/utils/diceUtil'
 import gameCtrl from '@/controllers/gameCtrl'
 
@@ -53,6 +58,22 @@ export default {
   },
 
   methods: {
+    randomPick () {
+      let upSeeds = numberUtil.multiRandom(5, heroDict.list.length - 1, 0)
+      upSeeds.forEach((item, index) => {
+        this.chooseHero(heroDict.list[item], index)
+      })
+      let downSeeds = numberUtil.multiRandom(5, heroDict.list.length - 1, 0)
+      downSeeds.forEach((item, index) => {
+        this.chooseHero(heroDict.list[item], index + 5)
+      })
+    },
+    chooseHero (item, index) {
+      let copy = hero.units[index]
+      copy.type = item.name
+      copy.url = item.url
+      hero.units.splice(index, 1, copy)
+    },
     startDraw () {
       // 执行校验（上下是否都有有效英雄）
       let upHeroValid = hero.units.some((unit, index) => index < 5 && unit.type)

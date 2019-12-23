@@ -43,7 +43,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atkqs',
+      sound: 'heavy_hammer',
       image: 'effdamham'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -75,7 +75,7 @@ export default {
 
     // 寻找己方最低HP，对方最高HP单位
     let friendIndex = heroUtil.getFriendBoundary().minIndex
-    let targetIndex = heroUtil.getFriendBoundary().maxIndex
+    let targetIndex = heroUtil.getTargetBoundary().maxIndex
     let friend = hero.units[friendIndex]
     let you = hero.units[targetIndex]
     let newHp = Math.floor((friend.hp + you.hp) / 2)

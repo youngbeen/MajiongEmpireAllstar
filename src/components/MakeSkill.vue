@@ -34,7 +34,7 @@
               主动
             </div>
             <div class="skills">
-              <img class="icon-skill" v-for="item in positiveSkills" :src="item.url" :alt="item.cnName" :key="item.id" @mouseover="handleSkillMouseover($event, item)" @mouseout="handleSkillMouseout" @click="handleSkillCast(item)">
+              <img class="icon-skill" :class="[sp < item.spCost && 'disabled']" v-for="item in positiveSkills" :src="item.url" :alt="item.cnName" :key="item.id" @mouseover="handleSkillMouseover($event, item)" @mouseout="handleSkillMouseout" @click="handleSkillCast(item)">
             </div>
           </div>
           <div class="negative-skills">
@@ -322,6 +322,10 @@ export default {
                 width: 40px;
                 border-radius: 4px;
                 cursor: pointer;
+                &.disabled {
+                  opacity: 0.6;
+                  cursor: not-allowed;
+                }
               }
             }
           }
@@ -346,6 +350,10 @@ export default {
                 width: 40px;
                 border-radius: 4px;
                 cursor: pointer;
+                &.disabled {
+                  opacity: 0.6;
+                  cursor: not-allowed;
+                }
               }
             }
           }
@@ -368,6 +376,10 @@ export default {
                 margin: 0 4px;
                 width: 30px;
                 border-radius: 4px;
+                &.disabled {
+                  opacity: 0.6;
+                  cursor: not-allowed;
+                }
               }
             }
           }

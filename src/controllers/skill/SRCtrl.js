@@ -43,7 +43,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atksr',
+      sound: 'music_cast',
       image: 'effdammagic'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -81,7 +81,7 @@ export default {
     eventBus.$emit('playSound', {
       sound: 'srcheer'
     })
-    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}单位释放*鼓舞*，使其最大生命值增加${config.config.inspirePlusHp}，并获得嘲讽`, ...system.msg]
+    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}单位释放*鼓舞*，使其最大生命值增加${config.inspirePlusHp}，并获得嘲讽`, ...system.msg]
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)

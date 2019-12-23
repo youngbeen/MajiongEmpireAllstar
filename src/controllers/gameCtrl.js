@@ -174,9 +174,9 @@ export default {
       system.turns++
 
       setTimeout(() => {
-        eventBus.$emit('playSound', {
-          sound: 'reset'
-        })
+        // eventBus.$emit('playSound', {
+        //   sound: 'reset'
+        // })
         system.msg = ['所有单位已重置！', ...system.msg]
       }, config.animationTime * stackPlays)
     } else if (speedUp !== -99 && speedDown !== -99) {
@@ -599,10 +599,16 @@ export default {
       window.alert(`平局未分胜负`)
     } else if (isUpsideWin) {
       // 上方胜利
+      eventBus.$emit('playSound', {
+        sound: 'win'
+      })
       system.msg = [`上方获得了最终的胜利！`, ...system.msg]
       window.alert(`上方获得了最终的胜利！`)
     } else if (isDownsideWin) {
       // 下方胜利
+      eventBus.$emit('playSound', {
+        sound: 'win'
+      })
       system.msg = [`下方获得了最终的胜利！`, ...system.msg]
       window.alert(`下方获得了最终的胜利！`)
     } else {

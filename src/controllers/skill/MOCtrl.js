@@ -19,7 +19,7 @@ export default {
     me = commonCtrl.act(me)
 
     // STEP1 计算原始伤害
-    let damage = 1 + me.actRounds
+    let damage = me.actRounds
     if (you.iceblock) {
       // 寒冰屏障
       damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
@@ -34,7 +34,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atkmo',
+      sound: 'stick',
       image: 'effdampunch'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]

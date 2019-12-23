@@ -423,7 +423,7 @@ export default {
       targetLimit: 2,
       cnName: '冲锋',
       desc: ['可以驱散'],
-      detail: `对最多2个敌方单位发起冲锋，被冲锋的单位将会被眩晕，并对其造成(${config.chargeFixedDamage})直接伤害。被眩晕的目标将无法行动`,
+      detail: `对最多2个相邻敌方单位发起冲锋，对其造成(${config.chargeFixedDamage})直接伤害。被冲锋的单位将会被眩晕，眩晕目标将跳过其行动回合`,
       url: './img/skill_3_zs.png'
     },
     {
@@ -797,7 +797,7 @@ export default {
       targetLimit: 0,
       cnName: '小不点也有大作为',
       desc: ['有益效果', '无法驱散'],
-      detail: '你的普通攻击不进行攻击判定，初始伤害固定为1。伤害值会随着每个回合而增加(1)',
+      detail: '你的普通攻击不进行攻击判定，初始伤害固定为1。伤害值每个回合后增加(1)',
       url: './img/skill_5_mo.png'
     },
     {

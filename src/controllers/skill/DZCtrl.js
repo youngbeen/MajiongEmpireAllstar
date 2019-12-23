@@ -46,7 +46,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atkdz',
+      sound: 'dagger',
       image: 'effdamdagger'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -120,7 +120,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'dzpoison',
+      sound: 'quick_dagger',
       image: 'effdamdagger'
     })
     system.msg = [`${system.unitIndex + 1}发动*毒刃*使${youIndex + 1}号单位中毒，并对其造成${damage}点伤害`, ...system.msg]

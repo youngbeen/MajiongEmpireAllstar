@@ -12,13 +12,18 @@
           {{ item.desc }}
         </div>
       </div>
-      <div class="box-hero" @click="choose()">
+      <div class="box-hero" @click="random()">
+        <div class="box-avatar">
+          <img src="../assets/img/bigbang.jpeg">
+        </div>
+        <div class="title">随机</div>
+        <div class="desc"></div>
+      </div>
+      <div class="box-hero" v-if="currentHero.type" @click="choose()">
         <div class="box-avatar">
           <img src="../assets/img/nounit.png">
         </div>
-        <div class="title">
-          空置
-        </div>
+        <div class="title">空置</div>
         <div class="desc">
         </div>
       </div>
@@ -33,18 +38,31 @@
 import eventBus from '@/eventBus'
 import hero from '@/models/hero'
 import heroDict from '@/models/heroDict'
+import diceUtil from '@/utils/diceUtil'
 
 export default {
   name: 'chooseHero',
   data () {
     return {
       isShow: false,
-      heros: heroDict.list
+      index: -1,
+      heros: heroDict.list,
+      hero
+    }
+  },
+  computed: {
+    currentHero () {
+      if (this.index > -1 && this.hero.units[this.index].type) {
+        return this.hero.units[this.index]
+      } else {
+        return {}
+      }
     }
   },
 
   mounted () {
     eventBus.$on('chooseHero', () => {
+      this.index = Number(window.sessionStorage.getItem('sourceIndex'))
       this.isShow = true
     })
   },
@@ -54,9 +72,12 @@ export default {
   },
 
   methods: {
+    random () {
+      let dice = diceUtil.rollDice(this.heros.length)
+      this.choose(this.heros[dice - 1])
+    },
     choose (item) {
-      let index = Number(window.sessionStorage.getItem('sourceIndex'))
-      let copy = hero.units[index]
+      let copy = hero.units[this.index]
       if (item) {
         // 选择了英雄
         copy.type = item.name
@@ -66,7 +87,7 @@ export default {
         copy.type = ''
         copy.url = ''
       }
-      hero.units.splice(index, 1, copy)
+      hero.units.splice(this.index, 1, copy)
       this.handleCancel()
     },
     handleCancel () {

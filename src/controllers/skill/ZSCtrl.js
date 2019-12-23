@@ -59,7 +59,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atkzs'
+      sound: 'sword'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
 
@@ -106,7 +106,7 @@ export default {
       eventBus.$emit('animateDamage', {
         targets: [youIndex],
         value: damage,
-        sound: 'atkzs'
+        sound: 'sword'
       })
       system.msg = [`*冲锋*使${youIndex + 1}号单位眩晕，并对其造成了${damage}点伤害`, ...system.msg]
 

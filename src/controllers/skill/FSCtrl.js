@@ -44,7 +44,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atkfs',
+      sound: 'icehit',
       image: 'effdammagic'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -123,7 +123,7 @@ export default {
 
     me.iceblock = config.iceblockTurns
     eventBus.$emit('playSound', {
-      sound: 'casticeblock'
+      sound: 'iceblock'
     })
     system.msg = [`${system.unitIndex + 1}号单位释放了*寒冰屏障*保护自己，免疫任何直接伤害`, ...system.msg]
 

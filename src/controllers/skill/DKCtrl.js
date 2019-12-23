@@ -43,7 +43,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
       value: damage,
-      sound: 'atkdk',
+      sound: 'sword',
       image: 'effdam'
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
@@ -123,7 +123,7 @@ export default {
     eventBus.$emit('animateDamage', {
       targets: [index],
       value: damage,
-      sound: 'dkboom',
+      sound: 'boom',
       image: 'effdammagic'
     })
     system.msg = [`${system.unitIndex + 1}号的*牺牲爪牙*对${index + 1}号单位造成${damage}点伤害`, ...system.msg]
