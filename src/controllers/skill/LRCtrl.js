@@ -77,9 +77,9 @@ export default {
     let damage = 2
     let dice = diceUtil.rollDice()
     if (dice === 6) {
-      damage = 5
+      damage = 6
     } else if (dice === 4 || dice === 5) {
-      damage = 3
+      damage = 4
     }
     targets.forEach(target => {
       let youDamage = damage // 每个单位的最终伤害可能不同

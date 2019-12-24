@@ -44,9 +44,7 @@ export default {
         })
         item.hp = item.maxhp = truth.maxhp
         item.maxsp = truth.maxsp
-        item.sp = 0
-        // TODO testing
-        item.sp = item.maxsp
+        item.sp = 3
         item.speed = truth.speed
         item.directDamageTotal = 0
         item.skillDamageTotal = 0
@@ -124,15 +122,21 @@ export default {
     })
     if (upsideMOIndex !== '') {
       let copy = hero.units[upsideMOIndex]
-      copy.maxhp = 10
+      copy.maxhp = 20
       copy.maxhp += 15 * downsideHeroCount - 5 * upsideHeroCount
+      if (copy.maxhp < 20) {
+        copy.maxhp = 20
+      }
       copy.hp = copy.maxhp
       hero.units.splice(upsideMOIndex, 1, copy)
     }
     if (downsideMOIndex !== '') {
       let copy = hero.units[downsideMOIndex]
-      copy.maxhp = 10
+      copy.maxhp = 20
       copy.maxhp += 15 * upsideHeroCount - 5 * downsideHeroCount
+      if (copy.maxhp < 20) {
+        copy.maxhp = 20
+      }
       copy.hp = copy.maxhp
       hero.units.splice(downsideMOIndex, 1, copy)
     }

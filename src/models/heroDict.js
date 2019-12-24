@@ -3,7 +3,7 @@ export default {
     {
       name: 'ZS',
       cnName: '战士',
-      maxhp: 32,
+      maxhp: 42,
       maxsp: 6,
       speed: 1,
       desc: '单体高伤害/控制',
@@ -15,7 +15,7 @@ export default {
     {
       name: 'LR',
       cnName: '游侠',
-      maxhp: 32,
+      maxhp: 42,
       maxsp: 6,
       speed: 1,
       desc: '群体伤害/控制',
@@ -27,7 +27,7 @@ export default {
     {
       name: 'SM',
       cnName: '萨满',
-      maxhp: 32,
+      maxhp: 40,
       maxsp: 6,
       speed: 1,
       desc: '全体增益效果/反馈伤害',
@@ -39,7 +39,7 @@ export default {
     {
       name: 'WS',
       cnName: '武僧',
-      maxhp: 33,
+      maxhp: 44,
       maxsp: 6,
       speed: 1,
       desc: '一击必杀/自我减伤',
@@ -51,7 +51,7 @@ export default {
     {
       name: 'DZ',
       cnName: '刺客',
-      maxhp: 31,
+      maxhp: 40,
       maxsp: 9,
       speed: 1,
       desc: '高暴击/回能量',
@@ -63,7 +63,7 @@ export default {
     {
       name: 'FS',
       cnName: '魔法师',
-      maxhp: 30,
+      maxhp: 38,
       maxsp: 6,
       speed: 1,
       desc: '免疫伤害/群体伤害',
@@ -75,7 +75,7 @@ export default {
     {
       name: 'XD',
       cnName: '德鲁伊',
-      maxhp: 33,
+      maxhp: 46,
       maxsp: 6,
       speed: 1,
       desc: '变形术/交换生命值',
@@ -86,7 +86,7 @@ export default {
     },
     {
       name: 'DK',
-      maxhp: 35,
+      maxhp: 48,
       maxsp: 6,
       cnName: '死亡骑士',
       speed: 1,
@@ -99,7 +99,7 @@ export default {
     {
       name: 'QS',
       cnName: '圣骑士',
-      maxhp: 31,
+      maxhp: 42,
       maxsp: 6,
       speed: 1,
       desc: '交换生命值/回复生命值',
@@ -111,7 +111,7 @@ export default {
     {
       name: 'MS',
       cnName: '牧师',
-      maxhp: 27,
+      maxhp: 38,
       maxsp: 6,
       speed: 1,
       desc: '回复生命值/全体增益效果',
@@ -123,7 +123,7 @@ export default {
     {
       name: 'SR',
       cnName: '吟游诗人',
-      maxhp: 30,
+      maxhp: 40,
       maxsp: 6,
       speed: 1,
       desc: '增益效果/减益效果',
@@ -135,7 +135,7 @@ export default {
     {
       name: 'JB',
       cnName: '酒保',
-      maxhp: 30,
+      maxhp: 42,
       maxsp: 6,
       speed: 1,
       desc: '控制/增益效果',
@@ -147,7 +147,7 @@ export default {
     {
       name: 'YD',
       cnName: '园丁',
-      maxhp: 33,
+      maxhp: 46,
       maxsp: 0,
       speed: 1,
       desc: '群体伤害/回复效果',
@@ -159,7 +159,7 @@ export default {
     {
       name: 'YX',
       cnName: '夜行者',
-      maxhp: 32,
+      maxhp: 40,
       maxsp: 6,
       speed: 3,
       desc: '高速度/多次攻击',
@@ -171,7 +171,7 @@ export default {
     {
       name: 'TF',
       cnName: '屠夫',
-      maxhp: 34,
+      maxhp: 46,
       maxsp: 6,
       speed: 1,
       desc: '群体伤害/增益效果',
@@ -183,7 +183,7 @@ export default {
     {
       name: 'PC',
       cnName: '破城者',
-      maxhp: 32,
+      maxhp: 42,
       maxsp: 0,
       speed: 1,
       desc: '高群体伤害',
@@ -195,7 +195,7 @@ export default {
     {
       name: 'MO',
       cnName: '木偶',
-      maxhp: 10,
+      maxhp: 20,
       maxsp: 0,
       speed: 1,
       desc: '伤害加成/高生命值',

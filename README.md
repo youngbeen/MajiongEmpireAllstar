@@ -65,14 +65,13 @@ npm run lint
 
 ## TODOS
 
-* 所有角色技能review，前摇设置？
-* 播放音效期间freeze action？
 * HP和所有伤害数值调整
 * 初始SP多少？
 * 使用更美观的角色图片
 * 所有角色再增加新技能？
 * 增加新角色？
 * 0点伤害时是否需要播放击退效果？
+* 播放音效期间freeze action？
 
 ## BUGS
 
