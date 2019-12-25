@@ -29,10 +29,7 @@ export default {
     }
     // STEP2 计算原始伤害
     let damage = Math.ceil(diceUtil.getDamageFactor() * times)
-    if (you.iceblock) {
-      // 寒冰屏障
-      damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
-    } else if (you.flagBear) {
+    if (you.flagBear) {
       // 熊形态
       damage = reduceCtrl.getReducedDamage(damage, 'bear')
     }

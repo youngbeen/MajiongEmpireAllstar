@@ -9,7 +9,7 @@ export default {
       desc: '高伤害/控制',
       url: './img/unitzs.png',
       commonSkills: ['C1', 'C2'],
-      positiveSkills: ['ZS1'],
+      positiveSkills: ['ZS1', 'ZS3'],
       negativeSkills: ['ZS2']
     },
     {
