@@ -6,7 +6,7 @@ export default {
       maxhp: 42,
       maxsp: 6,
       speed: 1,
-      desc: '单体高伤害/控制',
+      desc: '高伤害/控制',
       url: './img/unitzs.png',
       commonSkills: ['C1', 'C2'],
       positiveSkills: ['ZS1'],

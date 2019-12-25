@@ -12,6 +12,7 @@ export default {
   guardYDPlusHeal: 2, // 守备YD增加的治疗量
   recoverSpAmount: 2, // 每回合自动SP回复量
   chargeFixedDamage: 2, // 冲锋技能造成的固定伤害
+  angerPlusDamage: 2, // 激怒状态提升的伤害
   magicShotMinusSpeed: 2, // 奥术射击技能减少的speed值
   yyMaxTurns: 2, // yy 技能持续层数
   yyPlusMaxhp: 4, // yy 技能增加的maxhp值

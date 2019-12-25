@@ -1,3 +1,4 @@
+import { numberUtil } from '@youngbeen/angle-util'
 import eventBus from '@/eventBus'
 import config from '@/models/config'
 import hero from '@/models/hero'
@@ -91,6 +92,9 @@ export default {
 
       // STEP1 计算伤害
       let damage = config.chargeFixedDamage
+      if (me.flagAnger) {
+        damage += config.angerPlusDamage
+      }
       if (you.iceblock) {
         // 寒冰屏障
         damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
@@ -112,6 +116,61 @@ export default {
 
       hero.units.splice(youIndex, 1, you)
     })
+
+    me.flagAnger = false
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
+  },
+  // 旋风斩
+  rotateAtk (skillId = '', targets = []) {
+    let me = hero.units[system.unitIndex]
+    me = commonCtrl.act(me, skillId)
+
+    // 1/3概率3目标，2/3概率2目标
+    let targetCount = diceUtil.rollDice(3) > 1 ? 2 : 3
+    // 随机选取目标
+    let targetIndexs = numberUtil.multiRandom(targetCount, 4, 0)
+    targetIndexs.forEach(target => {
+      const youIndex = system.unitIndex < 5 ? target + 5 : target
+      let you = hero.units[youIndex]
+
+      // STEP1 计算倍数
+      let times = config.normalTimes // 伤害倍数
+      // 正常情况
+      let timeDice = diceUtil.getDamageTimes()
+      times = timeDice.times
+      if (you.type === 'WS' && timeDice.dice === 3) {
+        // 武僧被动技能，3点修正为偏斜攻击
+        times = config.slightTimes
+      }
+      // STEP2 计算原始伤害
+      let damage = Math.ceil(diceUtil.getDamageFactor() * times)
+      if (me.flagAnger) {
+        damage += config.angerPlusDamage
+      }
+      if (you.iceblock) {
+        // 寒冰屏障
+        damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
+      } else if (you.flagBear) {
+        // 熊形态
+        damage = reduceCtrl.getReducedDamage(damage, 'bear')
+      }
+      // STEP3 结算
+      me = commonCtrl.drawDps(me, 'skill', damage)
+      you = commonCtrl.changeHp(you, -1 * damage)
+      // 显示伤害动效
+      eventBus.$emit('animateDamage', {
+        targets: [youIndex],
+        value: damage,
+        sound: 'sword' // TODO 更换旋风音效
+      })
+      system.msg = [`${system.unitIndex + 1}号单位使用*旋风斩*对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+
+      hero.units.splice(youIndex, 1, you)
+    })
+
+    me.flagAnger = false
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)

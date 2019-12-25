@@ -244,12 +244,20 @@ export default {
       case 'C1': // ZS普攻
         ZSCtrl.atk(targets)
         break
-      case 'ZS1': // 冲锋
+      case 'ZS1': // ZS冲锋
         eventBus.$emit('playSound', {
           sound: 'charge'
         })
         setTimeout(() => {
           ZSCtrl.charge(skillId, targets)
+        }, config.preCastingTime)
+        break
+      case 'ZS3': // ZS旋风斩
+        eventBus.$emit('playSound', {
+          sound: 'charge'
+        })
+        setTimeout(() => {
+          ZSCtrl.rotateAtk(skillId)
         }, config.preCastingTime)
         break
       case 'C3': // LR普攻

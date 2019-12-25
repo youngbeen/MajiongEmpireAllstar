@@ -419,12 +419,23 @@ export default {
       id: 'ZS1',
       cat: 'P',
       type: 'SK',
-      spCost: 3,
+      spCost: 4,
       targetLimit: 2,
       cnName: '冲锋',
       desc: ['可以驱散'],
-      detail: `对最多2个相邻敌方单位发起冲锋，对其造成(${config.chargeFixedDamage})直接伤害。被冲锋的单位将会被眩晕，眩晕目标将跳过其行动回合`,
+      detail: `对最多2个相邻敌方单位发起冲锋，对其造成(${config.chargeFixedDamage})直接伤害，激怒状态时伤害额外增加(${config.angerPlusDamage})。被冲锋的单位将会被眩晕，眩晕目标将跳过其行动回合`,
       url: './img/skill_3_zs.png'
+    },
+    {
+      id: 'ZS3',
+      cat: 'P',
+      type: 'SA',
+      spCost: 3,
+      targetLimit: 3,
+      cnName: '旋风斩',
+      desc: [],
+      detail: `随机对2~3个敌方单位发动一次旋风般的攻击，激怒状态时伤害额外增加(${config.angerPlusDamage})`,
+      url: './img/skill_3_zs.png' // TODO 换图
     },
     {
       id: 'ZS2',
@@ -434,7 +445,7 @@ export default {
       targetLimit: 0,
       cnName: '鲁莽',
       desc: ['有益效果', '可以驱散'],
-      detail: '你的正常攻击造成暴击时，会获得激怒效果。激怒状态下你的下次攻击必定暴击，并消耗激怒，激怒攻击本身不触发鲁莽',
+      detail: `你的正常攻击造成暴击时，会获得激怒效果，任何攻击会消耗激怒。激怒状态下正常攻击必定暴击，激怒攻击本身不触发鲁莽。激怒状态下技能攻击伤害额外提升${config.angerPlusDamage}`,
       url: './img/skill_5_zs.png'
     },
     {
