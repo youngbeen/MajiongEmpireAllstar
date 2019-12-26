@@ -45,7 +45,7 @@ export default {
       desc: '一击必杀/自我减伤',
       url: './img/unitws.png',
       commonSkills: ['C7', 'C8'],
-      positiveSkills: ['WS1'],
+      positiveSkills: ['WS1', 'WS3'],
       negativeSkills: ['WS2']
     },
     {

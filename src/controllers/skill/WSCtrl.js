@@ -92,5 +92,23 @@ export default {
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(youIndex, 1, you)
+  },
+  // 禅坐
+  zen (skillId = '', targets = []) {
+    let me = hero.units[system.unitIndex]
+    me = commonCtrl.act(me, skillId)
+
+    let heal = me.sp * config.zenHealTimes
+    me = commonCtrl.changeHp(me, heal)
+    me.sp = 0
+
+    eventBus.$emit('animateHeal', {
+      targets: [system.unitIndex],
+      value: heal
+    })
+    system.msg = [`${system.unitIndex + 1}号单位进行*禅坐*，所有SP转化为${heal}生命值`, ...system.msg]
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
   }
 }

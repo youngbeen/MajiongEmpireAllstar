@@ -295,13 +295,21 @@ export default {
         SMCtrl.brave(skillId)
         break
       case 'SM3': // SM治疗链
-        SMCtrl.healLink(skillId, targets)
+        eventBus.$emit('playSound', {
+          sound: 'castmultishot' // TODO change pre sound
+        })
+        setTimeout(() => {
+          SMCtrl.healLink(skillId, targets)
+        }, config.preCastingTime)
         break
       case 'C7': // WS普攻
         WSCtrl.atk(targets)
         break
       case 'WS1': // WS死亡一指
         WSCtrl.deathFinger(skillId, targets)
+        break
+      case 'WS3': // WS禅坐
+        WSCtrl.zen(skillId)
         break
       case 'C9': // DZ普攻
         DZCtrl.atk(targets)

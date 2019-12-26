@@ -526,6 +526,17 @@ export default {
       url: './img/skill_3_ws.png'
     },
     {
+      id: 'WS3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '禅坐',
+      desc: [],
+      detail: `开始禅坐，消耗你当前所有SP，每消耗1点SP，回复你${config.zenHealTimes}点生命值`,
+      url: './img/skill_3_ws.png' // TODO change icon
+    },
+    {
       id: 'WS2',
       cat: 'N',
       type: 'BF',

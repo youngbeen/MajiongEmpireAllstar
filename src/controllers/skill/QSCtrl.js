@@ -110,5 +110,8 @@ export default {
       sound: 'qsreborn'
     })
     system.msg = [`${system.unitIndex + 1}号单位释放了*圣疗术*，生命值完全恢复`, ...system.msg]
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
   }
 }

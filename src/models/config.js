@@ -25,6 +25,7 @@ export default {
   healLinkMaxHeal: 10, // 治疗链首跳最高治疗量（含）
   deathFingerMinDamage: 8, // 死亡一指最低伤害
   deathFingerMaxDamage: 15, // 死亡一指必杀血线 <= 该值则触发
+  zenHealTimes: 2, // 禅坐消耗每单位SP回复HP的倍数
   poisonDamageTurns: 2, // 毒刃效果持续层数
   poisonDamage: 4, // 中毒dot伤害值
   rogueBonusSp: 1, // DZ奖励SP点数
