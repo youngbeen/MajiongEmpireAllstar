@@ -18,11 +18,11 @@ export default {
       maxhp: 42,
       maxsp: 6,
       speed: 1,
-      desc: '群体伤害/控制',
+      desc: '多目标/群体伤害/控制',
       url: './img/unitlr.png',
       commonSkills: ['C3', 'C4'],
       positiveSkills: ['LR1', 'LR2'],
-      negativeSkills: []
+      negativeSkills: ['LR3']
     },
     {
       name: 'SM',
@@ -33,7 +33,7 @@ export default {
       desc: '全体增益效果/反馈伤害',
       url: './img/unitsm.png',
       commonSkills: ['C5', 'C6'],
-      positiveSkills: ['SM1'],
+      positiveSkills: ['SM1', 'SM3'],
       negativeSkills: ['SM2']
     },
     {
@@ -148,7 +148,7 @@ export default {
       name: 'YD',
       cnName: '园丁',
       maxhp: 46,
-      maxsp: 0,
+      maxsp: 4,
       speed: 1,
       desc: '群体伤害/回复效果',
       url: './img/unityd.png',
@@ -184,7 +184,7 @@ export default {
       name: 'PC',
       cnName: '破城者',
       maxhp: 42,
-      maxsp: 0,
+      maxsp: 6,
       speed: 1,
       desc: '高群体伤害',
       url: './img/unitpc.png',
@@ -196,7 +196,7 @@ export default {
       name: 'MO',
       cnName: '木偶',
       maxhp: 20,
-      maxsp: 0,
+      maxsp: 10,
       speed: 1,
       desc: '伤害加成/高生命值',
       url: './img/unitmo.png',

@@ -4,6 +4,7 @@ import config from '@/models/config'
 import hero from '@/models/hero'
 import system from '@/models/system'
 import diceUtil from '@/utils/diceUtil'
+import heroUtil from '@/utils/heroUtil'
 import reduceCtrl from '../reduceCtrl'
 import commonCtrl from './commonCtrl'
 
@@ -128,11 +129,21 @@ export default {
     me = commonCtrl.act(me, skillId)
 
     // 1/3概率3目标，2/3概率2目标
+    let targetIndexs = []
     let targetCount = diceUtil.rollDice(3) > 1 ? 2 : 3
-    // 随机选取目标
-    let targetIndexs = numberUtil.multiRandom(targetCount, 4, 0)
+    let validTargets = heroUtil.getAllTargets()
+    if (validTargets.length <= targetCount) {
+      // 有效目标不足，直接使用有效目标
+      targetIndexs = validTargets
+    } else {
+      // 有效目标比较多，则随机选择
+      let randomPicks = numberUtil.multiRandom(targetCount, validTargets.length - 1, 0)
+      randomPicks.forEach(i => {
+        targetIndexs.push(validTargets[i])
+      })
+    }
     targetIndexs.forEach(target => {
-      const youIndex = system.unitIndex < 5 ? target + 5 : target
+      const youIndex = target
       let you = hero.units[youIndex]
 
       // STEP1 计算倍数

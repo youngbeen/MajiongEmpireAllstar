@@ -23,6 +23,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -54,6 +55,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -85,6 +87,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -116,6 +119,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -147,6 +151,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -179,6 +184,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -210,6 +216,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -241,6 +248,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -272,6 +280,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑
@@ -303,6 +312,7 @@ export default {
       flagEarth: false, // 是否激活了大地之力
       flagFaint: false, // 是否激活了眩晕
       flagSlow: false, // 是否激活了减速
+      lockOn: 0, // 锁定状态剩余层数
       poison: 0, // 中毒状态剩余层数
       confuse: 0, // 蛊惑状态剩余层数
       flagBind: false, // 是否激活了捆绑

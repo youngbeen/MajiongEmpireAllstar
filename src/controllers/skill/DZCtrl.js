@@ -113,7 +113,7 @@ export default {
       damage = reduceCtrl.getReducedDamage(damage, 'bear')
     }
     // STEP3 结算
-    you.poison = config.poisonDamageTurns
+    you.poison += config.poisonDamageTurns
     me = commonCtrl.drawDps(me, 'skill', damage)
     you = commonCtrl.changeHp(you, -1 * damage)
     // 显示伤害动效

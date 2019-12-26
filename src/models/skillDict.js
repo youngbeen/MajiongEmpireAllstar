@@ -346,7 +346,7 @@ export default {
       targetLimit: 0,
       cnName: '守备',
       desc: [],
-      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal + config.guardYDPlusHeal})生命值`,
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal + config.guardYDPlusHeal})生命值和少量(${config.guardYDPlusSp})SP`,
       url: './img/skill_2_zs.png'
     },
     {
@@ -471,6 +471,17 @@ export default {
       url: './img/skill_4_lr.png'
     },
     {
+      id: 'LR3',
+      cat: 'N',
+      type: 'BF',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '瞄准锁定',
+      desc: ['可以驱散'],
+      detail: `你每次攻击的目标会被锁定，持续${config.lockOnTurns}回合(不叠加)。你对锁定的目标造成的伤害增加(${config.lockOnPlusDamage})`,
+      url: './img/skill_4_lr.png' // TODO change icon
+    },
+    {
       id: 'SM1',
       cat: 'P',
       type: 'BF',
@@ -480,6 +491,17 @@ export default {
       desc: ['有益效果', '可以驱散'],
       detail: `借助元素的力量，鼓舞所有队友。全体友方单位生命值上限提高(${config.yyPlusMaxhp})，速度上升(${config.yyPlusSpeed})，持续${config.yyMaxTurns}回合，英勇增益效果不会叠加`,
       url: './img/skill_3_sm.png'
+    },
+    {
+      id: 'SM3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 3,
+      targetLimit: 1,
+      cnName: '治疗链',
+      desc: [],
+      detail: `对1个友方单位释放一条跳动的自然链接，为目标回复${config.healLinkMinHeal}~${config.healLinkMaxHeal}点生命值。链接会跳动2次，每跳对随机目标回复上次回复量的一半`,
+      url: './img/skill_3_sm.png' // TODO change icon
     },
     {
       id: 'SM2',
@@ -522,7 +544,7 @@ export default {
       targetLimit: 1,
       cnName: '毒刃',
       desc: ['物理伤害', '毒（自然伤害）', '可以驱散'],
-      detail: `对1个敌方单位发动一次攻击，并附带中毒效果(持续${config.poisonDamageTurns}回合，最多${config.poisonDamageTurns}层)。中毒的目标每回合结束会受到毒药伤害(${config.poisonDamage})，毒药伤害不受伤害减免效果影响。此外你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)`,
+      detail: `对1个敌方单位发动一次攻击，并附带中毒效果(持续${config.poisonDamageTurns}回合，可叠加)。中毒的目标每回合结束会受到毒药伤害(${config.poisonDamage})，毒药伤害不受伤害减免效果影响。此外你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)`,
       url: './img/skill_3_dz.png'
     },
     {
@@ -540,7 +562,7 @@ export default {
       id: 'FS1',
       cat: 'P',
       type: 'BF',
-      spCost: 3,
+      spCost: 5,
       targetLimit: 0,
       cnName: '寒冰屏障',
       desc: ['有益效果', '无法驱散'],
@@ -753,14 +775,14 @@ export default {
       targetLimit: 0,
       cnName: '平和主义',
       desc: ['无法驱散'],
-      detail: `你的*守 备*行动回复的生命值额外增加${config.guardYDPlusHeal}点，但你的普通攻击始终造成偏斜伤害`,
+      detail: `你的*守 备*行动回复的生命值额外增加${config.guardYDPlusHeal}点，此外还回复${config.guardYDPlusSp}点SP，但你的普通攻击始终造成偏斜伤害`,
       url: './img/skill_6_yd.png'
     },
     {
       id: 'YX1',
       cat: 'P',
       type: 'DA',
-      spCost: 3,
+      spCost: 4,
       targetLimit: 1,
       cnName: '幻影打击',
       desc: ['物理伤害'],

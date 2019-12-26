@@ -44,7 +44,10 @@ export default {
         })
         item.hp = item.maxhp = truth.maxhp
         item.maxsp = truth.maxsp
-        item.sp = 3
+        item.sp = config.initSp
+        if (item.sp > item.maxsp) {
+          item.sp = item.maxsp
+        }
         item.speed = truth.speed
         item.directDamageTotal = 0
         item.skillDamageTotal = 0
@@ -61,6 +64,7 @@ export default {
         item.flagEarth = false
         item.flagFaint = false
         item.flagSlow = false
+        item.lockOn = 0
         item.poison = 0
         item.confuse = 0
         item.flagBind = false
@@ -290,6 +294,9 @@ export default {
       case 'SM1': // SM英勇
         SMCtrl.brave(skillId)
         break
+      case 'SM3': // SM治疗链
+        SMCtrl.healLink(skillId, targets)
+        break
       case 'C7': // WS普攻
         WSCtrl.atk(targets)
         break
@@ -452,6 +459,10 @@ export default {
         if (item.flagSlow) {
           item.speed += config.magicShotMinusSpeed
           item.flagSlow = false
+        }
+        // 清除锁定效果
+        if (item.lockOn > 0) {
+          item.lockOn--
         }
         // 清除YY效果
         if (item.yy > 0) {
@@ -659,6 +670,7 @@ export default {
         flagEarth: false, // 是否激活了大地之力
         flagFaint: false, // 是否激活了眩晕
         flagSlow: false, // 是否激活了减速
+        lockOn: 0, // 锁定状态剩余层数
         poison: 0, // 中毒状态剩余层数
         confuse: 0, // 蛊惑状态剩余层数
         flagBind: false, // 是否激活了捆绑
@@ -682,6 +694,7 @@ export default {
     unit.flagEarth = false
     unit.flagFaint = false
     unit.flagSlow = false
+    unit.lockOn = 0
     unit.poison = 0
     unit.confuse = 0
     unit.flagBind = false

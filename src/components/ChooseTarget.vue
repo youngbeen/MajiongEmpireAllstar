@@ -47,6 +47,8 @@
               <img class="icon" v-show="item.confuse" src="../assets/img/confuse.png" title="蛊惑">
               <img class="icon" v-show="item.poison" src="../assets/img/poison.png" title="中毒(受到持续自然伤害)">
               <img class="icon" v-show="item.flagSlow" src="../assets/img/slow.png" title="减速(行动迟缓)">
+              <!-- TODO change icon -->
+              <img class="icon" v-show="item.lockOn" src="../assets/img/slow.png" title="锁定(易伤)">
               <img class="icon" v-show="item.flagBind" src="../assets/img/bind.png" title="致命藤蔓(受到持续自然伤害)">
             </div>
           </div>
@@ -164,7 +166,7 @@ export default {
       }
     },
     isTargetFriendly () {
-      return ['XD4', 'MS1', 'SR1'].includes(this.skillId)
+      return ['SM3', 'XD4', 'MS1', 'SR1'].includes(this.skillId)
     },
     targets () {
       if (this.skillId === 'DK1') {
@@ -209,8 +211,8 @@ export default {
           return item
         })
         return friends
-      } else if (this.skillId === 'MS1' || this.skillId === 'SR1') {
-        // NOTE MS治疗术比较特殊，需要选择友方目标
+      } else if (['SM3', 'MS1', 'SR1'].includes(this.skillId)) {
+        // NOTE 比较特殊，需要选择友方目标
         let friends = this.hero.units.map((item, index) => {
           if (this.system.unitIndex >= 5) {
             // 下方source

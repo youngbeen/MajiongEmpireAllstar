@@ -29,6 +29,9 @@ export default {
     }
     // STEP2 计算原始伤害
     let damage = Math.ceil(diceUtil.getDamageFactor() * times)
+    if (you.lockOn) {
+      damage += config.lockOnPlusDamage
+    }
     if (you.iceblock) {
       // 寒冰屏障
       damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
@@ -39,6 +42,7 @@ export default {
     // STEP3 结算
     me = commonCtrl.drawDps(me, 'direct', damage)
     you = commonCtrl.changeHp(you, -1 * damage)
+    you.lockOn = config.lockOnTurns
     // 显示伤害动效
     eventBus.$emit('animateDamage', {
       targets: [youIndex],
@@ -86,6 +90,9 @@ export default {
       const youIndex = target
       let you = hero.units[youIndex]
 
+      if (you.lockOn) {
+        youDamage += config.lockOnPlusDamage
+      }
       if (you.iceblock) {
         // 寒冰屏障
         youDamage = reduceCtrl.getReducedDamage(youDamage, 'iceblock')
@@ -96,6 +103,7 @@ export default {
       // STEP2 结算
       me = commonCtrl.drawDps(me, 'skill', youDamage)
       you = commonCtrl.changeHp(you, -1 * youDamage)
+      you.lockOn = config.lockOnTurns
       // 显示伤害动效
       eventBus.$emit('animateDamage', {
         targets: [youIndex],
@@ -131,6 +139,9 @@ export default {
     }
     // STEP2 计算原始伤害
     let damage = Math.ceil(diceUtil.getDamageFactor() * times)
+    if (you.lockOn) {
+      damage += config.lockOnPlusDamage
+    }
     if (you.iceblock) {
       // 寒冰屏障
       damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
@@ -150,6 +161,7 @@ export default {
     }
     // 清除激怒效果
     you.flagAnger = false
+    you.lockOn = config.lockOnTurns
     // 减速效果（不叠加）
     if (!you.flagSlow) {
       you.flagSlow = true

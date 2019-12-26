@@ -1,3 +1,4 @@
+import { numberUtil } from '@youngbeen/angle-util'
 import eventBus from '@/eventBus'
 import config from '@/models/config'
 import hero from '@/models/hero'
@@ -98,5 +99,53 @@ export default {
       sound: 'yy'
     })
     system.msg = [`萨满释放了*英勇*，所有友方单位最大生命值，速度增加`, ...system.msg]
+  },
+  // 治疗链
+  healLink (skillId = '', targets = []) {
+    const youIndex = targets[0]
+    let you = hero.units[youIndex]
+    let me = hero.units[system.unitIndex]
+    me = commonCtrl.act(me, skillId)
+
+    let stackPlays = 1
+
+    let healAmount = numberUtil.random(config.healLinkMaxHeal, config.healLinkMinHeal)
+    you = commonCtrl.changeHp(you, healAmount)
+    eventBus.$emit('animateHeal', {
+      targets: [youIndex],
+      value: healAmount
+    })
+    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位释放*治疗链*，回复${healAmount}点生命值`, ...system.msg]
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
+    hero.units.splice(youIndex, 1, you)
+
+    // 寻找后续两跳的目标
+    let friends = heroUtil.getAllFriends()
+    let followTargets = []
+    followTargets.push(friends[diceUtil.rollDice(friends.length) - 1]) // 随机第一个友方目标
+    followTargets.push(friends[diceUtil.rollDice(friends.length) - 1]) // 随机第二个友方目标
+    followTargets.forEach(target => {
+      const friendIndex = target
+      let friend = hero.units[friendIndex]
+
+      let heal = Math.round(healAmount / 2)
+      if (heal <= 0) {
+        heal = 1
+      }
+      healAmount = heal
+      friend = commonCtrl.changeHp(friend, heal)
+      hero.units.splice(friendIndex, 1, friend)
+
+      setTimeout(() => {
+        eventBus.$emit('animateHeal', {
+          targets: [friendIndex],
+          value: heal
+        })
+        system.msg = [`治疗链跳动对${friendIndex + 1}号单位回复${heal}点生命值`, ...system.msg]
+      }, config.animationTime * stackPlays)
+      stackPlays++
+    })
   }
 }

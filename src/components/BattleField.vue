@@ -74,6 +74,11 @@
             </div>
             <!-- 显示slow -->
             <img class="buff-icon" v-show="item.flagSlow" src="../assets/img/slow.png" title="减速(行动迟缓)" />
+            <!-- TODO change icon 显示锁定 -->
+            <div class="buff-icon" v-show="item.lockOn">
+              <img class="buff-icontext" src="../assets/img/poison.png" title="锁定(易伤)" />
+              <p class="buff-num" title="锁定(易伤)">{{ item.lockOn }}</p>
+            </div>
             <!-- 显示bind -->
             <img class="buff-icon" v-show="item.flagBind" src="../assets/img/bind.png" title="致命藤蔓(受到持续自然伤害)" />
           </div>
@@ -174,6 +179,11 @@
             </div>
             <!-- 显示slow -->
             <img class="buff-icon" v-show="item.flagSlow" src="../assets/img/slow.png" title="减速(行动迟缓)" />
+            <!-- TODO change icon 显示锁定 -->
+            <div class="buff-icon" v-show="item.lockOn">
+              <img class="buff-icontext" src="../assets/img/poison.png" title="锁定(易伤)" />
+              <p class="buff-num" title="锁定(易伤)">{{ item.lockOn }}</p>
+            </div>
             <!-- 显示bind -->
             <img class="buff-icon" v-show="item.flagBind" src="../assets/img/bind.png" title="致命藤蔓(受到持续自然伤害)" />
           </div>

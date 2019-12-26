@@ -12,15 +12,22 @@ export default {
     let me = hero.units[system.unitIndex]
     me = this.act(me)
 
+    let stackPlays = 1
+
     let heal = config.guardBaseHeal
+    let spHeal = 0
     if (me.type === 'DK') {
       heal = config.guardDKHeal
     } else if (me.type === 'YD') {
       heal += config.guardYDPlusHeal
+      spHeal = config.guardYDPlusSp
     } else if (me.iceblock) {
       heal += config.guardIceblockPlusHeal
     }
     this.changeHp(me, heal)
+    if (spHeal) {
+      this.changeSp(me, spHeal)
+    }
     hero.units.splice(system.unitIndex, 1, me)
     // 显示治疗特效
     eventBus.$emit('animateHeal', {
@@ -28,6 +35,16 @@ export default {
       value: heal
     })
     system.msg = [`${system.unitIndex + 1}号单位*守备*,回复${heal}点生命值`, ...system.msg]
+    if (spHeal) {
+      setTimeout(() => {
+        eventBus.$emit('animateSpRecover', {
+          targets: [system.unitIndex],
+          value: spHeal
+        })
+        system.msg = [`${system.unitIndex + 1}号单位*守备*,回复${spHeal}点SP`, ...system.msg]
+      }, config.animationTime * stackPlays)
+      stackPlays++
+    }
   },
   // 结算大地之力反伤
   earthReflect (me, stackPlays = 1, damage) {
@@ -96,6 +113,7 @@ export default {
       unit.flagEarth = false
       unit.flagFaint = false
       unit.flagSlow = false
+      unit.lockOn = 0
       unit.poison = 0
       unit.confuse = 0
       unit.flagBind = false

@@ -75,6 +75,7 @@ export default {
       you.flagSlow = false
       you.speed += config.magicShotMinusSpeed
     }
+    you.lockOn = 0
     you.poison = 0
     you.confuse = 0
     you.flagDrunk = false

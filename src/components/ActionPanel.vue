@@ -1,12 +1,12 @@
 <template>
   <section class="bed-action-panel">
+    <el-button type="info" size="mini" v-show="system.step === 0" @click="startDraw()">
+      <font-awesome-icon icon="theater-masks" /> 先后手
+    </el-button>
     <el-button size="mini" v-show="system.step === 0" @click="randomPick()">
       <font-awesome-icon icon="dice" /> 随机英雄
     </el-button>
-    <el-button size="mini" v-show="system.step === 0" @click="startDraw()">
-      <font-awesome-icon icon="theater-masks" /> 先后手
-    </el-button>
-    <el-button size="mini" v-show="system.step === 1" @click="startBattle()">
+    <el-button type="info" size="mini" v-show="system.step === 1" @click="startBattle()">
       <font-awesome-icon icon="hand-rock" /> 战斗开始
     </el-button>
     <el-button type="primary" size="mini" v-show="system.step === 2" @click="proceedTurn()">
