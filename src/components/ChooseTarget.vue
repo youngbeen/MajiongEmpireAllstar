@@ -297,11 +297,11 @@ export default {
     confirm () {
       // console.log(this.selectedTarget)
       if (this.selectedTarget.length) {
-        if (this.skillId === 'ZS1' && this.selectedTarget.length >= 2 && Math.abs(this.selectedTarget[0] - this.selectedTarget[1]) > 1) {
-          // NOTE ZS的冲锋技能比较特殊，选择的2个目标必须是相邻单位
+        if (['ZS1', 'DZ3'].includes(this.skillId) && this.selectedTarget.length >= 2 && Math.abs(this.selectedTarget[0] - this.selectedTarget[1]) > 1) {
+          // NOTE ZS冲锋, DZ左右开弓比较特殊，选择的2个目标必须是相邻单位
           this.$message({
             type: 'warning',
-            message: '*冲锋*技能的目标必须是相邻单位！'
+            message: '目标必须是相邻单位！'
           })
           return
         }

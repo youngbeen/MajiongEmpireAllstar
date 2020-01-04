@@ -30,10 +30,7 @@ export default {
     // STEP2 计算原始伤害
     let damageFactor = diceUtil.getDamageFactor()
     let damage = Math.ceil(damageFactor * times)
-    if (you.iceblock) {
-      // 寒冰屏障
-      damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
-    } else if (you.flagBear) {
+    if (you.flagBear) {
       // 熊形态
       damage = reduceCtrl.getReducedDamage(damage, 'bear')
     }
@@ -49,7 +46,7 @@ export default {
     })
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
 
-    // NOTE 因为后续触发冰枪术需要再次结算，所以此处先回写一次数据
+    // NOTE 因为后续触发冰枪术及法力爆炸需要再次结算，所以此处先回写一次数据
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(youIndex, 1, you)
 
@@ -73,6 +70,12 @@ export default {
         }
       }
       stackPlays++
+
+      // 触发法力爆炸
+      if (diceUtil.rollDice(100) > (50 + me.actRounds)) {
+        this.drawMagicBoom(stackPlays)
+        stackPlays++
+      }
     }
 
     me = hero.units[system.unitIndex]
@@ -93,10 +96,7 @@ export default {
     let you = hero.units[index]
 
     let damage = Math.ceil(damageFactor * config.slightTimes)
-    if (you.iceblock) {
-      // 寒冰屏障
-      damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
-    } else if (you.flagBear) {
+    if (you.flagBear) {
       // 熊形态
       damage = reduceCtrl.getReducedDamage(damage, 'bear')
     }
@@ -115,6 +115,42 @@ export default {
 
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(index, 1, you)
+  },
+  drawMagicBoom (stackPlays) {
+    let me = hero.units[system.unitIndex]
+
+    let targets = heroUtil.getAllTargets()
+    let damage = Math.round(me.damageTotal / 10)
+    if (damage < 1) {
+      damage = 1
+    }
+    targets.forEach(target => {
+      let youDamage = damage // 每个单位的最终伤害可能不同
+      const youIndex = target
+      let you = hero.units[youIndex]
+
+      if (you.flagBear) {
+        // 熊形态
+        youDamage = reduceCtrl.getReducedDamage(youDamage, 'bear')
+      }
+      // STEP2 结算
+      me = commonCtrl.drawDps(me, 'skill', youDamage)
+      you = commonCtrl.changeHp(you, -1 * youDamage)
+      // 显示伤害动效
+      setTimeout(() => {
+        eventBus.$emit('animateDamage', {
+          targets: [youIndex],
+          value: youDamage,
+          sound: 'boom',
+          image: 'effdammagic'
+        })
+        system.msg = [`*法力爆炸*对${youIndex + 1}号单位造成了${youDamage}点伤害`, ...system.msg]
+      }, config.animationTime * stackPlays)
+
+      hero.units.splice(youIndex, 1, you)
+    })
+
+    hero.units.splice(system.unitIndex, 1, me)
   },
   // 寒冰屏障
   iceblock (skillId = '', targets = []) {

@@ -317,6 +317,9 @@ export default {
       case 'DZ1': // DZ毒刃
         DZCtrl.poisonAtk(skillId, targets)
         break
+      case 'DZ3': // DZ左右开弓
+        DZCtrl.dualAtk(skillId, targets)
+        break
       case 'C11': // FS普攻
         FSCtrl.atk(targets)
         break

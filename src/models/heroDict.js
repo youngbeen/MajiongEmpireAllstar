@@ -57,7 +57,7 @@ export default {
       desc: '高暴击/回能量',
       url: './img/unitdz.png',
       commonSkills: ['C9', 'C10'],
-      positiveSkills: ['DZ1'],
+      positiveSkills: ['DZ1', 'DZ3'],
       negativeSkills: ['DZ2']
     },
     {
@@ -70,7 +70,7 @@ export default {
       url: './img/unitfs.png',
       commonSkills: ['C11', 'C12'],
       positiveSkills: ['FS1'],
-      negativeSkills: ['FS2']
+      negativeSkills: ['FS2', 'FS3']
     },
     {
       name: 'XD',

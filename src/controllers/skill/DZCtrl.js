@@ -155,5 +155,66 @@ export default {
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(youIndex, 1, you)
+  },
+  // 左右开弓
+  dualAtk (skillId = '', targets = []) {
+    let me = hero.units[system.unitIndex]
+    me = commonCtrl.act(me, skillId)
+    let stackPlays = 1
+
+    targets.forEach(target => {
+      const youIndex = target
+      let you = hero.units[youIndex]
+
+      // STEP1 计算伤害
+      let times = config.normalTimes // 伤害倍数
+      let timeDice = diceUtil.getDamageTimes()
+      times = timeDice.times
+      if (you.type === 'WS' && timeDice.dice === 3) {
+        // 武僧被动技能，3点修正为偏斜攻击
+        times = config.slightTimes
+      } else if (you.poison > 0 && timeDice.dice === 5) {
+        // DZ对中毒的目标更容易造成暴击
+        times = config.criticalTimes
+      }
+      let damage = Math.ceil(diceUtil.getDamageFactor() * times)
+      if (you.iceblock) {
+        // 寒冰屏障
+        damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
+      } else if (you.flagBear) {
+        // 熊形态
+        damage = reduceCtrl.getReducedDamage(damage, 'bear')
+      }
+      // STEP2 结算
+      me = commonCtrl.drawDps(me, 'skill', damage)
+      you = commonCtrl.changeHp(you, -1 * damage)
+      // 显示伤害动效
+      eventBus.$emit('animateDamage', {
+        targets: [youIndex],
+        value: damage,
+        sound: 'dagger',
+        image: 'effdamdagger'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+
+      hero.units.splice(youIndex, 1, you)
+    })
+
+    // 处理奖励SP
+    if (me.hp && diceUtil.rollDice(6) === 6) {
+      // 1/6概率获取奖励SP
+      me = commonCtrl.changeSp(me, config.rogueBonusSp)
+      setTimeout(() => {
+        eventBus.$emit('animateSpRecover', {
+          targets: [system.unitIndex],
+          value: config.rogueBonusSp
+        })
+        system.msg = [`*能量控制*使${system.unitIndex + 1}号单位回复了${config.rogueBonusSp}点SP`, ...system.msg]
+      }, config.animationTime * stackPlays)
+      stackPlays++
+    }
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
   }
 }

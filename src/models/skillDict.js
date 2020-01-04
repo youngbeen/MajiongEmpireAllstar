@@ -559,6 +559,17 @@ export default {
       url: './img/dagger1.png'
     },
     {
+      id: 'DZ3',
+      cat: 'P',
+      type: 'SA',
+      spCost: 4,
+      targetLimit: 2,
+      cnName: '左右开弓',
+      desc: ['物理伤害'],
+      detail: `对最多2个敌方单位发动攻击。你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)`,
+      url: './img/swing_dagger.png'
+    },
+    {
       id: 'DZ2',
       cat: 'N',
       type: 'BF',
@@ -587,9 +598,20 @@ export default {
       spCost: 0,
       targetLimit: 0,
       cnName: '冰枪术',
-      desc: ['有益效果', '无法驱散'],
+      desc: ['魔法伤害', '有益效果', '无法驱散'],
       detail: `每次普通攻击有一定几率(50%)触发冰枪术，对当前敌方单位及其左右相邻单位造成一次额外的偏斜伤害`,
       url: './img/iceshot.png'
+    },
+    {
+      id: 'FS3',
+      cat: 'N',
+      type: 'BF',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '法力爆炸',
+      desc: ['魔法伤害', '有益效果', '无法驱散'],
+      detail: `冰枪术触发后有一定几率(（50 - 回合数）%)）触发法力爆炸，对所有敌方目标造成你当前伤害总量10%的伤害`,
+      url: './img/magic_boom.png'
     },
     {
       id: 'XD1',
