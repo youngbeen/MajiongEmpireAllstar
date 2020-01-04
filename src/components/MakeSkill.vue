@@ -84,7 +84,7 @@ export default {
         //   cnName: '小不点也有大作为',
         //   desc: ['有益效果', '无法驱散'],
         //   detail: '初始伤害固定为1，不进行攻击判定。你的伤害值会随着你的每次攻击而微量增加(1)',
-        //   url: './img/skill_5_mo.png'
+        //   url: './img/cute_animal.png'
         // },
       ],
       positiveSkills: [],

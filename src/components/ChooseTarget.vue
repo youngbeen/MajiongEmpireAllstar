@@ -42,13 +42,12 @@
               减益效果
             </div>
             <div class="content">
-              <img class="icon" v-show="item.flagDrunk" src="../assets/img/drunk.png" title="醉酒(无法行动!)">
+              <img class="icon" v-show="item.flagDrunk" src="../assets/img/sleep.png" title="醉酒(无法行动!)">
               <img class="icon" v-show="item.flagFaint" src="../assets/img/faint.png" title="眩晕(无法行动!)">
               <img class="icon" v-show="item.confuse" src="../assets/img/confuse.png" title="蛊惑">
               <img class="icon" v-show="item.poison" src="../assets/img/poison.png" title="中毒(受到持续自然伤害)">
               <img class="icon" v-show="item.flagSlow" src="../assets/img/slow.png" title="减速(行动迟缓)">
-              <!-- TODO change icon -->
-              <img class="icon" v-show="item.lockOn" src="../assets/img/slow.png" title="锁定(易伤)">
+              <img class="icon" v-show="item.lockOn" src="../assets/img/lock_on.png" title="锁定(易伤)">
               <img class="icon" v-show="item.flagBind" src="../assets/img/bind.png" title="致命藤蔓(受到持续自然伤害)">
             </div>
           </div>

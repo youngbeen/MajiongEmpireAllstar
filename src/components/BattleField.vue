@@ -59,7 +59,7 @@
           <!-- 右侧debuff栏 -->
           <div class="box-debuffs">
             <!-- 显示drunk -->
-            <img class="buff-icon" v-show="item.flagDrunk" src="../assets/img/drunk.png" title="醉酒(无法行动!)" />
+            <img class="buff-icon" v-show="item.flagDrunk" src="../assets/img/sleep.png" title="醉酒(无法行动!)" />
             <!-- 显示faint -->
             <img class="buff-icon" v-show="item.flagFaint" src="../assets/img/faint.png" title="眩晕(无法行动!)" />
             <!-- 显示confuse -->
@@ -74,9 +74,9 @@
             </div>
             <!-- 显示slow -->
             <img class="buff-icon" v-show="item.flagSlow" src="../assets/img/slow.png" title="减速(行动迟缓)" />
-            <!-- TODO change icon 显示锁定 -->
+            <!-- 显示锁定 -->
             <div class="buff-icon" v-show="item.lockOn">
-              <img class="buff-icontext" src="../assets/img/poison.png" title="锁定(易伤)" />
+              <img class="buff-icontext" src="../assets/img/lock_on.png" title="锁定(易伤)" />
               <p class="buff-num" title="锁定(易伤)">{{ item.lockOn }}</p>
             </div>
             <!-- 显示bind -->
@@ -164,7 +164,7 @@
           <!-- 右侧debuff栏 -->
           <div class="box-debuffs">
             <!-- 显示drunk -->
-            <img class="buff-icon" v-show="item.flagDrunk" src="../assets/img/drunk.png" title="醉酒(无法行动!)" />
+            <img class="buff-icon" v-show="item.flagDrunk" src="../assets/img/sleep.png" title="醉酒(无法行动!)" />
             <!-- 显示faint -->
             <img class="buff-icon" v-show="item.flagFaint" src="../assets/img/faint.png" title="眩晕(无法行动!)" />
             <!-- 显示confuse -->
@@ -179,9 +179,9 @@
             </div>
             <!-- 显示slow -->
             <img class="buff-icon" v-show="item.flagSlow" src="../assets/img/slow.png" title="减速(行动迟缓)" />
-            <!-- TODO change icon 显示锁定 -->
+            <!-- 显示锁定 -->
             <div class="buff-icon" v-show="item.lockOn">
-              <img class="buff-icontext" src="../assets/img/poison.png" title="锁定(易伤)" />
+              <img class="buff-icontext" src="../assets/img/lock_on.png" title="锁定(易伤)" />
               <p class="buff-num" title="锁定(易伤)">{{ item.lockOn }}</p>
             </div>
             <!-- 显示bind -->

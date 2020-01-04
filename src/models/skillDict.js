@@ -17,7 +17,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `手持宽阔的剑刃斩击敌人，${atkSuffixDesc}`,
-      url: './img/skill_1_zs.png'
+      url: './img/sword.png'
     },
     {
       id: 'C2',
@@ -28,7 +28,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C3',
@@ -39,7 +39,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `挽起弓箭射击敌人，${atkSuffixDesc}`,
-      url: './img/skill_1_lr.png'
+      url: './img/arrow_atk.png'
     },
     {
       id: 'C4',
@@ -50,7 +50,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C5',
@@ -61,7 +61,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `挥舞附带元素力量的武器，${atkSuffixDesc}`,
-      url: './img/skill_1_sm.png'
+      url: './img/hammer_sm.png'
     },
     {
       id: 'C6',
@@ -72,7 +72,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C7',
@@ -83,7 +83,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `舞动手中的五步棍，${atkSuffixDesc}`,
-      url: './img/skill_1_ws.png'
+      url: './img/stick.png'
     },
     {
       id: 'C8',
@@ -94,7 +94,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C9',
@@ -105,7 +105,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `使用锋利的匕首攻击敌人，${atkSuffixDesc}`,
-      url: './img/skill_1_dz.png'
+      url: './img/dagger_atk.png'
     },
     {
       id: 'C10',
@@ -116,7 +116,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C11',
@@ -127,7 +127,7 @@ export default {
       cnName: '攻击',
       desc: ['魔法伤害'],
       detail: `吟唱寒冷刺骨的魔法，${atkSuffixDesc}`,
-      url: './img/skill_1_fs.png'
+      url: './img/ice_atk.png'
     },
     {
       id: 'C12',
@@ -138,7 +138,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C13',
@@ -149,7 +149,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `借助你的特殊能力，${atkSuffixDesc}`,
-      url: './img/skill_1_xd.png'
+      url: './img/stick2.png'
     },
     {
       id: 'C14',
@@ -160,7 +160,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `借助你的特殊能力，${atkSuffixDesc}`,
-      url: './img/skill_1_tiger.png'
+      url: './img/cat_atk.png'
     },
     {
       id: 'C15',
@@ -171,7 +171,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `借助你的特殊能力，${atkSuffixDesc}`,
-      url: './img/skill_1_bear.png'
+      url: './img/bear_atk.png'
     },
     {
       id: 'C16',
@@ -182,7 +182,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `借助你的特殊能力，${atkSuffixDesc}`,
-      url: './img/skill_1_tree.png'
+      url: './img/tree_atk.png'
     },
     {
       id: 'C17',
@@ -193,7 +193,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C18',
@@ -204,7 +204,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `手持你的符文剑，${atkSuffixDesc}`,
-      url: './img/skill_1_dk.png'
+      url: './img/dk_atk.png'
     },
     {
       id: 'C19',
@@ -215,7 +215,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C20',
@@ -226,7 +226,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `使用正义力量惩戒敌人，${atkSuffixDesc}`,
-      url: './img/skill_1_qs.png'
+      url: './img/hammer.png'
     },
     {
       id: 'C21',
@@ -237,7 +237,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C22',
@@ -248,7 +248,7 @@ export default {
       cnName: '攻击',
       desc: ['魔法伤害'],
       detail: `使用神圣法术惩戒敌人，${atkSuffixDesc}`,
-      url: './img/skill_1_ms.png'
+      url: './img/magic_atk.png'
     },
     {
       id: 'C23',
@@ -259,7 +259,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C24',
@@ -270,7 +270,7 @@ export default {
       cnName: '攻击',
       desc: ['魔法伤害'],
       detail: `演奏摄人心魄的乐曲，${atkSuffixDesc}`,
-      url: './img/skill_1_sr.png'
+      url: './img/magic2.png'
     },
     {
       id: 'C25',
@@ -281,7 +281,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C26',
@@ -292,7 +292,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `挥舞手中沉重的武器，${atkSuffixDesc}`,
-      url: './img/skill_1_pc.png'
+      url: './img/axe_atk.png'
     },
     {
       id: 'C27',
@@ -303,7 +303,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C28',
@@ -314,7 +314,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `使用手中的戒备棒，${atkSuffixDesc}`,
-      url: './img/skill_1_jb.png'
+      url: './img/stick_atk.png'
     },
     {
       id: 'C29',
@@ -325,7 +325,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C30',
@@ -336,7 +336,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `挥舞手中的花园锄头，${atkSuffixDesc}`,
-      url: './img/skill_1_yd.png'
+      url: './img/pick.png'
     },
     {
       id: 'C31',
@@ -347,7 +347,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal + config.guardYDPlusHeal})生命值和少量(${config.guardYDPlusSp})SP`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C32',
@@ -358,7 +358,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `手持利刃从阴影中打击敌人，${atkSuffixDesc}`,
-      url: './img/skill_1_yx.png'
+      url: './img/dagger_blood.png'
     },
     {
       id: 'C33',
@@ -369,7 +369,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C34',
@@ -380,7 +380,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `高举手中的屠刀，${atkSuffixDesc}`,
-      url: './img/skill_1_tf.png'
+      url: './img/axe.png'
     },
     {
       id: 'C35',
@@ -391,7 +391,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'C36',
@@ -402,7 +402,7 @@ export default {
       cnName: '攻击',
       desc: ['物理伤害'],
       detail: `${atkSuffixDesc}`,
-      url: './img/skill_1_mo.png'
+      url: './img/punch_atk.png'
     },
     {
       id: 'C37',
@@ -413,7 +413,7 @@ export default {
       cnName: '守备',
       desc: [],
       detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
-      url: './img/skill_2_zs.png'
+      url: './img/defend.png'
     },
     {
       id: 'ZS1',
@@ -424,7 +424,7 @@ export default {
       cnName: '冲锋',
       desc: ['物理伤害', '可以驱散'],
       detail: `对最多2个相邻敌方单位发起冲锋，对其造成${config.chargeFixedDamage}点伤害，激怒状态时伤害额外增加(${config.angerPlusDamage})。被冲锋的单位将会被眩晕，眩晕目标将跳过其行动回合`,
-      url: './img/skill_3_zs.png'
+      url: './img/charge.png'
     },
     {
       id: 'ZS3',
@@ -435,7 +435,7 @@ export default {
       cnName: '旋风斩',
       desc: ['物理伤害'],
       detail: `随机对2~3个敌方单位发动一次旋风般的攻击，激怒状态时伤害额外增加(${config.angerPlusDamage})`,
-      url: './img/skill_3_zs.png' // TODO 换图
+      url: './img/rotate_atk.png'
     },
     {
       id: 'ZS2',
@@ -446,7 +446,7 @@ export default {
       cnName: '激怒',
       desc: ['有益效果', '可以驱散'],
       detail: `你的普通攻击造成暴击时，会获得激怒效果，任何攻击会消耗激怒。激怒状态下普通攻击必定暴击，激怒状态下技能攻击伤害额外提升(${config.angerPlusDamage})`,
-      url: './img/skill_5_zs.png'
+      url: './img/anger.png'
     },
     {
       id: 'LR1',
@@ -457,7 +457,7 @@ export default {
       cnName: '箭雨',
       desc: ['物理伤害'],
       detail: '射出多重箭矢，对所有敌方单位造成伤害(不进行攻击程度判定，6点-6伤害/4~5点-4伤害/1~3点-2伤害)',
-      url: './img/skill_3_lr.png'
+      url: './img/arrow_rain.png'
     },
     {
       id: 'LR2',
@@ -468,7 +468,7 @@ export default {
       cnName: '奥术射击',
       desc: ['物理伤害', '可以驱散'],
       detail: `发动一次附带奥术效果的射击，使敌方目标速度降低(速度-${config.magicShotMinusSpeed}，不叠加)，并能驱散敌方目标身上的激怒和英勇效果`,
-      url: './img/skill_4_lr.png'
+      url: './img/arrow_ice.png'
     },
     {
       id: 'LR3',
@@ -479,7 +479,7 @@ export default {
       cnName: '瞄准锁定',
       desc: ['可以驱散'],
       detail: `你每次攻击的目标会被锁定，持续${config.lockOnTurns}回合(不叠加)。你对锁定的目标造成的伤害增加(${config.lockOnPlusDamage})`,
-      url: './img/skill_4_lr.png' // TODO change icon
+      url: './img/lock_on.png'
     },
     {
       id: 'SM1',
@@ -490,7 +490,7 @@ export default {
       cnName: '英勇',
       desc: ['有益效果', '可以驱散'],
       detail: `借助元素的力量，鼓舞所有队友。全体友方单位生命值上限提高(${config.yyPlusMaxhp})，速度上升(${config.yyPlusSpeed})，持续${config.yyMaxTurns}回合，英勇增益效果不会叠加`,
-      url: './img/skill_3_sm.png'
+      url: './img/yy.png'
     },
     {
       id: 'SM3',
@@ -501,7 +501,7 @@ export default {
       cnName: '治疗链',
       desc: [],
       detail: `对1个友方单位释放一条跳动的自然链接，为目标回复${config.healLinkMinHeal}~${config.healLinkMaxHeal}点生命值。链接会跳动2次，每跳对随机目标回复上次回复量的一半`,
-      url: './img/skill_3_sm.png' // TODO change icon
+      url: './img/heal_link.png'
     },
     {
       id: 'SM2',
@@ -512,7 +512,7 @@ export default {
       cnName: '大地之力',
       desc: ['有益效果', '无法驱散'],
       detail: '召唤大地母亲护佑全体友方单位，持续整场战斗。当敌方对友方单位造成暴击时，攻击方会受到此次伤害的1/3反馈伤害',
-      url: './img/skill_5_sm.png'
+      url: './img/earth.png'
     },
     {
       id: 'WS1',
@@ -523,7 +523,7 @@ export default {
       cnName: '死亡一指',
       desc: ['魔法伤害'],
       detail: `发动武术绝学，对1个敌方单位发动一次强力的终结技能。若目标生命值为${config.deathFingerMaxDamage}及以下则立即击杀该目标，否则对其造成${config.deathFingerMinDamage}点伤害值。该伤害不受伤害减免效果影响`,
-      url: './img/skill_3_ws.png'
+      url: './img/elec_atk.png'
     },
     {
       id: 'WS3',
@@ -534,7 +534,7 @@ export default {
       cnName: '禅坐',
       desc: [],
       detail: `开始禅坐，消耗你当前所有SP，每消耗1点SP，回复你${config.zenHealTimes}点生命值`,
-      url: './img/skill_3_ws.png' // TODO change icon
+      url: './img/zen.png'
     },
     {
       id: 'WS2',
@@ -545,7 +545,7 @@ export default {
       cnName: '醉拳',
       desc: ['有益效果', '无法驱散'],
       detail: '敌人对你的主动攻击更难击中你(1~3-偏斜，4~5-正常，6-暴击)',
-      url: './img/skill_5_ws.png'
+      url: './img/wine.png'
     },
     {
       id: 'DZ1',
@@ -556,7 +556,7 @@ export default {
       cnName: '毒刃',
       desc: ['物理伤害', '毒（自然伤害）', '可以驱散'],
       detail: `对1个敌方单位发动一次攻击，并附带中毒效果(持续${config.poisonDamageTurns}回合，可叠加)。中毒的目标每回合结束会受到毒药伤害(${config.poisonDamage})，毒药伤害不受伤害减免效果影响。此外你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)`,
-      url: './img/skill_3_dz.png'
+      url: './img/dagger1.png'
     },
     {
       id: 'DZ2',
@@ -567,7 +567,7 @@ export default {
       cnName: '能量控制',
       desc: ['有益效果', '无法驱散'],
       detail: `最大技能点数上限提高，你每次攻击结束之后有一定几率(1/6)回复${config.rogueBonusSp}点SP值`,
-      url: './img/skill_5_dz.png'
+      url: './img/melt_clock.png'
     },
     {
       id: 'FS1',
@@ -578,7 +578,7 @@ export default {
       cnName: '寒冰屏障',
       desc: ['有益效果', '无法驱散'],
       detail: `释放一道寒冰屏障保护自己，持续${config.iceblockTurns}回合，寒冰屏障持续时你免疫任何物理伤害。此外在寒冰屏障持续时，使用*守 备*技能可以额外回复${config.guardIceblockPlusHeal}点生命值`,
-      url: './img/skill_3_fs.png'
+      url: './img/iceblock.png'
     },
     {
       id: 'FS2',
@@ -589,7 +589,7 @@ export default {
       cnName: '冰枪术',
       desc: ['有益效果', '无法驱散'],
       detail: `每次普通攻击有一定几率(50%)触发冰枪术，对当前敌方单位及其左右相邻单位造成一次额外的偏斜伤害`,
-      url: './img/skill_5_fs.png'
+      url: './img/iceshot.png'
     },
     {
       id: 'XD1',
@@ -600,7 +600,7 @@ export default {
       cnName: '变形术:虎形态',
       desc: ['有益效果', '无法驱散'],
       detail: `回复${config.transformHealAmount}点生命值并变形成尖牙利齿的虎形态，在该形态下你所有攻击将额外造成${config.tigerPlusDamage}点伤害`,
-      url: './img/skill_7_xd.png'
+      url: './img/tiger.png'
     },
     {
       id: 'XD2',
@@ -611,7 +611,7 @@ export default {
       cnName: '变形术:熊形态',
       desc: ['有益效果', '无法驱散'],
       detail: `回复${config.transformHealAmount}点生命值并变形成厚实坚硬的熊形态，在该形态下受到的伤害减少(${config.bearDamageReduce})。并拥有嘲讽技能，强迫敌方单位必须先攻击你`,
-      url: './img/skill_8_xd.png'
+      url: './img/bear.png'
     },
     {
       id: 'XD3',
@@ -622,7 +622,7 @@ export default {
       cnName: '变形术:树形态',
       desc: ['有益效果', '无法驱散'],
       detail: `回复${config.transformHealAmount}点生命值并变形成自然和谐的树形态，在该形态下每回合结束所有友方单位回复${config.treeHealAmount}点生命值`,
-      url: './img/skill_9_xd.png'
+      url: './img/tree.png'
     },
     {
       id: 'XD4',
@@ -633,7 +633,7 @@ export default {
       cnName: '共生术',
       desc: [],
       detail: '精通自然之道，使你与1个友方单位交换彼此的当前生命值',
-      url: './img/skill_4_xd.png'
+      url: './img/nature.png'
     },
     {
       id: 'DK1',
@@ -644,7 +644,7 @@ export default {
       cnName: '牺牲爪牙',
       desc: ['魔法伤害'],
       detail: `操控死亡能力，使1个已死亡敌方单位变化为食尸鬼，并牺牲它使其爆炸。食尸鬼爆炸会对其相邻的单位造成${config.boomDamage}点伤害`,
-      url: './img/skill_3_dk.png'
+      url: './img/infect.png'
     },
     {
       id: 'DK2',
@@ -655,7 +655,7 @@ export default {
       cnName: '邪恶斩击',
       desc: ['有益效果', '无法驱散'],
       detail: `你的普通攻击造成有效伤害(>0)时，你回复${config.absorbHealAmount}点生命值，但你的*守 备*不能回复生命值`,
-      url: './img/skill_5_dk.png'
+      url: './img/axe_blood.png'
     },
     {
       id: 'QS1',
@@ -666,7 +666,7 @@ export default {
       cnName: '生而平等',
       desc: [],
       detail: `友方生命值最低的单位与敌方生命值最高的单位均分生命值，但不超过各自生命值上限`,
-      url: './img/skill_3_qs.png'
+      url: './img/justice.png'
     },
     {
       id: 'QS2',
@@ -677,7 +677,7 @@ export default {
       cnName: '圣疗术',
       desc: [],
       detail: '祈求圣光照耀，使你的生命值得到完全回复',
-      url: './img/skill_4_qs.png'
+      url: './img/recover.png'
     },
     {
       id: 'MS1',
@@ -688,7 +688,7 @@ export default {
       cnName: '治疗术',
       desc: [],
       detail: '对1个友方单位进行治疗，并清除目标身上的所有不良效果',
-      url: './img/skill_3_ms.png'
+      url: './img/heal.png'
     },
     {
       id: 'MS2',
@@ -699,7 +699,7 @@ export default {
       cnName: '强化',
       desc: ['有益效果', '无法驱散'],
       detail: `你存活的情况下，所有友方单位最大生命值增加(${config.enhancePlusHp})。死亡时，回合结束该增益效果自动消失`,
-      url: './img/skill_5_ms.png'
+      url: './img/enhance.png'
     },
     {
       id: 'SR1',
@@ -710,7 +710,7 @@ export default {
       cnName: '鼓舞',
       desc: ['有益效果', '无法驱散'],
       detail: `吹奏鼓舞士气的乐曲，使1个友方单位在该场战斗中生命值及其上限永久增加(${config.inspirePlusHp})，并获得嘲讽技能，强迫敌方单位必须优先攻击他。可以对同一友方单位重复释放该技能`,
-      url: './img/skill_3_sr.png'
+      url: './img/inspire.png'
     },
     {
       id: 'SR2',
@@ -721,7 +721,7 @@ export default {
       cnName: '蛊惑曲',
       desc: ['可以驱散'],
       detail: `对所有敌方单位吹奏蛊惑心智的乐曲，蛊惑持续${config.confuseTurns}回合（不叠加）。被蛊惑的敌方单位有一定(1/3)几率遭受其造成的攻击伤害的同等伤害`,
-      url: './img/skill_4_sr.png'
+      url: './img/confuse.png'
     },
     {
       id: 'PC1',
@@ -732,7 +732,7 @@ export default {
       targetLimit: 5,
       desc: ['有益效果', '无法驱散'],
       detail: '借助强有力的武器，你的普通攻击会攻击所有敌方单位，无需指定目标',
-      url: './img/skill_5_pc.png'
+      url: './img/swing_sword.png'
     },
     {
       id: 'PC2',
@@ -743,7 +743,7 @@ export default {
       cnName: '力量的代价',
       desc: ['有害效果', '无法驱散'],
       detail: '你的攻击不会产生暴击，只会造成偏斜攻击(1~3)或正常攻击(4~6)',
-      url: './img/skill_6_pc.png'
+      url: './img/back_atk.png'
     },
     {
       id: 'JB1',
@@ -754,7 +754,7 @@ export default {
       cnName: '醉酒',
       desc: ['可以驱散'],
       detail: '灌醉1个敌方单位，醉酒状态的单位始终跳过其行动回合，醉酒状态在每回合结束有较低概率(1/5)解除',
-      url: './img/skill_3_jb.png'
+      url: './img/sleep.png'
     },
     {
       id: 'JB2',
@@ -765,7 +765,7 @@ export default {
       cnName: '酒壮人胆',
       desc: ['有益效果', '无法驱散'],
       detail: '饮下烈酒，你的攻击伤害值会随着你的生命值的降低而增加(生命值每降低10点，伤害值额外增加1点)',
-      url: './img/skill_5_jb.png'
+      url: './img/snake_eye.png'
     },
     {
       id: 'YD1',
@@ -776,7 +776,7 @@ export default {
       cnName: '致命藤蔓',
       desc: ['有害效果', '无法驱散', '自然伤害'],
       detail: `你存活的回合结束阶段，会召唤出致命的藤蔓攻击所有敌方单位，致命藤蔓每次有一定(1/2)几率对目标造成${config.bindDamage}点伤害。该伤害不受伤害减免效果影响`,
-      url: './img/skill_5_yd.png'
+      url: './img/bind.png'
     },
     {
       id: 'YD2',
@@ -787,7 +787,7 @@ export default {
       cnName: '平和主义',
       desc: ['无法驱散'],
       detail: `你的*守 备*行动回复的生命值额外增加${config.guardYDPlusHeal}点，此外还回复${config.guardYDPlusSp}点SP，但你的普通攻击始终造成偏斜伤害`,
-      url: './img/skill_6_yd.png'
+      url: './img/peace.png'
     },
     {
       id: 'YX1',
@@ -798,7 +798,7 @@ export default {
       cnName: '幻影打击',
       desc: ['物理伤害'],
       detail: '如幻影般的步伐，发动一次攻击，且不消耗你的行动回合',
-      url: './img/skill_3_yx.png'
+      url: './img/fast_pace.png'
     },
     {
       id: 'YX2',
@@ -809,7 +809,7 @@ export default {
       cnName: '要害痛击',
       desc: ['有益效果', '无法驱散'],
       detail: '丰富的实战经验使你洞察敌人的弱点，战斗中速度增加，你的攻击造成暴击的时候，可以额外奖励一个行动回合。幻影打击不触发额外行动回合奖励',
-      url: './img/skill_5_yx.png'
+      url: './img/sharp_atk.png'
     },
     {
       id: 'TF1',
@@ -820,7 +820,7 @@ export default {
       cnName: '行刑',
       desc: ['物理伤害'],
       detail: '举起巨大的屠刀对1个敌方单位发动攻击。若行刑之后该目标死亡，则其他所有敌方单位都将受到该次伤害的50%顺带伤害。顺带伤害不受免/减伤效果影响',
-      url: './img/skill_3_tf.png'
+      url: './img/sword_blood.png'
     },
     {
       id: 'TF2',
@@ -831,7 +831,7 @@ export default {
       cnName: '恃强凌弱',
       desc: ['无法驱散'],
       detail: `你对生命值低于${config.tfRudeHpLine}的敌方单位进行攻击时，会额外造成${config.tfBonusDamage}点伤害。但对生命值为${config.tfRudeHpLine}点及以上的敌方单位进行攻击时，造成的伤害会降低${config.tfDamageReduce}点`,
-      url: './img/skill_5_tf.png'
+      url: './img/owl.png'
     },
     {
       id: 'MO1',
@@ -842,7 +842,7 @@ export default {
       cnName: '小不点也有大作为',
       desc: ['有益效果', '无法驱散'],
       detail: '你的普通攻击不进行攻击判定，初始伤害固定为1。伤害值每个回合后增加(1)',
-      url: './img/skill_5_mo.png'
+      url: './img/cute_animal.png'
     },
     {
       id: 'MO2',
@@ -853,7 +853,7 @@ export default {
       cnName: '玩偶之心',
       desc: ['有益效果', '无法驱散'],
       detail: '初始生命值为20，战斗刚开始时，场上每有1个敌方单位，你的最大生命值增加15；场上每有1个友方单位，你的最大生命值减少5 。你的最大生命值不会低于20点',
-      url: './img/skill_6_mo.png'
+      url: './img/doll.png'
     }
   ]
 }
