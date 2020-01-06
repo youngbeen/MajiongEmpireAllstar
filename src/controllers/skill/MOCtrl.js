@@ -1,5 +1,5 @@
 import eventBus from '@/eventBus'
-// import config from '@/models/config'
+import config from '@/models/config'
 import hero from '@/models/hero'
 import system from '@/models/system'
 import diceUtil from '@/utils/diceUtil'
@@ -40,8 +40,8 @@ export default {
     system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
 
     // 处理伤害后的效果
-    if (me.hp && me.confuse && diceUtil.rollDice(3) === 3) {
-      // 蛊惑时1/3的概率自己遭受同等伤害
+    if (me.hp && me.confuse && diceUtil.rollDice(100) <= config.confusePercent) {
+      // 蛊惑时概率自己遭受同等伤害
       me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
     }

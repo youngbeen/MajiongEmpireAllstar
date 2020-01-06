@@ -58,15 +58,15 @@ export default {
     }
 
     // 处理伤害后的效果
-    if (me.hp && me.confuse && diceUtil.rollDice(3) === 3) {
-      // 蛊惑时1/3的概率自己遭受同等伤害
+    if (me.hp && me.confuse && diceUtil.rollDice(100) <= config.confusePercent) {
+      // 蛊惑时概率自己遭受同等伤害
       me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
     }
 
     // 处理奖励SP
-    if (me.hp && diceUtil.rollDice(6) === 6) {
-      // 1/6概率获取奖励SP
+    if (me.hp && diceUtil.rollDice(100) <= config.rogueBonusSpPercent) {
+      // 概率获取奖励SP
       me = commonCtrl.changeSp(me, config.rogueBonusSp)
       setTimeout(() => {
         eventBus.$emit('animateSpRecover', {
@@ -132,15 +132,15 @@ export default {
     }
 
     // 处理伤害后的效果
-    if (me.hp && me.confuse && diceUtil.rollDice(3) === 3) {
-      // 蛊惑时1/3的概率自己遭受同等伤害
+    if (me.hp && me.confuse && diceUtil.rollDice(100) <= config.confusePercent) {
+      // 蛊惑时概率自己遭受同等伤害
       me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
     }
 
     // 处理奖励SP
-    if (me.hp && diceUtil.rollDice(6) === 6) {
-      // 1/6概率获取1点SP
+    if (me.hp && diceUtil.rollDice(100) <= config.rogueBonusSpPercent) {
+      // 概率获取1点SP
       me = commonCtrl.changeSp(me, config.rogueBonusSp)
       setTimeout(() => {
         eventBus.$emit('animateSpRecover', {
@@ -201,8 +201,8 @@ export default {
     })
 
     // 处理奖励SP
-    if (me.hp && diceUtil.rollDice(6) === 6) {
-      // 1/6概率获取奖励SP
+    if (me.hp && diceUtil.rollDice(100) <= config.rogueBonusSpPercent) {
+      // 概率获取奖励SP
       me = commonCtrl.changeSp(me, config.rogueBonusSp)
       setTimeout(() => {
         eventBus.$emit('animateSpRecover', {

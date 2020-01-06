@@ -51,7 +51,7 @@ export default {
     hero.units.splice(youIndex, 1, you)
 
     // 结算触发冰枪术
-    if (diceUtil.rollDice(2) >= 2) {
+    if (diceUtil.rollDice(100) <= config.iceshotPercent) {
       this.drawIceshotAtk(youIndex, damageFactor, stackPlays)
       if (youIndex === 0 || youIndex === 5) {
         if (heroUtil.isTargetValid(youIndex + 1)) {
@@ -72,7 +72,7 @@ export default {
       stackPlays++
 
       // 触发法力爆炸
-      if (diceUtil.rollDice(100) > (50 + me.actRounds)) {
+      if (diceUtil.rollDice(100) <= (40 - me.actRounds)) {
         this.drawMagicBoom(stackPlays)
         stackPlays++
       }
@@ -81,8 +81,8 @@ export default {
     me = hero.units[system.unitIndex]
     you = hero.units[youIndex]
     // 处理伤害后的效果
-    if (me.hp && me.confuse && diceUtil.rollDice(3) === 3) {
-      // 蛊惑时1/3的概率自己遭受同等伤害
+    if (me.hp && me.confuse && diceUtil.rollDice(100) <= config.confusePercent) {
+      // 蛊惑时概率自己遭受同等伤害
       me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
     }

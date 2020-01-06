@@ -434,8 +434,8 @@ export default {
   gainSp (stackPlays) {
     hero.units = hero.units.map((item, index) => {
       if (item.isOpen && item.type && !item.isDead) {
-        // 存活的有效单位，每回合2/5的概率获得sp
-        if (diceUtil.rollDice(5) > 3) {
+        // 存活的有效单位，每回合一定的概率获得sp
+        if (diceUtil.rollDice(100) <= config.recoverSpPercent) {
           item.sp += config.recoverSpAmount
           if (item.sp > item.maxsp) {
             item.sp = item.maxsp
@@ -495,7 +495,7 @@ export default {
           item.confuse--
         }
         // 清除醉酒
-        if (item.flagDrunk && diceUtil.rollDice(5) === 5) {
+        if (item.flagDrunk && diceUtil.rollDice(100) <= config.drunkClearPercent) {
           item.flagDrunk = false
         }
         // 结算中毒
@@ -542,7 +542,7 @@ export default {
         }
       }
       // 执行YD藤蔓
-      if (item.flagBind && diceUtil.rollDice(2) === 2) {
+      if (item.flagBind && diceUtil.rollDice(100) <= config.bindPercent) {
         if (delayCauses.indexOf('bind') === -1) {
           delayCauses.push('bind')
         }

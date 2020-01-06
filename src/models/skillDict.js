@@ -577,7 +577,7 @@ export default {
       targetLimit: 0,
       cnName: '能量控制',
       desc: ['有益效果', '无法驱散'],
-      detail: `最大技能点数上限提高，你每次攻击结束之后有一定几率(1/6)回复${config.rogueBonusSp}点SP值`,
+      detail: `最大技能点数上限提高，你每次攻击结束之后有一定几率(${config.rogueBonusSpPercent}%)回复${config.rogueBonusSp}点SP值`,
       url: './img/melt_clock.png'
     },
     {
@@ -599,7 +599,7 @@ export default {
       targetLimit: 0,
       cnName: '冰枪术',
       desc: ['魔法伤害', '有益效果', '无法驱散'],
-      detail: `每次普通攻击有一定几率(50%)触发冰枪术，对当前敌方单位及其左右相邻单位造成一次额外的偏斜伤害`,
+      detail: `每次普通攻击有一定几率(${config.iceshotPercent}%)触发冰枪术，对当前敌方单位及其左右相邻单位造成一次额外的偏斜伤害`,
       url: './img/iceshot.png'
     },
     {
@@ -610,7 +610,7 @@ export default {
       targetLimit: 0,
       cnName: '法力爆炸',
       desc: ['魔法伤害', '有益效果', '无法驱散'],
-      detail: `冰枪术触发后有一定几率(（50 - 回合数）%)）触发法力爆炸，对所有敌方目标造成你当前伤害总量10%的伤害`,
+      detail: `冰枪术触发后有一定几率(（40-回合数）%)）触发法力爆炸，对所有敌方目标造成你当前伤害总量10%的伤害`,
       url: './img/magic_boom.png'
     },
     {
@@ -655,6 +655,17 @@ export default {
       cnName: '共生术',
       desc: [],
       detail: '精通自然之道，使你与1个友方单位交换彼此的当前生命值',
+      url: './img/nature.png'
+    },
+    {
+      id: 'XD5',
+      cat: 'P',
+      type: 'SK',
+      spCost: 5,
+      targetLimit: 0,
+      cnName: '回春术',
+      desc: ['有益效果', '无法驱散'],
+      detail: 'TODO立即回复5%HP，获得2回合BUFF，回合结束回复10%',
       url: './img/nature.png'
     },
     {
@@ -742,7 +753,7 @@ export default {
       targetLimit: 0,
       cnName: '蛊惑曲',
       desc: ['可以驱散'],
-      detail: `对所有敌方单位吹奏蛊惑心智的乐曲，蛊惑持续${config.confuseTurns}回合（不叠加）。被蛊惑的敌方单位有一定(1/3)几率遭受其造成的攻击伤害的同等伤害`,
+      detail: `对所有敌方单位吹奏蛊惑心智的乐曲，蛊惑持续${config.confuseTurns}回合（不叠加）。被蛊惑的敌方单位有一定几率(${config.confusePercent}%)遭受其造成的攻击伤害的同等伤害`,
       url: './img/confuse.png'
     },
     {
@@ -775,7 +786,7 @@ export default {
       targetLimit: 1,
       cnName: '醉酒',
       desc: ['可以驱散'],
-      detail: '灌醉1个敌方单位，醉酒状态的单位始终跳过其行动回合，醉酒状态在每回合结束有较低概率(1/5)解除',
+      detail: `灌醉1个敌方单位，醉酒状态的单位始终跳过其行动回合，醉酒状态在每回合结束有一定几率(${config.drunkClearPercent}%)解除`,
       url: './img/sleep.png'
     },
     {
@@ -797,7 +808,7 @@ export default {
       targetLimit: 0,
       cnName: '致命藤蔓',
       desc: ['有害效果', '无法驱散', '自然伤害'],
-      detail: `你存活的回合结束阶段，会召唤出致命的藤蔓攻击所有敌方单位，致命藤蔓每次有一定(1/2)几率对目标造成${config.bindDamage}点伤害。该伤害不受伤害减免效果影响`,
+      detail: `你存活的回合结束阶段，会召唤出致命的藤蔓攻击所有敌方单位，致命藤蔓每次有一定几率(${config.bindPercent}%)对目标造成${config.bindDamage}点伤害。该伤害不受伤害减免效果影响`,
       url: './img/bind.png'
     },
     {
