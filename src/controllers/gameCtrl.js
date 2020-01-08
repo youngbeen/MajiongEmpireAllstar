@@ -387,8 +387,14 @@ export default {
       case 'SR2': // SR蛊惑曲
         SRCtrl.enchant(skillId)
         break
+      case 'SR3': // SR赞美诗
+        SRCtrl.praise(skillId, targets)
+        break
       case 'C26': // PC普攻
         PCCtrl.atk(targets)
+        break
+      case 'PC3': // PC击破
+        PCCtrl.breaking(skillId, targets)
         break
       case 'C28': // JB普攻
         JBCtrl.atk(targets)

@@ -166,7 +166,7 @@ export default {
       }
     },
     isTargetFriendly () {
-      return ['SM3', 'XD4', 'MS1', 'MS3', 'SR1'].includes(this.skillId)
+      return ['SM3', 'XD4', 'MS1', 'MS3', 'SR1', 'SR3'].includes(this.skillId)
     },
     targets () {
       if (this.skillId === 'DK1') {
@@ -190,8 +190,8 @@ export default {
           return item
         })
         return deads
-      } else if (this.skillId === 'XD4') {
-        // NOTE XD共生术比较特殊，需要选择除自己的友方目标
+      } else if (['XD4', 'SR3'].includes(this.skillId)) {
+        // NOTE XD共生术，SR赞美诗比较特殊，需要选择除自己的友方目标
         let friends = this.hero.units.map((item, index) => {
           if (this.system.unitIndex >= 5) {
             // 下方source

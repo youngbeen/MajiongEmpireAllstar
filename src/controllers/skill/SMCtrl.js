@@ -122,15 +122,14 @@ export default {
     let followTargets = []
     followTargets.push(friends[diceUtil.rollDice(friends.length) - 1]) // 随机第一个友方目标
     followTargets.push(friends[diceUtil.rollDice(friends.length) - 1]) // 随机第二个友方目标
-    followTargets.forEach(target => {
+    followTargets.forEach((target, index) => {
       const friendIndex = target
       let friend = hero.units[friendIndex]
 
-      let heal = Math.round(healAmount / 2)
+      let heal = Math.round(healAmount * Math.pow(0.5, index + 1))
       if (heal <= 0) {
         heal = 1
       }
-      healAmount = heal
       friend = commonCtrl.changeHp(friend, heal)
       hero.units.splice(friendIndex, 1, friend)
 

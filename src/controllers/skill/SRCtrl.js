@@ -107,5 +107,29 @@ export default {
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
+  },
+  // 赞美诗
+  praise (skillId = '', targets = []) {
+    const youIndex = targets[0]
+    let you = hero.units[youIndex]
+    let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
+    me = commonCtrl.act(me, skillId)
+
+    let sp = config.praiseSpAmount
+    you = commonCtrl.changeSp(you, sp)
+    setTimeout(() => {
+      eventBus.$emit('animateSpRecover', {
+        targets: [youIndex],
+        value: sp
+      })
+      system.msg = [`${system.unitIndex + 1}号单位的*赞美诗*使${youIndex + 1}号单位回复了${sp}点SP`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
+    hero.units.splice(youIndex, 1, you)
   }
 }

@@ -57,5 +57,33 @@ export default {
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
+  },
+  // 击破
+  breaking (skillId = '', targets = []) {
+    const youIndex = targets[0]
+    let you = hero.units[youIndex]
+    let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
+    me = commonCtrl.act(me, skillId)
+
+    let damage = Math.round(you.hp * config.breakDamagePercent / 100)
+    // 结算
+    you = commonCtrl.changeHp(you, -1 * damage)
+    me = commonCtrl.drawDps(me, 'skill', damage)
+    setTimeout(() => {
+      eventBus.$emit('animateDamage', {
+        targets: [youIndex],
+        value: damage,
+        sound: 'heavy_sword',
+        image: 'effdammagic'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位使用*击破*对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
+    hero.units.splice(youIndex, 1, you)
   }
 }

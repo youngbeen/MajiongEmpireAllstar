@@ -790,6 +790,28 @@ export default {
       url: './img/confuse.png'
     },
     {
+      id: 'SR3',
+      cat: 'P',
+      type: 'BF',
+      spCost: 1,
+      targetLimit: 1,
+      cnName: '赞美诗',
+      desc: [],
+      detail: `为1个其他友方单位回复${config.praiseSpAmount}点SP值`,
+      url: './img/paper.png'
+    },
+    {
+      id: 'PC3',
+      cat: 'P',
+      type: 'SA',
+      spCost: 5,
+      cnName: '击破',
+      targetLimit: 1,
+      desc: ['魔法伤害'],
+      detail: `指定1个敌方单位，造成其当前生命值${config.breakDamagePercent}%的伤害。该伤害不受免/减伤效果影响`,
+      url: './img/riot.png'
+    },
+    {
       id: 'PC1',
       cat: 'N',
       type: 'BF',

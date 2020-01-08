@@ -56,7 +56,7 @@ export default {
         top: 0;
         left: 0;
         right: 0;
-        height: 3px;
+        height: 2px;
         background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
       }
       .shadow-light {
@@ -64,7 +64,7 @@ export default {
         bottom: 0;
         left: 0;
         right: 0;
-        height: 3px;
+        height: 2px;
         background: linear-gradient(rgba(100, 100, 100, 0.1), rgba(100, 100, 100, 0.8));
       }
     }

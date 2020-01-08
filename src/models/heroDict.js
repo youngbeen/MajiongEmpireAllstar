@@ -129,7 +129,7 @@ export default {
       desc: '增益效果/减益效果',
       url: './img/unitsr.png',
       commonSkills: ['C24', 'C25'],
-      positiveSkills: ['SR1', 'SR2'],
+      positiveSkills: ['SR1', 'SR2', 'SR3'],
       negativeSkills: []
     },
     {
@@ -189,7 +189,7 @@ export default {
       desc: '高群体伤害',
       url: './img/unitpc.png',
       commonSkills: ['C26', 'C27'],
-      positiveSkills: [],
+      positiveSkills: ['PC3'],
       negativeSkills: ['PC1', 'PC2']
     },
     {

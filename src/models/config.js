@@ -52,6 +52,8 @@ export default {
   inspirePlusHp: 2, // SR鼓舞提升的HP上限
   confuseTurns: 2, // SR蛊惑持续层数
   confusePercent: 33, // SR蛊惑反伤触发百分比
+  praiseSpAmount: 2, // SR赞美诗回复SP值
+  breakDamagePercent: 50, // PC击破伤害对敌方最大生命值的百分比
   bindDamage: 3, // YD藤蔓伤害
   bindPercent: 50, // YD藤蔓触发百分比
   drunkClearPercent: 20, // 醉酒自动解除百分比
