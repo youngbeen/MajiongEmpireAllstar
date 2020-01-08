@@ -37,6 +37,9 @@ export default {
   tigerPlusDamage: 3, // 虎形态增加伤害
   bearDamageReduce: 2, // 熊形态减免伤害
   treeHealAmount: 3, // 树形态回血量
+  springTurns: 2, // 回春持续层数
+  springBaseHealPercent: 5, // 回春立即回血量百分比
+  springHealPercent: 10, // 回春持续状态回血量百分比
   absorbHealAmount: 2, // DK邪恶斩击吸血量
   boomDamage: 5, // DK牺牲爪牙伤害
   enhancePlusHp: 5, // MS强化提升的HP上限

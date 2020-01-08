@@ -59,6 +59,7 @@ export default {
         item.flagTiger = false
         item.flagBear = false
         item.flagTree = false
+        item.spring = 0
         item.yy = 0
         item.flagTaunt = false
         item.flagEarth = false
@@ -344,6 +345,9 @@ export default {
       case 'XD4': // XD共生术
         XDCtrl.symbiosis(skillId, targets)
         break
+      case 'XD5': // XD回春术
+        XDCtrl.spring(skillId)
+        break
       case 'C18': // DK普攻
         DKCtrl.atk(targets)
         break
@@ -498,6 +502,28 @@ export default {
         if (item.flagDrunk && diceUtil.rollDice(100) <= config.drunkClearPercent) {
           item.flagDrunk = false
         }
+        // 结算回春
+        if (item.spring > 0) {
+          if (delayCauses.indexOf('spring') === -1) {
+            delayCauses.push('spring')
+          }
+          item.spring--
+          let springHeal = Math.round(item.maxhp * config.springHealPercent / 100)
+          if (springHeal <= 0) {
+            springHeal = 1
+          }
+          item.hp += springHeal
+          if (item.hp > item.maxhp) {
+            item.hp = item.maxhp
+          }
+          setTimeout(() => {
+            eventBus.$emit('animateHeal', {
+              targets: [index],
+              value: springHeal
+            })
+            system.msg = [`*回春*使${index + 1}号单位回复${springHeal}生命值`, ...system.msg]
+          }, config.animationTime * (delayCauses.length - 1))
+        }
         // 结算中毒
         if (item.poison > 0) {
           if (delayCauses.indexOf('poison') === -1) {
@@ -512,14 +538,15 @@ export default {
             // 清除buff
             item = this.clearHeroState(item)
           }
-          // 显示伤害动效
-          eventBus.$emit('animateDamage', {
-            targets: [index],
-            value: poisonDamage,
-            sound: 'poison',
-            image: 'effdampoison'
-          })
-          system.msg = [`${index + 1}号单位受到了${poisonDamage}点毒药伤害`, ...system.msg]
+          setTimeout(() => {
+            eventBus.$emit('animateDamage', {
+              targets: [index],
+              value: poisonDamage,
+              sound: 'poison',
+              image: 'effdampoison'
+            })
+            system.msg = [`${index + 1}号单位受到了${poisonDamage}点毒药伤害`, ...system.msg]
+          }, config.animationTime * (delayCauses.length - 1))
         }
       }
       // 判断MS死亡情况
@@ -528,17 +555,6 @@ export default {
           upMSDead = true
         } else {
           downMSDead = true
-        }
-      }
-      // 判断树形态
-      if (item.flagTree) {
-        if (delayCauses.indexOf('tree') === -1) {
-          delayCauses.push('tree')
-        }
-        if (index < 5) {
-          upTreeAlive = true
-        } else {
-          downTreeAlive = true
         }
       }
       // 执行YD藤蔓
@@ -561,8 +577,8 @@ export default {
             sound: 'bind',
             image: 'effdamtree'
           })
+          system.msg = [`*致命藤蔓*对${index + 1}号单位造成${config.bindDamage}点自然伤害`, ...system.msg]
         }, config.animationTime * (delayCauses.length - 1))
-        system.msg = [`致命藤蔓对${index + 1}号单位造成${config.bindDamage}点自然伤害`, ...system.msg]
       }
       // 判断YD死亡情况
       if (item.type === 'YD' && item.isDead) {
@@ -570,6 +586,17 @@ export default {
           upYDDead = true
         } else {
           downYDDead = true
+        }
+      }
+      // 判断树形态
+      if (item.flagTree) {
+        if (delayCauses.indexOf('tree') === -1) {
+          delayCauses.push('tree')
+        }
+        if (index < 5) {
+          upTreeAlive = true
+        } else {
+          downTreeAlive = true
         }
       }
       return item
@@ -596,6 +623,7 @@ export default {
               targets: [index],
               value: config.treeHealAmount
             })
+            system.msg = [`树形态为${index + 1}号单位回复${config.treeHealAmount}生命值`, ...system.msg]
           }, config.animationTime * (delayCauses.length - 1))
         }
         // 清除YD藤蔓
@@ -676,6 +704,7 @@ export default {
         flagTiger: false, // 是否激活了虎形态
         flagBear: false, // 是否激活了熊形态
         flagTree: false, // 是否激活了树形态
+        spring: 0, // 回春术剩余层数
         yy: 0, // 英勇效果剩余层数
         flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
         flagEarth: false, // 是否激活了大地之力
@@ -700,6 +729,7 @@ export default {
     unit.flagTiger = false
     unit.flagBear = false
     unit.flagTree = false
+    unit.spring = 0
     unit.yy = 0
     unit.flagTaunt = false
     unit.flagEarth = false

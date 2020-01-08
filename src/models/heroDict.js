@@ -81,7 +81,7 @@ export default {
       desc: '变形术/交换生命值',
       url: './img/unitxd.png',
       commonSkills: ['C13', 'C14', 'C15', 'C16', 'C17'],
-      positiveSkills: ['XD1', 'XD2', 'XD3', 'XD4'],
+      positiveSkills: ['XD1', 'XD2', 'XD3', 'XD4', 'XD5'],
       negativeSkills: []
     },
     {

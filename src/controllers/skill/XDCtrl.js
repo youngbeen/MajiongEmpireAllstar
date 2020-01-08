@@ -149,5 +149,21 @@ export default {
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(youIndex, 1, you)
+  },
+  // 回春术
+  spring (skillId = '', targets = []) {
+    let me = hero.units[system.unitIndex]
+    me = commonCtrl.act(me, skillId)
+
+    let heal = Math.round(me.maxhp * config.springBaseHealPercent / 100)
+    me = commonCtrl.changeHp(me, heal)
+    eventBus.$emit('animateHeal', {
+      targets: [system.unitIndex],
+      value: heal
+    })
+    system.msg = [`${system.unitIndex + 1}号单位释放*回春术*，立即回复${heal}点生命值，并获得回春状态`, ...system.msg]
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
   }
 }

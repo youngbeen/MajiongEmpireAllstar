@@ -108,6 +108,7 @@ export default {
       unit.flagTiger = false
       unit.flagBear = false
       unit.flagTree = false
+      unit.spring = 0
       unit.yy = 0
       unit.flagTaunt = false
       unit.flagEarth = false

@@ -18,6 +18,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -50,6 +51,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -82,6 +84,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -114,6 +117,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -146,6 +150,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -179,6 +184,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -211,6 +217,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -243,6 +250,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -275,6 +283,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力
@@ -307,6 +316,7 @@ export default {
       flagTiger: false, // 是否激活了虎形态
       flagBear: false, // 是否激活了熊形态
       flagTree: false, // 是否激活了树形态
+      spring: 0, // 回春术剩余层数
       yy: 0, // 英勇效果剩余层数
       flagTaunt: false, // 是否激活了护盾状态（只能优先被指定攻击）
       flagEarth: false, // 是否激活了大地之力

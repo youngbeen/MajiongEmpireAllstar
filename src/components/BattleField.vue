@@ -33,6 +33,11 @@
             <img class="buff-icon" v-show="item.flagBear" src="../assets/img/bear.png" title="变形:熊形态(嘲讽，伤害减免)" />
             <!-- 显示tree -->
             <img class="buff-icon" v-show="item.flagTree" src="../assets/img/tree.png" title="变形:树形态(全体回复)" />
+            <!-- 显示回春 -->
+            <div class="buff-icon" v-show="item.spring">
+              <img class="buff-icontext" src="../assets/img/leaf.png" title="回春(持续生命值回复)" />
+              <p class="buff-num" title="回春(持续生命值回复)">{{ item.spring }}</p>
+            </div>
           </div>
           <!-- 显示栏 -->
           <div class="box-unit">
@@ -138,6 +143,11 @@
             <img class="buff-icon" v-show="item.flagBear" src="../assets/img/bear.png" title="变形:熊形态(嘲讽，伤害减免)" />
             <!-- 显示tree -->
             <img class="buff-icon" v-show="item.flagTree" src="../assets/img/tree.png" title="变形:树形态(全体回复)" />
+            <!-- 显示回春 -->
+            <div class="buff-icon" v-show="item.spring">
+              <img class="buff-icontext" src="../assets/img/leaf.png" title="回春(持续生命值回复)" />
+              <p class="buff-num" title="回春(持续生命值回复)">{{ item.spring }}</p>
+            </div>
           </div>
           <!-- 显示栏 -->
           <div class="box-unit">

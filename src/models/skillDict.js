@@ -423,7 +423,7 @@ export default {
       targetLimit: 2,
       cnName: '冲锋',
       desc: ['物理伤害', '可以驱散'],
-      detail: `对最多2个相邻敌方单位发起冲锋，对其造成${config.chargeFixedDamage}点伤害，激怒状态时伤害额外增加(${config.angerPlusDamage})。被冲锋的单位将会被眩晕，眩晕目标将跳过其行动回合`,
+      detail: `对最多2个相邻敌方单位发起冲锋，造成${config.chargeFixedDamage}点伤害，激怒状态时伤害额外增加(${config.angerPlusDamage})。被冲锋的单位会被眩晕，眩晕目标将跳过其行动回合`,
       url: './img/charge.png'
     },
     {
@@ -445,7 +445,7 @@ export default {
       targetLimit: 0,
       cnName: '激怒',
       desc: ['有益效果', '可以驱散'],
-      detail: `你的普通攻击造成暴击时，会获得激怒效果，任何攻击会消耗激怒。激怒状态下普通攻击必定暴击，激怒状态下技能攻击伤害额外提升(${config.angerPlusDamage})`,
+      detail: `普通攻击造成暴击时，获得激怒效果，任何攻击会消耗激怒。激怒状态下普通攻击必定暴击，技能攻击伤害额外提升(${config.angerPlusDamage})`,
       url: './img/anger.png'
     },
     {
@@ -456,7 +456,7 @@ export default {
       targetLimit: 5,
       cnName: '箭雨',
       desc: ['物理伤害'],
-      detail: '射出多重箭矢，对所有敌方单位造成伤害(不进行攻击程度判定，6点-6伤害/4~5点-4伤害/1~3点-2伤害)',
+      detail: '对所有敌方单位造成伤害(不进行攻击程度判定，6点-6伤害/4~5点-4伤害/1~3点-2伤害)',
       url: './img/arrow_rain.png'
     },
     {
@@ -467,7 +467,7 @@ export default {
       targetLimit: 1,
       cnName: '奥术射击',
       desc: ['物理伤害', '可以驱散'],
-      detail: `发动一次附带奥术效果的射击，使敌方目标速度降低(速度-${config.magicShotMinusSpeed}，不叠加)，并能驱散敌方目标身上的激怒和英勇效果`,
+      detail: `对1个敌方单位发动一次射击，使目标速度降低(速度-${config.magicShotMinusSpeed}，不叠加)，并能驱散目标身上的激怒和英勇效果`,
       url: './img/arrow_ice.png'
     },
     {
@@ -478,7 +478,7 @@ export default {
       targetLimit: 0,
       cnName: '瞄准锁定',
       desc: ['可以驱散'],
-      detail: `你每次攻击的目标会被锁定，持续${config.lockOnTurns}回合(不叠加)。你对锁定的目标造成的伤害增加(${config.lockOnPlusDamage})`,
+      detail: `每次攻击的目标会被锁定，持续${config.lockOnTurns}回合(不叠加)。你对锁定的目标造成的伤害增加(${config.lockOnPlusDamage})`,
       url: './img/lock_on.png'
     },
     {
@@ -489,7 +489,7 @@ export default {
       targetLimit: 0,
       cnName: '英勇',
       desc: ['有益效果', '可以驱散'],
-      detail: `借助元素的力量，鼓舞所有队友。全体友方单位生命值上限提高(${config.yyPlusMaxhp})，速度上升(${config.yyPlusSpeed})，持续${config.yyMaxTurns}回合，英勇增益效果不会叠加`,
+      detail: `全体友方单位生命值上限提高(${config.yyPlusMaxhp})，速度上升(${config.yyPlusSpeed})，持续${config.yyMaxTurns}回合，英勇效果不叠加`,
       url: './img/yy.png'
     },
     {
@@ -500,7 +500,7 @@ export default {
       targetLimit: 1,
       cnName: '治疗链',
       desc: [],
-      detail: `对1个友方单位释放一条跳动的自然链接，为目标回复${config.healLinkMinHeal}~${config.healLinkMaxHeal}点生命值。链接会跳动2次，每跳对随机目标回复上次回复量的一半`,
+      detail: `为1个友方单位回复${config.healLinkMinHeal}~${config.healLinkMaxHeal}点生命值。治疗链会再跳动2次，每跳对随机友方目标回复上次回复量的一半`,
       url: './img/heal_link.png'
     },
     {
@@ -522,7 +522,7 @@ export default {
       targetLimit: 1,
       cnName: '死亡一指',
       desc: ['魔法伤害'],
-      detail: `发动武术绝学，对1个敌方单位发动一次强力的终结技能。若目标生命值为${config.deathFingerMaxDamage}及以下则立即击杀该目标，否则对其造成${config.deathFingerMinDamage}点伤害值。该伤害不受伤害减免效果影响`,
+      detail: `指定1个敌方单位，若目标生命值<=${config.deathFingerMaxDamage}则立即击杀该目标，否则对其造成${config.deathFingerMinDamage}点伤害。该伤害不受伤害减免效果影响`,
       url: './img/elec_atk.png'
     },
     {
@@ -533,7 +533,7 @@ export default {
       targetLimit: 0,
       cnName: '禅坐',
       desc: [],
-      detail: `开始禅坐，消耗你当前所有SP，每消耗1点SP，回复你${config.zenHealTimes}点生命值`,
+      detail: `消耗当前所有SP，每消耗1点SP，回复${config.zenHealTimes}点生命值`,
       url: './img/zen.png'
     },
     {
@@ -555,7 +555,7 @@ export default {
       targetLimit: 1,
       cnName: '毒刃',
       desc: ['物理伤害', '毒（自然伤害）', '可以驱散'],
-      detail: `对1个敌方单位发动一次攻击，并附带中毒效果(持续${config.poisonDamageTurns}回合，可叠加)。中毒的目标每回合结束会受到毒药伤害(${config.poisonDamage})，毒药伤害不受伤害减免效果影响。此外你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)`,
+      detail: `对1个敌方单位发动一次攻击，并附带中毒效果(持续${config.poisonDamageTurns}回合，可叠加)。中毒目标每回合结束会受到毒药伤害(${config.poisonDamage})，毒药伤害不受伤害减免效果影响。你对中毒目标进行攻击时更容易暴击(5~6-暴击)`,
       url: './img/dagger1.png'
     },
     {
@@ -566,7 +566,7 @@ export default {
       targetLimit: 2,
       cnName: '左右开弓',
       desc: ['物理伤害'],
-      detail: `对最多2个敌方单位发动攻击。你对中毒目标进行攻击时将更容易对其暴击(5~6-暴击)`,
+      detail: `对最多2个敌方单位同时发动攻击。你对中毒目标进行攻击时更容易暴击(5~6-暴击)`,
       url: './img/swing_dagger.png'
     },
     {
@@ -588,7 +588,7 @@ export default {
       targetLimit: 0,
       cnName: '寒冰屏障',
       desc: ['有益效果', '无法驱散'],
-      detail: `释放一道寒冰屏障保护自己，持续${config.iceblockTurns}回合，寒冰屏障持续时你免疫任何物理伤害。此外在寒冰屏障持续时，使用*守 备*技能可以额外回复${config.guardIceblockPlusHeal}点生命值`,
+      detail: `释放保护自己的寒冰屏障，持续${config.iceblockTurns}回合，寒冰屏障持续时你免疫任何物理伤害。此外在寒冰屏障持续时，使用*守 备*技能额外回复${config.guardIceblockPlusHeal}点生命值`,
       url: './img/iceblock.png'
     },
     {
@@ -654,7 +654,7 @@ export default {
       targetLimit: 1,
       cnName: '共生术',
       desc: [],
-      detail: '精通自然之道，使你与1个友方单位交换彼此的当前生命值',
+      detail: '指定1个友方单位，与其交换彼此的当前生命值。交换后的生命值不会超过生命值上限',
       url: './img/nature.png'
     },
     {
@@ -665,8 +665,8 @@ export default {
       targetLimit: 0,
       cnName: '回春术',
       desc: ['有益效果', '无法驱散'],
-      detail: 'TODO立即回复5%HP，获得2回合BUFF，回合结束回复10%',
-      url: './img/nature.png'
+      detail: `立即回复${config.springBaseHealPercent}%生命值，并获得回春(持续${config.springTurns}回合，不叠加)。回春状态下，回合结束时回复${config.springHealPercent}%生命值`,
+      url: './img/leaf.png'
     },
     {
       id: 'DK1',
@@ -676,7 +676,7 @@ export default {
       targetLimit: 1,
       cnName: '牺牲爪牙',
       desc: ['魔法伤害'],
-      detail: `操控死亡能力，使1个已死亡敌方单位变化为食尸鬼，并牺牲它使其爆炸。食尸鬼爆炸会对其相邻的单位造成${config.boomDamage}点伤害`,
+      detail: `指定1个已死亡敌方单位变化为食尸鬼，并牺牲它使其爆炸。食尸鬼爆炸对相邻单位造成${config.boomDamage}点伤害`,
       url: './img/infect.png'
     },
     {
@@ -687,7 +687,7 @@ export default {
       targetLimit: 0,
       cnName: '邪恶斩击',
       desc: ['有益效果', '无法驱散'],
-      detail: `你的普通攻击造成有效伤害(>0)时，你回复${config.absorbHealAmount}点生命值，但你的*守 备*不能回复生命值`,
+      detail: `普通攻击造成有效伤害(>0)时，回复${config.absorbHealAmount}点生命值，但*守 备*不能回复生命值`,
       url: './img/axe_blood.png'
     },
     {
@@ -698,7 +698,7 @@ export default {
       targetLimit: 0,
       cnName: '生而平等',
       desc: [],
-      detail: `友方生命值最低的单位与敌方生命值最高的单位均分生命值，但不超过各自生命值上限`,
+      detail: `生命值最低的友方单位与生命值最高的敌方单位均分生命值，但不超过各自生命值上限`,
       url: './img/justice.png'
     },
     {
@@ -709,7 +709,7 @@ export default {
       targetLimit: 0,
       cnName: '圣疗术',
       desc: [],
-      detail: '祈求圣光照耀，使你的生命值得到完全回复',
+      detail: '你的生命值完全回复',
       url: './img/recover.png'
     },
     {
@@ -742,7 +742,7 @@ export default {
       targetLimit: 1,
       cnName: '鼓舞',
       desc: ['有益效果', '无法驱散'],
-      detail: `吹奏鼓舞士气的乐曲，使1个友方单位在该场战斗中生命值及其上限永久增加(${config.inspirePlusHp})，并获得嘲讽技能，强迫敌方单位必须优先攻击他。可以对同一友方单位重复释放该技能`,
+      detail: `使1个友方单位在该场战斗中生命值及上限永久增加(${config.inspirePlusHp})，并获得嘲讽技能，强迫敌方单位必须优先攻击他。可以对同一友方单位重复释放该技能`,
       url: './img/inspire.png'
     },
     {
@@ -753,7 +753,7 @@ export default {
       targetLimit: 0,
       cnName: '蛊惑曲',
       desc: ['可以驱散'],
-      detail: `对所有敌方单位吹奏蛊惑心智的乐曲，蛊惑持续${config.confuseTurns}回合（不叠加）。被蛊惑的敌方单位有一定几率(${config.confusePercent}%)遭受其造成的攻击伤害的同等伤害`,
+      detail: `所有敌方单位获得蛊惑，蛊惑持续${config.confuseTurns}回合（不叠加）。被蛊惑的敌方单位有一定几率(${config.confusePercent}%)遭受其造成的攻击伤害的同等伤害`,
       url: './img/confuse.png'
     },
     {
@@ -764,7 +764,7 @@ export default {
       cnName: '横扫',
       targetLimit: 5,
       desc: ['有益效果', '无法驱散'],
-      detail: '借助强有力的武器，你的普通攻击会攻击所有敌方单位，无需指定目标',
+      detail: '普通攻击会攻击所有敌方单位，无需指定目标',
       url: './img/swing_sword.png'
     },
     {
@@ -775,7 +775,7 @@ export default {
       targetLimit: 0,
       cnName: '力量的代价',
       desc: ['有害效果', '无法驱散'],
-      detail: '你的攻击不会产生暴击，只会造成偏斜攻击(1~3)或正常攻击(4~6)',
+      detail: '攻击不会暴击，只会造成偏斜攻击(1~3)或正常攻击(4~6)',
       url: './img/back_atk.png'
     },
     {
@@ -786,7 +786,7 @@ export default {
       targetLimit: 1,
       cnName: '醉酒',
       desc: ['可以驱散'],
-      detail: `灌醉1个敌方单位，醉酒状态的单位始终跳过其行动回合，醉酒状态在每回合结束有一定几率(${config.drunkClearPercent}%)解除`,
+      detail: `指定1个敌方单位，目标获得醉酒。醉酒状态单位始终跳过其行动回合，醉酒状态在每回合结束有一定几率(${config.drunkClearPercent}%)解除`,
       url: './img/sleep.png'
     },
     {
@@ -797,7 +797,7 @@ export default {
       targetLimit: 0,
       cnName: '酒壮人胆',
       desc: ['有益效果', '无法驱散'],
-      detail: '饮下烈酒，你的攻击伤害值会随着你的生命值的降低而增加(生命值每降低10点，伤害值额外增加1点)',
+      detail: '你的攻击伤害值会随着你的生命值的降低而增加(生命值每降低10点，伤害值额外增加1点)',
       url: './img/snake_eye.png'
     },
     {
@@ -819,7 +819,7 @@ export default {
       targetLimit: 0,
       cnName: '平和主义',
       desc: ['无法驱散'],
-      detail: `你的*守 备*行动回复的生命值额外增加${config.guardYDPlusHeal}点，此外还回复${config.guardYDPlusSp}点SP，但你的普通攻击始终造成偏斜伤害`,
+      detail: `*守 备*行动回复的生命值额外增加${config.guardYDPlusHeal}点，此外还回复${config.guardYDPlusSp}点SP，但你的普通攻击始终造成偏斜伤害`,
       url: './img/peace.png'
     },
     {
@@ -830,7 +830,7 @@ export default {
       targetLimit: 1,
       cnName: '幻影打击',
       desc: ['物理伤害'],
-      detail: '如幻影般的步伐，发动一次攻击，且不消耗你的行动回合',
+      detail: '发动一次攻击，且不消耗行动回合',
       url: './img/fast_pace.png'
     },
     {
@@ -841,7 +841,7 @@ export default {
       targetLimit: 0,
       cnName: '要害痛击',
       desc: ['有益效果', '无法驱散'],
-      detail: '丰富的实战经验使你洞察敌人的弱点，战斗中速度增加，你的攻击造成暴击的时候，可以额外奖励一个行动回合。幻影打击不触发额外行动回合奖励',
+      detail: '战斗中速度增加，你的攻击造成暴击的时候，可以额外奖励一个行动回合。幻影打击不触发额外行动回合奖励',
       url: './img/sharp_atk.png'
     },
     {
@@ -852,7 +852,7 @@ export default {
       targetLimit: 1,
       cnName: '行刑',
       desc: ['物理伤害'],
-      detail: '举起巨大的屠刀对1个敌方单位发动攻击。若行刑之后该目标死亡，则其他所有敌方单位都将受到该次伤害的50%顺带伤害。顺带伤害不受免/减伤效果影响',
+      detail: '对1个敌方单位发动一次攻击。若行刑后该目标死亡，则其他所有敌方单位都将受到该次伤害的50%顺带伤害。顺带伤害不受免/减伤效果影响',
       url: './img/sword_blood.png'
     },
     {
@@ -863,7 +863,7 @@ export default {
       targetLimit: 0,
       cnName: '恃强凌弱',
       desc: ['无法驱散'],
-      detail: `你对生命值低于${config.tfRudeHpLine}的敌方单位进行攻击时，会额外造成${config.tfBonusDamage}点伤害。但对生命值为${config.tfRudeHpLine}点及以上的敌方单位进行攻击时，造成的伤害会降低${config.tfDamageReduce}点`,
+      detail: `对生命值<${config.tfRudeHpLine}的敌方单位进行攻击时，额外造成${config.tfBonusDamage}点伤害。但对生命值>=${config.tfRudeHpLine}的敌方单位进行攻击时，造成的伤害降低${config.tfDamageReduce}点`,
       url: './img/owl.png'
     },
     {
@@ -874,7 +874,7 @@ export default {
       targetLimit: 0,
       cnName: '小不点也有大作为',
       desc: ['有益效果', '无法驱散'],
-      detail: '你的普通攻击不进行攻击判定，初始伤害固定为1。伤害值每个回合后增加(1)',
+      detail: '普通攻击不进行攻击判定，初始伤害固定为1。伤害值每个回合后增加(1)',
       url: './img/cute_animal.png'
     },
     {
