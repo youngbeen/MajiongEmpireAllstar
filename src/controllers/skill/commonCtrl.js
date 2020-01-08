@@ -156,6 +156,7 @@ export default {
       unit.hp = 0
       unit.isDead = true
       // 清理其他buff
+      unit.sp = 0
       unit.flagAnger = false
       unit.iceblock = 0
       unit.flagEnhance = false

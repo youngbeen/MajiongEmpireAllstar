@@ -105,7 +105,7 @@ export default {
       desc: '交换生命值/回复生命值',
       url: './img/unitqs.png',
       commonSkills: ['C20', 'C21'],
-      positiveSkills: ['QS1', 'QS2'],
+      positiveSkills: ['QS1', 'QS2', 'QS3'],
       negativeSkills: []
     },
     {
@@ -117,7 +117,7 @@ export default {
       desc: '回复生命值/全体增益效果',
       url: './img/unitms.png',
       commonSkills: ['C22', 'C23'],
-      positiveSkills: ['MS1'],
+      positiveSkills: ['MS1', 'MS3'],
       negativeSkills: ['MS2']
     },
     {

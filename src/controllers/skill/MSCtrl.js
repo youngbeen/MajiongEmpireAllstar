@@ -87,5 +87,28 @@ export default {
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(youIndex, 1, you)
+  },
+  // 复活
+  revive (skillId = '', targets = []) {
+    const youIndex = targets[0]
+    let you = hero.units[youIndex]
+    let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
+    me = commonCtrl.act(me, skillId)
+
+    you.isDead = false
+    you.hp = Math.round(you.maxhp * config.reviveHealPercent / 100)
+    setTimeout(() => {
+      eventBus.$emit('playSound', {
+        sound: 'qsequal' // TODO 音效
+      })
+      system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位释放*复活术*`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
+    hero.units.splice(youIndex, 1, you)
   }
 }

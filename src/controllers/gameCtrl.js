@@ -366,11 +366,17 @@ export default {
       case 'QS2': // QS圣疗术
         QSCtrl.reborn(skillId)
         break
+      case 'QS3': // QS牺牲
+        QSCtrl.sacrifice(skillId, targets)
+        break
       case 'C22': // MS普攻
         MSCtrl.atk(targets)
         break
       case 'MS1': // MS治疗
         MSCtrl.heal(skillId, targets)
+        break
+      case 'MS3': // MS复活
+        MSCtrl.revive(skillId, targets)
         break
       case 'C24': // SR普攻
         SRCtrl.atk(targets)
@@ -726,6 +732,7 @@ export default {
     }
   },
   clearHeroState (unit) {
+    unit.sp = 0
     unit.flagAnger = false
     unit.iceblock = 0
     unit.flagEnhance = false

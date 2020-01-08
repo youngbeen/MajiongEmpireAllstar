@@ -724,6 +724,17 @@ export default {
       url: './img/recover.png'
     },
     {
+      id: 'QS3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 1,
+      targetLimit: 1,
+      cnName: '牺牲',
+      desc: ['魔法伤害'],
+      detail: `指定1个敌方单位，牺牲你当前剩余生命值的${config.sacrificeMinusPercent}%，对目标造成减少量的${config.sacrificeTransformPercent}%伤害。该伤害不受免/减伤效果影响`,
+      url: './img/holy_sword.png'
+    },
+    {
       id: 'MS1',
       cat: 'P',
       type: 'SK',
@@ -733,6 +744,17 @@ export default {
       desc: [],
       detail: '对1个友方单位进行治疗，并清除目标身上的所有不良效果',
       url: './img/heal.png'
+    },
+    {
+      id: 'MS3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 6,
+      targetLimit: 1,
+      cnName: '复活术',
+      desc: [],
+      detail: `指定1个已死亡的友方单位，复活目标并回复其最大生命值的${config.reviveHealPercent}%`,
+      url: './img/revive.png'
     },
     {
       id: 'MS2',

@@ -45,7 +45,10 @@ export default {
   absorbHealAmount: 2, // DK邪恶斩击吸血量
   boomDamage: 5, // DK牺牲爪牙伤害
   infectTurns: 2, // DK感染中毒层数
+  sacrificeMinusPercent: 50, // QS牺牲扣减自身当前生命值百分比
+  sacrificeTransformPercent: 60, // QS牺牲生命值转化伤害值百分比
   enhancePlusHp: 5, // MS强化提升的HP上限
+  reviveHealPercent: 15, // MS复活术回复最大生命值百分比
   inspirePlusHp: 2, // SR鼓舞提升的HP上限
   confuseTurns: 2, // SR蛊惑持续层数
   confusePercent: 33, // SR蛊惑反伤触发百分比

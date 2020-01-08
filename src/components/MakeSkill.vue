@@ -58,6 +58,7 @@ import config from '@/models/config'
 import hero from '@/models/hero'
 import heroDict from '@/models/heroDict'
 import skillDict from '@/models/skillDict'
+import heroUtil from '@/utils/heroUtil'
 import Bar from '@/components/Bar'
 
 export default {
@@ -125,6 +126,22 @@ export default {
           // title: '警告',
           type: 'warning',
           message: `SP值不足！`
+        })
+        return
+      }
+      if (item.id === 'DK1' && !heroUtil.hasDeadTarget()) {
+        this.$message({
+          // title: '警告',
+          type: 'warning',
+          message: `当前没有死亡的敌方单位！`
+        })
+        return
+      }
+      if (item.id === 'MS3' && !heroUtil.hasDeadFriend()) {
+        this.$message({
+          // title: '警告',
+          type: 'warning',
+          message: `当前没有死亡的友方单位！`
         })
         return
       }

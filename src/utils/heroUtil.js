@@ -6,6 +6,35 @@ export default {
   isTargetValid (index) {
     return index >= 0 && index < 10 && hero.units[index].isOpen && !hero.units[index].isDead
   },
+  hasDeadTarget () {
+    let result = false
+    hero.units.forEach((item, index) => {
+      if (item.isOpen && item.type && item.isDead) {
+        // 有效单位
+        if (system.unitIndex > 4 && index < 5) {
+          result = true
+        } else if (system.unitIndex < 5 && index > 4) {
+          result = true
+        }
+      }
+    })
+    return result
+  },
+  hasDeadFriend () {
+    let result = false
+    hero.units.forEach((item, index) => {
+      if (item.isOpen && item.type && item.isDead) {
+        // 有效单位
+        console.log(index, system.unitIndex)
+        if (system.unitIndex > 4 && index > 4) {
+          result = true
+        } else if (system.unitIndex < 5 && index < 5) {
+          result = true
+        }
+      }
+    })
+    return result
+  },
   // 获取所有有效敌方单位索引
   getAllTargets () {
     let result = []

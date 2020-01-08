@@ -166,7 +166,7 @@ export default {
       }
     },
     isTargetFriendly () {
-      return ['SM3', 'XD4', 'MS1', 'SR1'].includes(this.skillId)
+      return ['SM3', 'XD4', 'MS1', 'MS3', 'SR1'].includes(this.skillId)
     },
     targets () {
       if (this.skillId === 'DK1') {
@@ -203,6 +203,27 @@ export default {
           } else {
             // 上方source
             if (index < 5 && item.isOpen && !item.isDead && index !== this.system.unitIndex) {
+              item.isTarget = true
+            } else {
+              item.isTarget = false
+            }
+          }
+          return item
+        })
+        return friends
+      } else if (this.skillId === 'MS3') {
+        // NOTE 复活比较特殊，需要选择已死亡的友方单位
+        let friends = this.hero.units.map((item, index) => {
+          if (this.system.unitIndex >= 5) {
+            // 下方source
+            if (index >= 5 && item.isOpen && item.isDead) {
+              item.isTarget = true
+            } else {
+              item.isTarget = false
+            }
+          } else {
+            // 上方source
+            if (index < 5 && item.isOpen && item.isDead) {
               item.isTarget = true
             } else {
               item.isTarget = false
