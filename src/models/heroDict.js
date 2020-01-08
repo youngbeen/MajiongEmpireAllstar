@@ -93,7 +93,7 @@ export default {
       desc: '吸血/群体伤害',
       url: './img/unitdk.png',
       commonSkills: ['C18', 'C19'],
-      positiveSkills: ['DK1'],
+      positiveSkills: ['DK1', 'DK3'],
       negativeSkills: ['DK2']
     },
     {

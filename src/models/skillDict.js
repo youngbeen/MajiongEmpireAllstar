@@ -544,7 +544,7 @@ export default {
       targetLimit: 0,
       cnName: '醉拳',
       desc: ['有益效果', '无法驱散'],
-      detail: '敌人对你的主动攻击更难击中你(1~3-偏斜，4~5-正常，6-暴击)',
+      detail: '对你的攻击更难击中你(1~3-偏斜，4~5-正常，6-暴击)',
       url: './img/wine.png'
     },
     {
@@ -599,7 +599,7 @@ export default {
       targetLimit: 0,
       cnName: '冰枪术',
       desc: ['魔法伤害', '有益效果', '无法驱散'],
-      detail: `每次普通攻击有一定几率(${config.iceshotPercent}%)触发冰枪术，对当前敌方单位及其左右相邻单位造成一次额外的偏斜伤害`,
+      detail: `每次普通攻击有一定几率(${config.iceshotPercent}%)触发冰枪术，对当前敌方单位及其左右相邻单位再次造成普通攻击伤害的${config.iceshotDamagePercent}%伤害`,
       url: './img/iceshot.png'
     },
     {
@@ -610,7 +610,7 @@ export default {
       targetLimit: 0,
       cnName: '法力爆炸',
       desc: ['魔法伤害', '有益效果', '无法驱散'],
-      detail: `冰枪术触发后有一定几率(（40-回合数）%)）触发法力爆炸，对所有敌方目标造成你当前伤害总量10%的伤害`,
+      detail: `冰枪术触发后有一定几率(（40-回合数）%)）触发法力爆炸，对所有敌方目标造成你当前伤害总量${config.magicBoomDamagePercent}%的伤害`,
       url: './img/magic_boom.png'
     },
     {
@@ -678,6 +678,17 @@ export default {
       desc: ['魔法伤害'],
       detail: `指定1个已死亡敌方单位变化为食尸鬼，并牺牲它使其爆炸。食尸鬼爆炸对相邻单位造成${config.boomDamage}点伤害`,
       url: './img/infect.png'
+    },
+    {
+      id: 'DK3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 4,
+      targetLimit: 5,
+      cnName: '感染',
+      desc: ['毒（自然伤害）', '可以驱散'],
+      detail: `所有敌方目标中毒，持续${config.infectTurns}回合，可叠加。如果目标身上已有毒状态，则毒状态层数翻倍`,
+      url: './img/bug.png'
     },
     {
       id: 'DK2',

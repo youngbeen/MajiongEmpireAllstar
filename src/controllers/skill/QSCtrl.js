@@ -2,9 +2,7 @@ import eventBus from '@/eventBus'
 import config from '@/models/config'
 import hero from '@/models/hero'
 import system from '@/models/system'
-import diceUtil from '@/utils/diceUtil'
 import heroUtil from '@/utils/heroUtil'
-import reduceCtrl from '../reduceCtrl'
 import commonCtrl from './commonCtrl'
 
 export default {
@@ -12,50 +10,39 @@ export default {
   atk (targets = []) {
     // 只有一目标
     const youIndex = targets[0]
-    let me = hero.units[system.unitIndex]
     let you = hero.units[youIndex]
-    let stackPlays = 1
+    let me = hero.units[system.unitIndex]
+    let stackPlays = 0
 
     me = commonCtrl.act(me)
 
-    // STEP1 计算伤害倍数
-    let times = config.normalTimes // 伤害倍数
-    // 正常情况
-    let timeDice = diceUtil.getDamageTimes()
-    times = timeDice.times
-    if (you.type === 'WS' && timeDice.dice === 3) {
-      // 武僧被动技能，3点修正为偏斜攻击
-      times = config.slightTimes
-    }
-    // STEP2 计算原始伤害
-    let damage = Math.ceil(diceUtil.getDamageFactor() * times)
-    if (you.iceblock) {
-      // 寒冰屏障
-      damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
-    } else if (you.flagBear) {
-      // 熊形态
-      damage = reduceCtrl.getReducedDamage(damage, 'bear')
-    }
-    // STEP3 结算
-    me = commonCtrl.drawDps(me, 'direct', damage)
+    // 计算伤害倍数
+    let times = commonCtrl.getDamageTimes(me, you)
+    // 计算伤害
+    let damage = commonCtrl.getDamage(me, you, times)
+    damage = commonCtrl.getReducedDamage(me, you, damage)
+    // 结算
     you = commonCtrl.changeHp(you, -1 * damage)
-    // 显示伤害动效
-    eventBus.$emit('animateDamage', {
-      targets: [youIndex],
-      value: damage,
-      sound: 'heavy_hammer',
-      image: 'effdamham'
-    })
-    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+    me = commonCtrl.drawDps(me, 'direct', damage)
+    setTimeout(() => {
+      eventBus.$emit('animateDamage', {
+        targets: [youIndex],
+        value: damage,
+        sound: 'heavy_hammer',
+        image: 'effdamham'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
-    if (you.flagEarth && times === config.criticalTimes) {
+    if (commonCtrl.shouldEarthReflectTrigger(me, you, times)) {
       // 大地之力反伤
       me = commonCtrl.earthReflect(me, stackPlays, damage)
       stackPlays++
     }
 
     // 处理伤害后的效果
-    if (me.hp && me.confuse && diceUtil.rollDice(100) <= config.confusePercent) {
+    if (commonCtrl.shouldEnchantTrigger(me, you)) {
       // 蛊惑时概率自己遭受同等伤害
       me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
@@ -68,6 +55,8 @@ export default {
   // 生而平等
   equal (skillId = '', targets = []) {
     let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
     me = commonCtrl.act(me, skillId)
 
     // NOTE 因为接下来的结算目标可能涉及自己，所以先回写数据
@@ -91,25 +80,33 @@ export default {
       you.hp = you.maxhp
     }
 
+    setTimeout(() => {
+      eventBus.$emit('playSound', {
+        sound: 'qsequal'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位释放了*生而平等*，${friendIndex + 1}号单位与${targetIndex + 1}号单位均分生命值`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
+
     hero.units.splice(friendIndex, 1, friend)
     hero.units.splice(targetIndex, 1, you)
-
-    eventBus.$emit('playSound', {
-      sound: 'qsequal'
-    })
-    system.msg = [`${system.unitIndex + 1}号单位释放了*生而平等*，${friendIndex + 1}号单位与${targetIndex + 1}号单位均分生命值`, ...system.msg]
   },
   // 圣疗术
   reborn (skillId = '', targets = []) {
     let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
     me = commonCtrl.act(me, skillId)
 
     me.hp = me.maxhp
 
-    eventBus.$emit('playSound', {
-      sound: 'qsreborn'
-    })
-    system.msg = [`${system.unitIndex + 1}号单位释放了*圣疗术*，生命值完全恢复`, ...system.msg]
+    setTimeout(() => {
+      eventBus.$emit('playSound', {
+        sound: 'qsreborn'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位释放了*圣疗术*，生命值完全恢复`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)

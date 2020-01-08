@@ -32,7 +32,9 @@ export default {
   rogueBonusSp: 1, // DZ奖励SP点数
   rogueBonusSpPercent: 17, // DZ奖励SP触发百分比
   iceblockTurns: 3, // 寒冰屏障持续层数
-  iceshotPercent: 50, // 冰枪术触发百分比
+  iceshotPercent: 30, // 冰枪术触发百分比
+  iceshotDamagePercent: 50, // 冰枪术占普通伤害的百分比
+  magicBoomDamagePercent: 10, // 法力爆炸占总体伤害的百分比
   transformHealAmount: 5, // 变形术回血量
   tigerPlusDamage: 3, // 虎形态增加伤害
   bearDamageReduce: 2, // 熊形态减免伤害
@@ -42,6 +44,7 @@ export default {
   springHealPercent: 10, // 回春持续状态回血量百分比
   absorbHealAmount: 2, // DK邪恶斩击吸血量
   boomDamage: 5, // DK牺牲爪牙伤害
+  infectTurns: 2, // DK感染中毒层数
   enhancePlusHp: 5, // MS强化提升的HP上限
   inspirePlusHp: 2, // SR鼓舞提升的HP上限
   confuseTurns: 2, // SR蛊惑持续层数

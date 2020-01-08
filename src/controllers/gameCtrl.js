@@ -354,6 +354,9 @@ export default {
       case 'DK1': // DK牺牲爪牙
         DKCtrl.boom(skillId, targets)
         break
+      case 'DK3': // DK感染
+        DKCtrl.infect(skillId)
+        break
       case 'C20': // QS普攻
         QSCtrl.atk(targets)
         break
@@ -439,7 +442,7 @@ export default {
     hero.units = hero.units.map((item, index) => {
       if (item.isOpen && item.type && !item.isDead) {
         // 存活的有效单位，每回合一定的概率获得sp
-        if (diceUtil.rollDice(100) <= config.recoverSpPercent) {
+        if (commonCtrl.shouldAutoGainSpTrigger()) {
           item.sp += config.recoverSpAmount
           if (item.sp > item.maxsp) {
             item.sp = item.maxsp

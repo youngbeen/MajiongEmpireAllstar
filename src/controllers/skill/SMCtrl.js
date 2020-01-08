@@ -5,7 +5,6 @@ import hero from '@/models/hero'
 import system from '@/models/system'
 import diceUtil from '@/utils/diceUtil'
 import heroUtil from '@/utils/heroUtil'
-import reduceCtrl from '../reduceCtrl'
 import commonCtrl from './commonCtrl'
 
 export default {
@@ -13,50 +12,39 @@ export default {
   atk (targets = []) {
     // 只有一目标
     const youIndex = targets[0]
-    let me = hero.units[system.unitIndex]
     let you = hero.units[youIndex]
-    let stackPlays = 1
+    let me = hero.units[system.unitIndex]
+    let stackPlays = 0
 
     me = commonCtrl.act(me)
 
-    // STEP1 计算伤害倍数
-    let times = config.normalTimes // 伤害倍数
-    // 正常情况
-    let timeDice = diceUtil.getDamageTimes()
-    times = timeDice.times
-    if (you.type === 'WS' && timeDice.dice === 3) {
-      // 武僧被动技能，3点修正为偏斜攻击
-      times = config.slightTimes
-    }
-    // STEP2 计算原始伤害
-    let damage = Math.ceil(diceUtil.getDamageFactor() * times)
-    if (you.iceblock) {
-      // 寒冰屏障
-      damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
-    } else if (you.flagBear) {
-      // 熊形态
-      damage = reduceCtrl.getReducedDamage(damage, 'bear')
-    }
-    // STEP3 结算
-    me = commonCtrl.drawDps(me, 'direct', damage)
+    // 计算伤害倍数
+    let times = commonCtrl.getDamageTimes(me, you)
+    // 计算伤害
+    let damage = commonCtrl.getDamage(me, you, times)
+    damage = commonCtrl.getReducedDamage(me, you, damage)
+    // 结算
     you = commonCtrl.changeHp(you, -1 * damage)
-    // 显示伤害动效
-    eventBus.$emit('animateDamage', {
-      targets: [youIndex],
-      value: damage,
-      sound: 'hammer',
-      image: 'effdamham'
-    })
-    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+    me = commonCtrl.drawDps(me, 'direct', damage)
+    setTimeout(() => {
+      eventBus.$emit('animateDamage', {
+        targets: [youIndex],
+        value: damage,
+        sound: 'hammer',
+        image: 'effdamham'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
-    if (you.flagEarth && times === config.criticalTimes) {
+    if (commonCtrl.shouldEarthReflectTrigger(me, you, times)) {
       // 大地之力反伤
       me = commonCtrl.earthReflect(me, stackPlays, damage)
       stackPlays++
     }
 
     // 处理伤害后的效果
-    if (me.hp && me.confuse && diceUtil.rollDice(100) <= config.confusePercent) {
+    if (commonCtrl.shouldEnchantTrigger(me, you)) {
       // 蛊惑时概率自己遭受同等伤害
       me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
@@ -69,6 +57,8 @@ export default {
   // 英勇
   brave (skillId = '', targets = []) {
     let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
     me = commonCtrl.act(me, skillId)
 
     // 回写数据 NOTE 这里有些特殊，之所以要先回写SM单位的数据是因为后续的英勇效果结算也会变动SM自身的数据，所以需要提前把数据先写入一次
@@ -80,7 +70,7 @@ export default {
       const youIndex = target
       let you = hero.units[youIndex]
 
-      // STEP1 结算
+      // 结算
       if (you.yy > 0) {
         // 已有英勇效果，刷新层数
         you.yy = config.yyMaxTurns
@@ -95,27 +85,33 @@ export default {
       hero.units.splice(youIndex, 1, you)
     })
 
-    eventBus.$emit('playSound', {
-      sound: 'yy'
-    })
-    system.msg = [`萨满释放了*英勇*，所有友方单位最大生命值，速度增加`, ...system.msg]
+    setTimeout(() => {
+      eventBus.$emit('playSound', {
+        sound: 'yy'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位释放了*英勇*，所有友方单位最大生命值，速度增加`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
   },
   // 治疗链
   healLink (skillId = '', targets = []) {
     const youIndex = targets[0]
     let you = hero.units[youIndex]
     let me = hero.units[system.unitIndex]
-    me = commonCtrl.act(me, skillId)
+    let stackPlays = 0
 
-    let stackPlays = 1
+    me = commonCtrl.act(me, skillId)
 
     let healAmount = numberUtil.random(config.healLinkMaxHeal, config.healLinkMinHeal)
     you = commonCtrl.changeHp(you, healAmount)
-    eventBus.$emit('animateHeal', {
-      targets: [youIndex],
-      value: healAmount
-    })
-    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位释放*治疗链*，回复${healAmount}点生命值`, ...system.msg]
+    setTimeout(() => {
+      eventBus.$emit('animateHeal', {
+        targets: [youIndex],
+        value: healAmount
+      })
+      system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位释放*治疗链*，回复${healAmount}点生命值`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)

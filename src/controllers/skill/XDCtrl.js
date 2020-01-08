@@ -2,9 +2,6 @@ import eventBus from '@/eventBus'
 import config from '@/models/config'
 import hero from '@/models/hero'
 import system from '@/models/system'
-import diceUtil from '@/utils/diceUtil'
-// import heroUtil from '@/utils/heroUtil'
-import reduceCtrl from '../reduceCtrl'
 import commonCtrl from './commonCtrl'
 
 export default {
@@ -12,8 +9,8 @@ export default {
   atk (targets = []) {
     // 只有一目标
     const youIndex = targets[0]
-    let me = hero.units[system.unitIndex]
     let you = hero.units[youIndex]
+    let me = hero.units[system.unitIndex]
     let mySubtype = 'xd'
     if (me.flagTiger) {
       mySubtype = 'tiger'
@@ -22,52 +19,40 @@ export default {
     } else if (me.flagTree) {
       mySubtype = 'tree'
     }
-    let stackPlays = 1
+    let stackPlays = 0
 
     me = commonCtrl.act(me)
 
-    // STEP1 计算伤害倍数
-    let times = config.normalTimes // 伤害倍数
-    // 正常情况
-    let timeDice = diceUtil.getDamageTimes()
-    times = timeDice.times
-    if (you.type === 'WS' && timeDice.dice === 3) {
-      // 武僧被动技能，3点修正为偏斜攻击
-      times = config.slightTimes
-    }
-    // STEP2 计算原始伤害
-    let damageFactor = diceUtil.getDamageFactor()
-    let damage = Math.ceil(damageFactor * times)
+    // 计算伤害倍数
+    let times = commonCtrl.getDamageTimes(me, you)
+    // 计算伤害
+    let damage = commonCtrl.getDamage(me, you, times)
     if (me.flagTiger) {
       damage += config.tigerPlusDamage
     }
-    if (you.iceblock) {
-      // 寒冰屏障
-      damage = reduceCtrl.getReducedDamage(damage, 'iceblock')
-    } else if (you.flagBear) {
-      // 熊形态
-      damage = reduceCtrl.getReducedDamage(damage, 'bear')
-    }
-    // STEP3 结算
-    me = commonCtrl.drawDps(me, 'direct', damage)
+    damage = commonCtrl.getReducedDamage(me, you, damage)
+    // 结算
     you = commonCtrl.changeHp(you, -1 * damage)
-    // 显示伤害动效
-    eventBus.$emit('animateDamage', {
-      targets: [youIndex],
-      value: damage,
-      sound: `atk${mySubtype}`,
-      image: `effdam${mySubtype}`
-    })
-    system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+    me = commonCtrl.drawDps(me, 'direct', damage)
+    setTimeout(() => {
+      eventBus.$emit('animateDamage', {
+        targets: [youIndex],
+        value: damage,
+        sound: `atk${mySubtype}`,
+        image: `effdam${mySubtype}`
+      })
+      system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
-    if (you.flagEarth && times === config.criticalTimes) {
+    if (commonCtrl.shouldEarthReflectTrigger(me, you, times)) {
       // 大地之力反伤
       me = commonCtrl.earthReflect(me, stackPlays, damage)
       stackPlays++
     }
 
     // 处理伤害后的效果
-    if (me.hp && me.confuse && diceUtil.rollDice(100) <= config.confusePercent) {
+    if (commonCtrl.shouldEnchantTrigger(me, you)) {
       // 蛊惑时概率自己遭受同等伤害
       me = commonCtrl.enchant(me, stackPlays, damage)
       stackPlays++
@@ -80,7 +65,8 @@ export default {
   // 变形
   transform (skillId = '', type = '', targets = []) {
     let me = hero.units[system.unitIndex]
-    let stackPlays = 1
+    let stackPlays = 0
+
     me = commonCtrl.act(me, skillId)
 
     if (me.flagBear) {
@@ -107,9 +93,12 @@ export default {
         break
     }
     me.url = `./img/unit${type}.png`
-    eventBus.$emit('playSound', {
-      sound: type
-    })
+    setTimeout(() => {
+      eventBus.$emit('playSound', {
+        sound: type
+      })
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
     me = commonCtrl.changeHp(me, config.transformHealAmount)
     setTimeout(() => {
@@ -129,6 +118,8 @@ export default {
     const youIndex = targets[0]
     let you = hero.units[youIndex]
     let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
     me = commonCtrl.act(me, skillId)
 
     let tempHp = you.hp
@@ -141,10 +132,13 @@ export default {
       me.hp = me.maxhp
     }
 
-    eventBus.$emit('playSound', {
-      sound: 'xdgs'
-    })
-    system.msg = [`${system.unitIndex + 1}号单位释放*共生术*，与${youIndex + 1}号单位交换了生命值`, ...system.msg]
+    setTimeout(() => {
+      eventBus.$emit('playSound', {
+        sound: 'xdgs'
+      })
+      system.msg = [`${system.unitIndex + 1}号单位释放*共生术*，与${youIndex + 1}号单位交换了生命值`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
@@ -153,15 +147,20 @@ export default {
   // 回春术
   spring (skillId = '', targets = []) {
     let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
     me = commonCtrl.act(me, skillId)
 
     let heal = Math.round(me.maxhp * config.springBaseHealPercent / 100)
     me = commonCtrl.changeHp(me, heal)
-    eventBus.$emit('animateHeal', {
-      targets: [system.unitIndex],
-      value: heal
-    })
-    system.msg = [`${system.unitIndex + 1}号单位释放*回春术*，立即回复${heal}点生命值，并获得回春状态`, ...system.msg]
+    setTimeout(() => {
+      eventBus.$emit('animateHeal', {
+        targets: [system.unitIndex],
+        value: heal
+      })
+      system.msg = [`${system.unitIndex + 1}号单位释放*回春术*，立即回复${heal}点生命值，并获得回春状态`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
 
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
