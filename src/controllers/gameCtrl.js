@@ -70,6 +70,7 @@ export default {
         item.confuse = 0
         item.flagBind = false
         item.flagDrunk = false
+        item.flagVanish = false
         if (index < 5) {
           // 上方
           if (isMSUpside) {
@@ -238,6 +239,12 @@ export default {
       eventBus.$emit('playSound', {
         sound: 'drunk'
       })
+    } else if (hero.units[system.unitIndex].flagVanish) {
+      // 准备行动的角色已隐匿，自动跳过回合
+      hero.units[system.unitIndex].isActed = true
+      eventBus.$emit('playSound', {
+        sound: 'drunk' // TODO 音效
+      })
     } else {
       // 可以行动
       eventBus.$emit('makeSkill')
@@ -402,14 +409,23 @@ export default {
       case 'JB1': // JB醉酒
         JBCtrl.drunk(skillId, targets)
         break
+      case 'JB3': // JB调和鸡尾酒
+        JBCtrl.cocktail(skillId, targets)
+        break
       case 'C30': // YD普攻
         YDCtrl.atk(targets)
+        break
+      case 'YD3': // YD友善礼物
+        YDCtrl.gift(skillId, targets)
         break
       case 'C32': // YX普攻
         YXCtrl.atk(targets)
         break
       case 'YX1': // YX幻影打击
         YXCtrl.shadowAtk(skillId, targets)
+        break
+      case 'YX3': // YX隐匿
+        YXCtrl.vanish(skillId)
         break
       case 'C34': // TF普攻
         TFCtrl.atk(targets)
@@ -517,6 +533,14 @@ export default {
         if (item.flagDrunk && diceUtil.rollDice(100) <= config.drunkClearPercent) {
           item.flagDrunk = false
         }
+        // 结算隐匿
+        if (item.flagVanish) {
+          item.sp += config.vanishSpAmount
+          if (item.sp >= item.maxsp) {
+            item.sp = item.maxsp
+            item.flagVanish = false
+          }
+        }
         // 结算回春
         if (item.spring > 0) {
           if (delayCauses.indexOf('spring') === -1) {
@@ -572,7 +596,7 @@ export default {
           downMSDead = true
         }
       }
-      // 执行YD藤蔓
+      // 结算YD藤蔓
       if (item.flagBind && diceUtil.rollDice(100) <= config.bindPercent) {
         if (delayCauses.indexOf('bind') === -1) {
           delayCauses.push('bind')
@@ -730,6 +754,7 @@ export default {
         confuse: 0, // 蛊惑状态剩余层数
         flagBind: false, // 是否激活了捆绑
         flagDrunk: false, // 是否激活了醉酒
+        flagVanish: false, // 是否激活了隐匿
         directDamageTotal: 0, // 累计直接伤害
         skillDamageTotal: 0, // 累计技能伤害
         damageTotal: 0, // 累计总伤害
@@ -756,6 +781,7 @@ export default {
     unit.confuse = 0
     unit.flagBind = false
     unit.flagDrunk = false
+    unit.flagVanish = false
     return unit
   }
 }

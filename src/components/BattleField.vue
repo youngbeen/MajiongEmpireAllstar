@@ -38,6 +38,8 @@
               <img class="buff-icontext" src="../assets/img/leaf.png" title="回春(持续生命值回复)" />
               <p class="buff-num" title="回春(持续生命值回复)">{{ item.spring }}</p>
             </div>
+            <!-- 显示隐匿 -->
+            <img class="buff-icon" v-show="item.flagVanish" src="../assets/img/vanish.png" title="隐匿(持续SP回复，闪避增加)" />
           </div>
           <!-- 显示栏 -->
           <div class="box-unit">
@@ -148,6 +150,8 @@
               <img class="buff-icontext" src="../assets/img/leaf.png" title="回春(持续生命值回复)" />
               <p class="buff-num" title="回春(持续生命值回复)">{{ item.spring }}</p>
             </div>
+            <!-- 显示隐匿 -->
+            <img class="buff-icon" v-show="item.flagVanish" src="../assets/img/vanish.png" title="隐匿(持续SP回复，闪避增加)" />
           </div>
           <!-- 显示栏 -->
           <div class="box-unit">

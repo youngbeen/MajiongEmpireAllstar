@@ -837,12 +837,23 @@ export default {
       id: 'JB1',
       cat: 'P',
       type: 'DB',
-      spCost: 6,
+      spCost: 5,
       targetLimit: 1,
       cnName: '醉酒',
       desc: ['可以驱散'],
-      detail: `指定1个敌方单位，目标获得醉酒。醉酒状态单位始终跳过其行动回合，醉酒状态在每回合结束有一定几率(${config.drunkClearPercent}%)解除`,
+      detail: `指定1个敌方单位，目标获得醉酒状态。醉酒状态单位始终跳过其行动回合，醉酒状态在每回合结束有一定几率(${config.drunkClearPercent}%)解除`,
       url: './img/sleep.png'
+    },
+    {
+      id: 'JB3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 2,
+      targetLimit: 1,
+      cnName: '调和鸡尾酒',
+      desc: [],
+      detail: `指定1个友方单位，其生命值或者SP值产生一次随机变化`,
+      url: './img/cocktail.png'
     },
     {
       id: 'JB2',
@@ -854,6 +865,17 @@ export default {
       desc: ['有益效果', '无法驱散'],
       detail: '你的攻击伤害值会随着你的生命值的降低而增加(生命值每降低10点，伤害值额外增加1点)',
       url: './img/snake_eye.png'
+    },
+    {
+      id: 'YD3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 0,
+      targetLimit: 1,
+      cnName: '友善礼物',
+      desc: [],
+      detail: `指定1个其他友方单位，你当前全部SP值转移给目标`,
+      url: './img/love_gift.png'
     },
     {
       id: 'YD1',
@@ -887,6 +909,17 @@ export default {
       desc: ['物理伤害'],
       detail: '发动一次攻击，且不消耗行动回合',
       url: './img/fast_pace.png'
+    },
+    {
+      id: 'YX3',
+      cat: 'P',
+      type: 'SK',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '隐匿',
+      desc: ['有益效果', '无法驱散'],
+      detail: `获得隐匿状态，隐匿状态下${config.vanishDodgePercent}%概率闪避物理伤害，始终跳过行动回合，每回合结束时回复${config.vanishSpAmount}SP，SP回满时自动取消隐匿状态`,
+      url: './img/vanish.png'
     },
     {
       id: 'YX2',

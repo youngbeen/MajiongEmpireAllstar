@@ -100,5 +100,24 @@ export default {
     // 回写数据
     hero.units.splice(system.unitIndex, 1, me)
     hero.units.splice(youIndex, 1, you)
+  },
+  // 隐匿
+  vanish (skillId = '', targets = []) {
+    let me = hero.units[system.unitIndex]
+    let stackPlays = 0
+
+    me = commonCtrl.act(me, skillId)
+
+    me.flagVanish = true
+    setTimeout(() => {
+      eventBus.$emit('playSound', {
+        sound: 'yy' // TODO 音效
+      })
+      system.msg = [`${system.unitIndex + 1}号单位*隐匿*，概率闪避物理伤害，回合结束回复SP`, ...system.msg]
+    }, config.animationTime * stackPlays)
+    stackPlays++
+
+    // 回写数据
+    hero.units.splice(system.unitIndex, 1, me)
   }
 }

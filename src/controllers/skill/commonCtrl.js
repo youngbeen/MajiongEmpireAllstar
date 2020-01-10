@@ -28,7 +28,10 @@ export default {
   // 获取减免伤后伤害
   getReducedDamage (me, target, damage, { isMagicDamage = false } = {}) {
     if (!isMagicDamage && target.iceblock) {
-      // 寒冰屏障
+      // 寒冰屏障，免疫物理伤害
+      return 0
+    } else if (!isMagicDamage && target.flagVanish && diceUtil.rollDice(100) <= config.vanishDodgePercent) {
+      // 隐匿，概率闪避物理伤害
       return 0
     } else if (target.flagBear) {
       // 熊形态
@@ -174,6 +177,7 @@ export default {
       unit.confuse = 0
       unit.flagBind = false
       unit.flagDrunk = false
+      unit.flagVanish = false
     } else if (unit.hp > unit.maxhp) {
       unit.hp = unit.maxhp
     }

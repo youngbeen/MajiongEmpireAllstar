@@ -57,6 +57,8 @@ export default {
   bindDamage: 3, // YD藤蔓伤害
   bindPercent: 50, // YD藤蔓触发百分比
   drunkClearPercent: 20, // 醉酒自动解除百分比
+  vanishDodgePercent: 50, // 隐匿状态闪避物理攻击百分比
+  vanishSpAmount: 1, // 隐匿状态每回合结束回复SP
   tfRudeHpLine: 15, // TF恃强凌弱触发血线
   tfBonusDamage: 3, // TF恃强凌弱提升伤害
   tfDamageReduce: 1, // TF恃强凌弱削减伤害

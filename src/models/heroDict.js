@@ -141,7 +141,7 @@ export default {
       desc: '控制/增益效果',
       url: './img/unitjb.png',
       commonSkills: ['C28', 'C29'],
-      positiveSkills: ['JB1'],
+      positiveSkills: ['JB1', 'JB3'],
       negativeSkills: ['JB2']
     },
     {
@@ -153,7 +153,7 @@ export default {
       desc: '群体伤害/回复效果',
       url: './img/unityd.png',
       commonSkills: ['C30', 'C31'],
-      positiveSkills: [],
+      positiveSkills: ['YD3'],
       negativeSkills: ['YD1', 'YD2']
     },
     {
@@ -165,7 +165,7 @@ export default {
       desc: '高速度/多次攻击',
       url: './img/unityx.png',
       commonSkills: ['C32', 'C33'],
-      positiveSkills: ['YX1'],
+      positiveSkills: ['YX1', 'YX3'],
       negativeSkills: ['YX2']
     },
     {

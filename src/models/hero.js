@@ -29,6 +29,7 @@ export default {
     //   confuse: 0, // 蛊惑状态剩余层数
     //   flagBind: false, // 是否激活了捆绑
     //   flagDrunk: false, // 是否激活了醉酒
+    //   flagVanish: false, // 是否激活了隐匿
     //   directDamageTotal: 0, // 累计直接伤害
     //   skillDamageTotal: 0, // 累计技能伤害
     //   damageTotal: 0, // 累计总伤害
