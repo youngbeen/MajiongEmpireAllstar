@@ -203,6 +203,18 @@ export default {
       commonSkills: ['C36', 'C37'],
       positiveSkills: [],
       negativeSkills: ['MO1', 'MO2', 'MO3']
+    },
+    {
+      name: 'WM',
+      cnName: '狼人',
+      maxhp: 36,
+      maxsp: 6,
+      speed: 1,
+      desc: '伤害加成',
+      url: './img/unitwm.png',
+      commonSkills: ['C38', 'C39'],
+      positiveSkills: ['WM1'],
+      negativeSkills: ['WM2', 'WM3']
     }
   ]
 }

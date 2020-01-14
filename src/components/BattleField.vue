@@ -40,6 +40,13 @@
             </div>
             <!-- 显示隐匿 -->
             <img class="buff-icon" v-show="item.flagVanish" src="../assets/img/vanish.png" title="隐匿(持续SP回复，闪避增加)" />
+            <!-- 显示月光 -->
+            <div class="buff-icon" v-show="item.moonlight">
+              <img class="buff-icontext" src="../assets/img/moon_light.png" title="月光(伤害增加)" />
+              <p class="buff-num" title="月光(伤害增加)">{{ item.moonlight }}</p>
+            </div>
+            <!-- 显示月圆之夜 -->
+            <img class="buff-icon" v-show="item.flagFullmoon" src="../assets/img/moon_owl.png" title="月圆之夜(伤害增加，易伤)" />
           </div>
           <!-- 显示栏 -->
           <div class="box-unit">
@@ -61,7 +68,7 @@
             <!-- 显示伤害效果 -->
             <img class="cover-effect" v-show="animates[index].isShowEffect" :src="animates[index].effectUrl" />
             <!-- 显示扣血/治疗效果 -->
-            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index].textType === 'heal', 'cover-sp-recover': animates[index].textType === 'sp', 'active': animates[index].isTextAnimateStart }" v-show="animates[index].isShowText">{{ animates[index].textType === 'damage' ? '-' : '+' }}{{ animates[index].textValue }}</p>
+            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index].textType === 'heal', 'cover-sp-recover': animates[index].textType === 'sp', 'active': animates[index].isTextAnimateStart, 'faded': !animates[index].isShowText }">{{ animates[index].textType === 'damage' ? '-' : '+' }}{{ animates[index].textValue }}</p>
           </div>
           <!-- 右侧debuff栏 -->
           <div class="box-debuffs">
@@ -152,6 +159,13 @@
             </div>
             <!-- 显示隐匿 -->
             <img class="buff-icon" v-show="item.flagVanish" src="../assets/img/vanish.png" title="隐匿(持续SP回复，闪避增加)" />
+            <!-- 显示月光 -->
+            <div class="buff-icon" v-show="item.moonlight">
+              <img class="buff-icontext" src="../assets/img/moon_light.png" title="月光(伤害增加)" />
+              <p class="buff-num" title="月光(伤害增加)">{{ item.moonlight }}</p>
+            </div>
+            <!-- 显示月圆之夜 -->
+            <img class="buff-icon" v-show="item.flagFullmoon" src="../assets/img/moon_owl.png" title="月圆之夜(伤害增加，易伤)" />
           </div>
           <!-- 显示栏 -->
           <div class="box-unit">
@@ -173,7 +187,7 @@
             <!-- 显示伤害效果 -->
             <img class="cover-effect" v-show="animates[index + 5].isShowEffect" :src="animates[index + 5].effectUrl" />
             <!-- 显示扣血效果 -->
-            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index + 5].textType === 'heal', 'cover-sp-recover': animates[index + 5].textType === 'sp', 'active': animates[index + 5].isTextAnimateStart }" v-show="animates[index + 5].isShowText">{{ animates[index + 5].textType === 'damage' ? '-' : '+' }}{{ animates[index + 5].textValue }}</p>
+            <p class="unit-cover cover-effect-hpminus" :class="{ 'cover-heal': animates[index + 5].textType === 'heal', 'cover-sp-recover': animates[index + 5].textType === 'sp', 'active': animates[index + 5].isTextAnimateStart, 'faded': !animates[index + 5].isShowText }">{{ animates[index + 5].textType === 'damage' ? '-' : '+' }}{{ animates[index + 5].textValue }}</p>
           </div>
           <!-- 右侧debuff栏 -->
           <div class="box-debuffs">
@@ -654,6 +668,9 @@ export default {
               }
               &.active {
                 top: -46px;
+              }
+              &.faded {
+                opacity: 0;
               }
             }
           }

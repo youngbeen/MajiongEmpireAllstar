@@ -21,6 +21,7 @@ import YDCtrl from './skill/YDCtrl'
 import YXCtrl from './skill/YXCtrl'
 import TFCtrl from './skill/TFCtrl'
 import MOCtrl from './skill/MOCtrl'
+import WMCtrl from './skill/WMCtrl'
 import diceUtil from '../utils/diceUtil'
 
 export default {
@@ -71,6 +72,8 @@ export default {
         item.flagBind = false
         item.flagDrunk = false
         item.flagVanish = false
+        item.moonlight = 0
+        item.flagFullmoon = false
         if (index < 5) {
           // 上方
           if (isMSUpside) {
@@ -436,6 +439,9 @@ export default {
       case 'C36': // MO普攻
         MOCtrl.atk(targets)
         break
+      case 'C38': // WM普攻
+        WMCtrl.atk(targets)
+        break
       case 'C2': // ZS守备
       case 'C4': // LR守备
       case 'C6': // SM守备
@@ -453,6 +459,7 @@ export default {
       case 'C33': // YX守备
       case 'C35': // TF守备
       case 'C37': // MO守备
+      case 'C39': // WM守备
         commonCtrl.guard()
         break
       default:
@@ -774,6 +781,8 @@ export default {
         flagBind: false, // 是否激活了捆绑
         flagDrunk: false, // 是否激活了醉酒
         flagVanish: false, // 是否激活了隐匿
+        moonlight: 0, // 月光层数
+        flagFullmoon: false, // 是否激活了月圆之夜
         directDamageTotal: 0, // 累计直接伤害
         skillDamageTotal: 0, // 累计技能伤害
         damageTotal: 0, // 累计总伤害
@@ -801,6 +810,8 @@ export default {
     unit.flagBind = false
     unit.flagDrunk = false
     unit.flagVanish = false
+    unit.moonlight = 0
+    unit.flagFullmoon = false
     return unit
   }
 }

@@ -416,6 +416,28 @@ export default {
       url: './img/defend.png'
     },
     {
+      id: 'C38',
+      cat: 'C',
+      type: 'DA',
+      spCost: 0,
+      targetLimit: 1,
+      cnName: '攻击',
+      desc: ['物理伤害'],
+      detail: `挥舞利爪，${atkSuffixDesc}`,
+      url: './img/cat_atk.png'
+    },
+    {
+      id: 'C39',
+      cat: 'C',
+      type: 'DEF',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '守备',
+      desc: [],
+      detail: `${guardPrefixDesc}，可以恢复少量(${config.guardBaseHeal})生命值`,
+      url: './img/defend.png'
+    },
+    {
       id: 'ZS1',
       cat: 'P',
       type: 'SK',
@@ -997,6 +1019,39 @@ export default {
       desc: ['有益效果', '无法驱散'],
       detail: '回合结束时，若SP值满，则全部SP值转化为对应生命值回复',
       url: './img/gold_duck.png'
+    },
+    {
+      id: 'WM1',
+      cat: 'P',
+      type: 'SA',
+      spCost: 4,
+      targetLimit: 0,
+      cnName: '残暴',
+      desc: ['物理伤害'],
+      detail: `对除自己外的所有其他目标造成少量伤害(${config.cruelDamage})`,
+      url: './img/swing_strike.png'
+    },
+    {
+      id: 'WM2',
+      cat: 'N',
+      type: 'BF',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '月光',
+      desc: ['有益效果', '无法驱散'],
+      detail: `每攻击1个目标1次，增加1层月光。每有1层月光，伤害增加1点`,
+      url: './img/moon_light.png'
+    },
+    {
+      id: 'WM3',
+      cat: 'N',
+      type: 'BF',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '月圆之夜',
+      desc: ['有益效果', '无法驱散'],
+      detail: `当月光达到${config.fullmoonLine}层时，移除所有月光，生命上限减少为${config.fullmoonMaxhpPercent}%，生命值完全回复。获得月圆之夜状态。该状态下所有对你的伤害与你造成的伤害增加(${config.fullmoonPlusDamage})`,
+      url: './img/moon_owl.png'
     }
   ]
 }

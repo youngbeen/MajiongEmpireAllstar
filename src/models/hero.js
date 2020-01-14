@@ -30,6 +30,8 @@ export default {
     //   flagBind: false, // 是否激活了捆绑
     //   flagDrunk: false, // 是否激活了醉酒
     //   flagVanish: false, // 是否激活了隐匿
+    //   moonlight: 0, // 月光层数
+    //   flagFullmoon: false, // 是否激活了月圆之夜
     //   directDamageTotal: 0, // 累计直接伤害
     //   skillDamageTotal: 0, // 累计技能伤害
     //   damageTotal: 0, // 累计总伤害

@@ -63,6 +63,10 @@ export default {
   tfBonusDamage: 3, // TF恃强凌弱提升伤害
   tfDamageReduce: 1, // TF恃强凌弱削减伤害
   tfKillPlusHp: 2, // TF嗜血击杀后提升的生命值及上限
+  cruelDamage: 1, // WM残暴基础伤害
+  fullmoonLine: 20, // 达成月圆之夜状态的月光层数
+  fullmoonMaxhpPercent: 50, // 月圆之夜变身HP上限缩小至百分比
+  fullmoonPlusDamage: 5, // 月圆之夜自身易伤与伤害增加
   // 系统配置
   healthColor: '#62a108', // HP使用色
   skillColor: '#ddd71b' // 技能使用色

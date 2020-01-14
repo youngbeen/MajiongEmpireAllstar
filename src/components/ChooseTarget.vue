@@ -37,6 +37,8 @@
               <img class="icon" v-show="item.flagTree" src="../assets/img/tree.png" title="变形:树形态(全体回复)">
               <img class="icon" v-show="item.spring" src="../assets/img/leaf.png" title="回春(持续生命值回复)">
               <img class="icon" v-show="item.flagVanish" src="../assets/img/vanish.png" title="隐匿(持续SP回复，闪避增加)">
+              <img class="icon" v-show="item.moonlight" src="../assets/img/moon_light.png" title="月光(伤害增加)">
+              <img class="icon" v-show="item.flagFullmoon" src="../assets/img/moon_owl.png" title="月圆之夜(伤害增加，易伤)">
             </div>
           </div>
           <div class="debuffs">
@@ -362,8 +364,8 @@ export default {
     },
     show (params) {
       this.skillId = params.skillId || ''
-      if (['ZS3', 'LR1', 'SM1', 'WS3', 'FS1', 'XD1', 'XD2', 'XD3', 'XD5', 'DK3', 'QS1', 'QS2', 'SR2', 'YX3', 'C2', 'C4', 'C6', 'C8', 'C10', 'C12', 'C17', 'C19', 'C21', 'C23', 'C25', 'C26', 'C27', 'C29', 'C31', 'C33', 'C35', 'C37'].indexOf(this.skillId) > -1) {
-        // ZS旋风斩，LR箭雨,SM英勇,WS禅坐，FS寒冰屏障,XD变形虎,XD变形熊，XD变形树，XD回春术，DK感染，QS生而平等，QS圣疗，MS治疗，SR蛊惑，YX隐匿，ZS守备,LR守备,SM守备,WS守备,DZ守备,FS守备，XD守备，DK守备，QS守备，MS守备，SR守备，PC普攻，PC守备，JB守备，YD守备，YX守备，TF守备，MO守备
+      if (['ZS3', 'LR1', 'SM1', 'WS3', 'FS1', 'XD1', 'XD2', 'XD3', 'XD5', 'DK3', 'QS1', 'QS2', 'SR2', 'YX3', 'C2', 'C4', 'C6', 'C8', 'C10', 'C12', 'C17', 'C19', 'C21', 'C23', 'C25', 'C26', 'C27', 'C29', 'C31', 'C33', 'C35', 'C37', 'C39'].indexOf(this.skillId) > -1) {
+        // ZS旋风斩，LR箭雨,SM英勇,WS禅坐，FS寒冰屏障,XD变形虎,XD变形熊，XD变形树，XD回春术，DK感染，QS生而平等，QS圣疗，MS治疗，SR蛊惑，YX隐匿，ZS守备,LR守备,SM守备,WS守备,DZ守备,FS守备，XD守备，DK守备，QS守备，MS守备，SR守备，PC普攻，PC守备，JB守备，YD守备，YX守备，TF守备，MO守备，WM守备
         // 处理不需要选择目标的技能
         gameCtrl.proceedSkill(this.skillId)
         this.close()

@@ -178,6 +178,8 @@ export default {
       unit.flagBind = false
       unit.flagDrunk = false
       unit.flagVanish = false
+      unit.moonlight = 0
+      unit.flagFullmoon = false
     } else if (unit.hp > unit.maxhp) {
       unit.hp = unit.maxhp
     }
