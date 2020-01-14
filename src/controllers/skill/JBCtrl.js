@@ -93,7 +93,7 @@ export default {
       you = commonCtrl.changeHp(you, change)
       setTimeout(() => {
         eventBus.$emit('playSound', {
-          sound: 'glass_broke' // TODO 音效
+          sound: 'mix'
         })
         system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位使用*调和鸡尾酒*，其生命值发生了变化`, ...system.msg]
       }, config.animationTime * stackPlays)
@@ -106,7 +106,7 @@ export default {
       you = commonCtrl.changeSp(you, change)
       setTimeout(() => {
         eventBus.$emit('playSound', {
-          sound: 'glass_broke' // TODO 音效
+          sound: 'mix'
         })
         system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位使用*调和鸡尾酒*，其SP值发生了变化`, ...system.msg]
       }, config.animationTime * stackPlays)

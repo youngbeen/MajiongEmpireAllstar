@@ -178,7 +178,7 @@ export default {
       url: './img/unittf.png',
       commonSkills: ['C34', 'C35'],
       positiveSkills: ['TF1'],
-      negativeSkills: ['TF2']
+      negativeSkills: ['TF2', 'TF3']
     },
     {
       name: 'PC',
@@ -202,7 +202,7 @@ export default {
       url: './img/unitmo.png',
       commonSkills: ['C36', 'C37'],
       positiveSkills: [],
-      negativeSkills: ['MO1', 'MO2']
+      negativeSkills: ['MO1', 'MO2', 'MO3']
     }
   ]
 }

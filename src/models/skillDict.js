@@ -955,6 +955,17 @@ export default {
       url: './img/owl.png'
     },
     {
+      id: 'TF3',
+      cat: 'N',
+      type: 'BF',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '嗜血',
+      desc: ['无法驱散'],
+      detail: `每击杀1个敌方单位，生命值及上限增加${config.tfKillPlusHp}`,
+      url: './img/blood_strike.png'
+    },
+    {
       id: 'MO1',
       cat: 'N',
       type: 'BF',
@@ -975,6 +986,17 @@ export default {
       desc: ['有益效果', '无法驱散'],
       detail: '初始生命值为20，战斗刚开始时，场上每有1个敌方单位，你的最大生命值增加15；场上每有1个友方单位，你的最大生命值减少5 。你的最大生命值不会低于20点',
       url: './img/doll.png'
+    },
+    {
+      id: 'MO3',
+      cat: 'N',
+      type: 'BF',
+      spCost: 0,
+      targetLimit: 0,
+      cnName: '不死之身',
+      desc: ['有益效果', '无法驱散'],
+      detail: '回合结束时，若SP值满，则全部SP值转化为对应生命值回复',
+      url: './img/gold_duck.png'
     }
   ]
 }

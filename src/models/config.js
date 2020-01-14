@@ -62,6 +62,7 @@ export default {
   tfRudeHpLine: 15, // TF恃强凌弱触发血线
   tfBonusDamage: 3, // TF恃强凌弱提升伤害
   tfDamageReduce: 1, // TF恃强凌弱削减伤害
+  tfKillPlusHp: 2, // TF嗜血击杀后提升的生命值及上限
   // 系统配置
   healthColor: '#62a108', // HP使用色
   skillColor: '#ddd71b' // 技能使用色

@@ -156,7 +156,7 @@ export default {
         eventBus.$emit('animateDamage', {
           targets: [youIndex],
           value: damage,
-          sound: 'sword' // TODO 更换旋风音效
+          sound: 'wind'
         })
         system.msg = [`${system.unitIndex + 1}号单位使用*旋风斩*对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]
       }, config.animationTime * stackPlays)

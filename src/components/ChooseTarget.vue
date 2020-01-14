@@ -552,6 +552,7 @@ export default {
       // top: 45%;
       font-size: 60px;
       cursor: pointer;
+      user-select: none;
       animation: 1s linear infinite heartbeat;
       &:hover {
         animation: none;

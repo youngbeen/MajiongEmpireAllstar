@@ -43,6 +43,19 @@ export default {
     }, config.animationTime * stackPlays)
     stackPlays++
 
+    if (you.isDead) {
+      // 击杀目标，结算嗜血
+      me.maxhp += config.tfKillPlusHp
+      me.hp += config.tfKillPlusHp
+      setTimeout(() => {
+        eventBus.$emit('playSound', {
+          sound: 'sound_reflect'
+        })
+        system.msg = [`${system.unitIndex + 1}号单位击杀${youIndex + 1}号单位，触发*嗜血*效果，生命值及上限提高${config.tfKillPlusHp}`, ...system.msg]
+      }, config.animationTime * stackPlays)
+      stackPlays++
+    }
+
     if (commonCtrl.shouldEarthReflectTrigger(me, you, times)) {
       // 大地之力反伤
       me = commonCtrl.earthReflect(me, stackPlays, damage)
@@ -96,11 +109,21 @@ export default {
     }, config.animationTime * stackPlays)
     stackPlays++
 
-    // NOTE 因为顺带伤害结算还会涉及目标，所以先写入数据
-    hero.units.splice(youIndex, 1, you)
-
     if (you.isDead) {
+      // 击杀目标，结算嗜血
+      me.maxhp += config.tfKillPlusHp
+      me.hp += config.tfKillPlusHp
+      setTimeout(() => {
+        eventBus.$emit('playSound', {
+          sound: 'sound_reflect'
+        })
+        system.msg = [`${system.unitIndex + 1}号单位击杀${youIndex + 1}号单位，触发*嗜血*效果，生命值及上限提高${config.tfKillPlusHp}`, ...system.msg]
+      }, config.animationTime * stackPlays)
+      stackPlays++
+
+      // 击杀目标，触发顺带伤害
       let attachedDamage = Math.round(damage / 2)
+      let isAttachDamageKilled = false
       targets = heroUtil.getAllTargets()
       targets.forEach(target => {
         const targetIndex = target
@@ -120,8 +143,24 @@ export default {
         }, config.animationTime * stackPlays)
 
         hero.units.splice(targetIndex, 1, enemy)
+
+        if (enemy.isDead) {
+          isAttachDamageKilled = true
+          me.maxhp += config.tfKillPlusHp
+          me.hp += config.tfKillPlusHp
+          system.msg = [`${system.unitIndex + 1}号单位击杀${targetIndex + 1}号单位，触发*嗜血*效果，生命值及上限提高${config.tfKillPlusHp}`, ...system.msg]
+        }
       })
       stackPlays++
+
+      if (isAttachDamageKilled) {
+        setTimeout(() => {
+          eventBus.$emit('playSound', {
+            sound: 'sound_reflect'
+          })
+        }, config.animationTime * stackPlays)
+        stackPlays++
+      }
     }
 
     if (commonCtrl.shouldEarthReflectTrigger(me, you, times)) {

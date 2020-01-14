@@ -124,7 +124,7 @@ export default {
     me = commonCtrl.changeHp(me, -1 * selfDamage)
     setTimeout(() => {
       eventBus.$emit('playSound', {
-        sound: 'hammer' // TODO 音效
+        sound: 'eff_fireball_b'
       })
       system.msg = [`${system.unitIndex + 1}号单位*牺牲*，生命值减少${selfDamage}`, ...system.msg]
     }, config.animationTime * stackPlays)
@@ -137,7 +137,7 @@ export default {
       eventBus.$emit('animateDamage', {
         targets: [youIndex],
         value: damage,
-        sound: 'hammer', // TODO 音效
+        sound: 'boom',
         image: 'effdammagic'
       })
       system.msg = [`${system.unitIndex + 1}号单位的*牺牲*对${youIndex + 1}号单位造成${damage}点伤害`, ...system.msg]

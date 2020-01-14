@@ -101,7 +101,7 @@ export default {
     you.hp = Math.round(you.maxhp * config.reviveHealPercent / 100)
     setTimeout(() => {
       eventBus.$emit('playSound', {
-        sound: 'qsequal' // TODO 音效
+        sound: 'eff_revive'
       })
       system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位释放*复活术*`, ...system.msg]
     }, config.animationTime * stackPlays)

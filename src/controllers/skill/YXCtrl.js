@@ -111,7 +111,7 @@ export default {
     me.flagVanish = true
     setTimeout(() => {
       eventBus.$emit('playSound', {
-        sound: 'yy' // TODO 音效
+        sound: 'dodge'
       })
       system.msg = [`${system.unitIndex + 1}号单位*隐匿*，概率闪避物理伤害，回合结束回复SP`, ...system.msg]
     }, config.animationTime * stackPlays)

@@ -237,13 +237,13 @@ export default {
       // 准备行动的角色已被醉酒
       hero.units[system.unitIndex].isActed = true
       eventBus.$emit('playSound', {
-        sound: 'drunk'
+        sound: 'faint'
       })
     } else if (hero.units[system.unitIndex].flagVanish) {
       // 准备行动的角色已隐匿，自动跳过回合
       hero.units[system.unitIndex].isActed = true
       eventBus.$emit('playSound', {
-        sound: 'drunk' // TODO 音效
+        sound: 'dodge'
       })
     } else {
       // 可以行动
@@ -304,7 +304,7 @@ export default {
         break
       case 'SM3': // SM治疗链
         eventBus.$emit('playSound', {
-          sound: 'castmultishot' // TODO change pre sound
+          sound: 'eff_light'
         })
         setTimeout(() => {
           SMCtrl.healLink(skillId, targets)
@@ -540,6 +540,25 @@ export default {
             item.sp = item.maxsp
             item.flagVanish = false
           }
+        }
+        // 结算不死之身
+        if (item.type === 'MO' && item.sp >= item.maxsp) {
+          if (delayCauses.indexOf('solidBody') === -1) {
+            delayCauses.push('solidBody')
+          }
+          let heal = item.sp
+          item.sp = 0
+          item.hp += heal
+          if (item.hp > item.maxhp) {
+            item.hp = item.maxhp
+          }
+          setTimeout(() => {
+            eventBus.$emit('animateHeal', {
+              targets: [index],
+              value: heal
+            })
+            system.msg = [`*不死之身*使${index + 1}号单位${heal}点SP转化为生命值回复`, ...system.msg]
+          }, config.animationTime * (delayCauses.length - 1))
         }
         // 结算回春
         if (item.spring > 0) {

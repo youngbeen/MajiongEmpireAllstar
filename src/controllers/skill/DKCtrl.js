@@ -141,7 +141,7 @@ export default {
 
       setTimeout(() => {
         eventBus.$emit('playSound', {
-          sound: 'arrow' // TODO 音效
+          sound: 'infect'
         })
         system.msg = [`${system.unitIndex + 1}号单位对${youIndex + 1}号单位使用*感染*，使其中毒`, ...system.msg]
       }, config.animationTime * stackPlays)
